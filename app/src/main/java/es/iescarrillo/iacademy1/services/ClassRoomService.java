@@ -1,0 +1,42 @@
+package es.iescarrillo.iacademy1.services;
+
+import android.app.Application;
+
+import java.util.List;
+
+import es.iescarrillo.iacademy1.daos.AdminDAO;
+import es.iescarrillo.iacademy1.daos.ClassroomDAO;
+import es.iescarrillo.iacademy1.database.DatabaseHelper;
+import es.iescarrillo.iacademy1.models.Admin;
+import es.iescarrillo.iacademy1.models.Classroom;
+
+public class ClassRoomService implements ClassroomDAO {
+
+
+    private ClassroomDAO classroomDAO;
+
+    public ClassRoomService(Application application){
+        DatabaseHelper db = DatabaseHelper.getInstance(application);
+        classroomDAO= db.classroomDAO();
+    }
+    @Override
+    public long insertClassroom(Classroom classroom) {
+        return classroomDAO.insertClassroom(classroom);
+
+    }
+
+    @Override
+    public void updateClassroom(Classroom classroom) {
+        classroomDAO.updateClassroom(classroom);
+    }
+
+    @Override
+    public void deleteClassroom(Classroom classroom) {
+        classroomDAO.deleteClassroom(classroom);
+    }
+
+    @Override
+    public List<Classroom> getAll() {
+        return classroomDAO.getAll();
+    }
+}
