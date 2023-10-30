@@ -32,7 +32,7 @@ en nuestra base de datos.
         // Añadir los DAO
         public abstract ManagerDAO managerDAO();
         public abstract AcademyDAO academyDAO();
-        public abstract PersonDAO personDAO();
+
 
         public abstract AdminDAO adminDAO();
         public abstract ClassroomDAO classroomDAO();
