@@ -4,20 +4,27 @@ import android.content.Context;
 import androidx.room.Database;
 import androidx.room.Room;
 import androidx.room.RoomDatabase;
+
+import es.iescarrillo.iacademy1.daos.AdminDAO;
+import es.iescarrillo.iacademy1.daos.ClassroomDAO;
+import es.iescarrillo.iacademy1.daos.LessonDAO;
+import es.iescarrillo.iacademy1.daos.TeacherDAO;
 import es.iescarrillo.iacademy1.models.Academy;
-import es.iescarrillo.iacademy1.models.Course;
 import es.iescarrillo.iacademy1.models.Manager;
-import es.iescarrillo.iacademy1.daos.AcademyDAO;
-import es.iescarrillo.iacademy1.daos.CourseDAO;
-import es.iescarrillo.iacademy1.daos.ManagerDAO;
+import es.iescarrillo.iacademy1.models.Course;
 import es.iescarrillo.iacademy1.daos.InscriptionDAO;
 import es.iescarrillo.iacademy1.daos.StudentDAO;
 import es.iescarrillo.iacademy1.daos.UserDAO;
 import es.iescarrillo.iacademy1.models.Inscription;
-
+import es.iescarrillo.iacademy1.daos.AcademyDAO;
+import es.iescarrillo.iacademy1.daos.CourseDAO;
+import es.iescarrillo.iacademy1.daos.ManagerDAO;
+import es.iescarrillo.iacademy1.models.Admin;
+import es.iescarrillo.iacademy1.models.Classroom;
+import es.iescarrillo.iacademy1.models.Lesson;
+import es.iescarrillo.iacademy1.models.Teacher;
 import es.iescarrillo.iacademy1.models.Student;
 import es.iescarrillo.iacademy1.models.User;
-
 
 
 
@@ -25,7 +32,7 @@ import es.iescarrillo.iacademy1.models.User;
 en nuestra base de datos.
    La versión tendremos que ir incementándola cada vez que hagamos un cambio dentro de nuestra BBDD
 * */
-    @Database(entities = {Manager.class, Academy.class, Course.class,User.class, Student.class, Inscription.class}, version = 1)
+    @Database(entities = {Manager.class, Academy.class, Course.class,User.class, Student.class, Inscription.class,Admin.class, Classroom.class, Lesson.class, Teacher.class}, version = 1)
     public abstract class DatabaseHelper extends RoomDatabase {
 
 
@@ -40,6 +47,11 @@ en nuestra base de datos.
         public abstract AcademyDAO academyDAO();
 
         public abstract CourseDAO courseDAO();
+
+        public abstract AdminDAO adminDAO();
+        public abstract ClassroomDAO classroomDAO();
+        public abstract LessonDAO lessonDAO();
+        public abstract TeacherDAO teacherDAO();
 
 
         // Instancia estática de la clase, para oder usarla en toda la aplicación
