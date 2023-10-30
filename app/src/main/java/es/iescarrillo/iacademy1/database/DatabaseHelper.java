@@ -8,7 +8,6 @@ import androidx.room.RoomDatabase;
 import es.iescarrillo.iacademy1.daos.AcademyDAO;
 import es.iescarrillo.iacademy1.daos.CourseDAO;
 import es.iescarrillo.iacademy1.daos.ManagerDAO;
-import es.iescarrillo.iacademy1.daos.PersonDAO;
 import es.iescarrillo.iacademy1.models.Academy;
 import es.iescarrillo.iacademy1.models.Course;
 import es.iescarrillo.iacademy1.models.Manager;
@@ -22,7 +21,7 @@ import es.iescarrillo.iacademy1.repositories.ManagerRepository;
 en nuestra base de datos.
    La versión tendremos que ir incementándola cada vez que hagamos un cambio dentro de nuestra BBDD
 * */
-    @Database(entities = {Manager.class, Academy.class, Course.class, Person.class}, version = 1)
+    @Database(entities = {Manager.class, Academy.class, Course.class}, version = 1)
     public abstract class DatabaseHelper extends RoomDatabase {
 
         // Añadir los DAO
@@ -31,7 +30,7 @@ en nuestra base de datos.
 
         public abstract CourseDAO courseDAO();
 
-        public abstract PersonDAO personDAO();
+
         // Instancia estática de la clase, para oder usarla en toda la aplicación
         private static DatabaseHelper instance;
 
