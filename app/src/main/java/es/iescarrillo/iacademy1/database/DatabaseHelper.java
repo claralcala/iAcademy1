@@ -8,7 +8,6 @@ import androidx.room.RoomDatabase;
 import es.iescarrillo.iacademy1.daos.AdminDAO;
 import es.iescarrillo.iacademy1.daos.ClassroomDAO;
 import es.iescarrillo.iacademy1.daos.LessonDAO;
-import es.iescarrillo.iacademy1.daos.PersonDAO;
 import es.iescarrillo.iacademy1.daos.TeacherDAO;
 import es.iescarrillo.iacademy1.models.Academy;
 import es.iescarrillo.iacademy1.models.Admin;
