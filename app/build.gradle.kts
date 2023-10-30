@@ -4,7 +4,7 @@ plugins {
 
 android {
     namespace = "es.iescarrillo.iacademy1"
-    compileSdk = 33
+    compileSdk = 34
 
     defaultConfig {
         applicationId = "es.iescarrillo.iacademy1"

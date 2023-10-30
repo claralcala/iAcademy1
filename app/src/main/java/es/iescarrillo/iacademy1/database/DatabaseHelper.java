@@ -11,9 +11,9 @@ import es.iescarrillo.iacademy1.daos.ManagerDAO;
 import es.iescarrillo.iacademy1.models.Academy;
 import es.iescarrillo.iacademy1.models.Course;
 import es.iescarrillo.iacademy1.models.Manager;
-import es.iescarrillo.iacademy1.models.Person;
-import es.iescarrillo.iacademy1.repositories.AcademyRepository;
-import es.iescarrillo.iacademy1.repositories.ManagerRepository;
+
+//import es.iescarrillo.iacademy1.repositories.AcademyRepository;
+//import es.iescarrillo.iacademy1.repositories.ManagerRepository;
 
 
 
