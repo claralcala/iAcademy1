@@ -1,9 +1,12 @@
 package es.iescarrillo.iacademy1.models;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
+import androidx.room.ForeignKey;
 import androidx.room.PrimaryKey;
 
-@Entity(tableName = "academy")
+@Entity(tableName = "academy", foreignKeys = @ForeignKey(entity = Manager.class, parentColumns = "id",
+        childColumns = "manager_id", onDelete = ForeignKey.CASCADE))
+
 public class Academy {
 
     @PrimaryKey(autoGenerate = true)
@@ -29,7 +32,8 @@ public class Academy {
     @ColumnInfo(name="phone")
     private String phone;
 
-
+    @ColumnInfo(name= "manager_id")
+    private long manager_id;
     public Academy(){
 
     }
@@ -112,6 +116,14 @@ public class Academy {
 
     public void setPhone(String phone) {
         this.phone = phone;
+    }
+
+    public long getManager_id() {
+        return manager_id;
+    }
+
+    public void setManager_id(long manager_id) {
+        this.manager_id = manager_id;
     }
 
     @Override

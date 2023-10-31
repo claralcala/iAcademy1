@@ -7,8 +7,13 @@ import androidx.room.Query;
 import androidx.room.Update;
 
 import java.util.List;
+import java.util.Map;
 
+import es.iescarrillo.iacademy1.models.Academy;
+import es.iescarrillo.iacademy1.models.Classroom;
 import es.iescarrillo.iacademy1.models.Course;
+import es.iescarrillo.iacademy1.models.Inscription;
+import es.iescarrillo.iacademy1.models.Lesson;
 import es.iescarrillo.iacademy1.models.Manager;
 
 @Dao
@@ -25,4 +30,12 @@ public interface CourseDAO {
 
     @Query("SELECT * FROM course")
     List<Course> getAll();
+
+
+    @Query("SELECT * FROM course c JOIN lesson s on c.id=s.course_id")
+    Map<Course, List<Lesson>> getCourseWithLessonsMap();
+
+    @Query("SELECT * FROM course c JOIN inscription i ON c.id=i.course_id")
+    Map<Course, List<Inscription>> getCoursesWithInscriptionMap();
+
 }

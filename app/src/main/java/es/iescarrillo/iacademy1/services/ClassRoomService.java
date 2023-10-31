@@ -3,12 +3,14 @@ package es.iescarrillo.iacademy1.services;
 import android.app.Application;
 
 import java.util.List;
+import java.util.Map;
 
 import es.iescarrillo.iacademy1.daos.AdminDAO;
 import es.iescarrillo.iacademy1.daos.ClassroomDAO;
 import es.iescarrillo.iacademy1.database.DatabaseHelper;
 import es.iescarrillo.iacademy1.models.Admin;
 import es.iescarrillo.iacademy1.models.Classroom;
+import es.iescarrillo.iacademy1.models.Lesson;
 
 public class ClassRoomService implements ClassroomDAO {
 
@@ -38,5 +40,10 @@ public class ClassRoomService implements ClassroomDAO {
     @Override
     public List<Classroom> getAll() {
         return classroomDAO.getAll();
+    }
+
+    @Override
+    public Map<Classroom, List<Lesson>> getClassroomWithLessonsMap() {
+        return classroomDAO.getClassroomWithLessonsMap();
     }
 }

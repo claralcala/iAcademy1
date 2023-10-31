@@ -3,10 +3,12 @@ package es.iescarrillo.iacademy1.services;
 import android.app.Application;
 
 import java.util.List;
+import java.util.Map;
 
 import es.iescarrillo.iacademy1.daos.LessonDAO;
 import es.iescarrillo.iacademy1.daos.TeacherDAO;
 import es.iescarrillo.iacademy1.database.DatabaseHelper;
+import es.iescarrillo.iacademy1.models.Course;
 import es.iescarrillo.iacademy1.models.Teacher;
 
 public class TeacherService implements TeacherDAO {
@@ -35,5 +37,10 @@ public class TeacherService implements TeacherDAO {
     @Override
     public List<Teacher> getAll() {
         return teacherDAO.getAll();
+    }
+
+    @Override
+    public Map<Teacher, List<Course>> getTeacherWithCoursesMap() {
+        return teacherDAO.getTeacherWithCoursesMap();
     }
 }

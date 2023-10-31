@@ -6,6 +6,7 @@ import androidx.room.Query;
 import androidx.room.Update;
 
 import java.util.List;
+import java.util.Map;
 
 import es.iescarrillo.iacademy1.models.Academy;
 import es.iescarrillo.iacademy1.models.Manager;
@@ -25,4 +26,7 @@ public interface ManagerDAO {
 
     @Query("SELECT * FROM manager")
     List<Manager> getAll();
+
+    @Query("SELECT * FROM manager m JOIN academy a on m.id=a.manager_id")
+    Map<Manager,Academy> getManagerWithAcademyMap();
 }

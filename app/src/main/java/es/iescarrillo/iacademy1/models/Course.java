@@ -2,11 +2,15 @@ package es.iescarrillo.iacademy1.models;
 
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
+import androidx.room.ForeignKey;
 import androidx.room.PrimaryKey;
 
 import java.time.LocalDate;
 
-@Entity(tableName = "course")
+@Entity(tableName = "course", foreignKeys = {@ForeignKey(entity= Academy.class, parentColumns = "id",
+childColumns = "academy_id", onDelete = ForeignKey.CASCADE),
+        @ForeignKey(entity= Teacher.class, parentColumns = "id",
+childColumns = "teacher_id", onDelete = ForeignKey.CASCADE)})
 public class Course {
 
     @PrimaryKey(autoGenerate = true)
@@ -34,6 +38,11 @@ public class Course {
     @ColumnInfo(name="activated")
     private boolean activated;
 
+    @ColumnInfo(name="academy_id")
+    private long academy_id;
+
+    @ColumnInfo(name="teacher_id")
+    private long teacher_id;
 
 public Course(){
 
@@ -101,6 +110,23 @@ public Course(){
 
     public void setActivated(boolean activated) {
         this.activated = activated;
+    }
+
+
+    public long getAcademy_id() {
+        return academy_id;
+    }
+
+    public void setAcademy_id(long academy_id) {
+        this.academy_id = academy_id;
+    }
+
+    public long getTeacher_id() {
+        return teacher_id;
+    }
+
+    public void setTeacher_id(long teacher_id) {
+        this.teacher_id = teacher_id;
     }
 
     @Override

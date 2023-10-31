@@ -2,12 +2,16 @@ package es.iescarrillo.iacademy1.models;
 
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
+import androidx.room.ForeignKey;
 import androidx.room.PrimaryKey;
 
 import java.time.LocalDateTime;
 
 
-@Entity(tableName = "inscription")
+@Entity(tableName = "inscription", foreignKeys = {@ForeignKey(entity= Course.class, parentColumns = "id",
+        childColumns = "course_id", onDelete = ForeignKey.CASCADE),
+        @ForeignKey(entity= Student.class, parentColumns = "id",
+                childColumns = "student_id", onDelete = ForeignKey.CASCADE)})
 public class Inscription {
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "id")
@@ -16,6 +20,11 @@ public class Inscription {
     @ColumnInfo(name = "registrationtime")
     private LocalDateTime registrationTime;
 
+    @ColumnInfo(name="course_id")
+    private long course_id;
+
+    @ColumnInfo(name="student_id")
+    private long student_id;
     public Inscription() {
     }
 
