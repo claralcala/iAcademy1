@@ -1,11 +1,15 @@
 package es.iescarrillo.iacademy1.models;
 import androidx.room.ColumnInfo;
+import androidx.room.Embedded;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
 @Entity
 public abstract class Person {
 
+
+    @Embedded
+    private User user;
 
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name="id")

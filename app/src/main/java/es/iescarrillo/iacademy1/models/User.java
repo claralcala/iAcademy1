@@ -4,12 +4,10 @@ package es.iescarrillo.iacademy1.models;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
-@Entity(tableName = "user")
+@Entity
 public class User {
 
-    @PrimaryKey(autoGenerate = true)
-    @ColumnInfo(name = "id")
-    private long id;
+
     @ColumnInfo(name = "name")
     private String name;
     @ColumnInfo(name = "password")
@@ -18,13 +16,7 @@ public class User {
     public User() {
     }
 
-    public long getId() {
-        return id;
-    }
 
-    public void setId(long id) {
-        this.id = id;
-    }
 
     public String getName() {
         return name;
@@ -45,8 +37,7 @@ public class User {
     @Override
     public String toString() {
         return "User{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
+                "name='" + name + '\'' +
                 ", password='" + password + '\'' +
                 '}';
     }
