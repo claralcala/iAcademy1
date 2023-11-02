@@ -4,11 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activities.RegisterManagerActivity">
-
+    tools:context=".activities.ManagerRegisterTeacherActivity">
 
     <LinearLayout
-        android:id="@+id/linearLayout4"
+        android:id="@+id/linearLayout6"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginStart="1dp"
@@ -23,15 +22,16 @@
 
 
         <TextView
-            android:id="@+id/tvManagerRegister"
+            android:id="@+id/tvTitle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="30sp"
             android:gravity="center"
-            android:text="Registro de gerente" />
+            android:text="Registrar nuevo profesor"
+            android:textSize="30sp" />
+
 
         <EditText
-            android:id="@+id/etManagerName"
+            android:id="@+id/etTeacherName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
@@ -40,7 +40,7 @@
             android:inputType="text" />
 
         <EditText
-            android:id="@+id/etManagerSurname"
+            android:id="@+id/etTeacherSurname"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
@@ -49,7 +49,7 @@
             android:inputType="text" />
 
         <EditText
-            android:id="@+id/etManagerMail"
+            android:id="@+id/etTeacherMail"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
@@ -59,7 +59,7 @@
 
 
         <EditText
-            android:id="@+id/etManagerDNI"
+            android:id="@+id/etTeacherDNI"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
@@ -68,7 +68,7 @@
             android:inputType="text" />
 
         <EditText
-            android:id="@+id/etManagerPhone"
+            android:id="@+id/etTeacherPhone"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
@@ -78,7 +78,17 @@
 
 
         <EditText
-            android:id="@+id/etManagerUserName"
+            android:id="@+id/etTeacherAddress"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:ems="10"
+            android:hint="Dirección"
+            android:inputType="text" />
+
+
+        <EditText
+            android:id="@+id/etTeacherUserName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
@@ -88,13 +98,14 @@
 
 
         <EditText
-            android:id="@+id/etManagerPassword"
+            android:id="@+id/etTeacherPassword"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:ems="10"
             android:hint="contraseña"
             android:inputType="text" />
+
 
         <Button
             android:id="@+id/btnSave"
@@ -103,6 +114,7 @@
             android:layout_gravity="center"
             android:layout_marginTop="30dp"
             android:text="Guardar" />
+
 
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

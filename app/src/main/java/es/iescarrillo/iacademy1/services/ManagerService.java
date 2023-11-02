@@ -8,6 +8,7 @@ import java.util.Map;
 import es.iescarrillo.iacademy1.daos.ManagerDAO;
 import es.iescarrillo.iacademy1.database.DatabaseHelper;
 import es.iescarrillo.iacademy1.models.Academy;
+import es.iescarrillo.iacademy1.models.Course;
 import es.iescarrillo.iacademy1.models.Manager;
 
 
@@ -42,5 +43,10 @@ public class ManagerService implements ManagerDAO {
     @Override
     public Map<Manager, Academy> getManagerWithAcademyMap() {
         return managerDAO.getManagerWithAcademyMap();
+    }
+
+    @Override
+    public Map<Manager, List<Course>> getManagerWithCoursesMap() {
+        return managerDAO.getManagerWithCoursesMap();
     }
 }
