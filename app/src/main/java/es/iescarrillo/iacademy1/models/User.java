@@ -8,7 +8,7 @@ import androidx.room.PrimaryKey;
 public class User {
 
 
-    @ColumnInfo(name = "name")
+    @ColumnInfo(name = "username")
     private String name;
     @ColumnInfo(name = "password")
     private String password;

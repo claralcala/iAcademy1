@@ -46,13 +46,15 @@ public class Teacher extends Person{
         this.address = address;
     }
 
-    public long getManager_id() {
-        return manager_id;
+    public long getAcademy_id() {
+        return academy_id;
     }
 
-    public void setManager_id(long manager_id) {
-        this.manager_id = manager_id;
+    public void setAcademy_id(long academy_id) {
+        this.academy_id = academy_id;
     }
+
+
 
     @Override
     public String toString() {
