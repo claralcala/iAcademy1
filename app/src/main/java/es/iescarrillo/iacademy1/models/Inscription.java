@@ -44,6 +44,22 @@ public class Inscription {
         this.registrationTime = registrationTime;
     }
 
+    public long getCourse_id() {
+        return course_id;
+    }
+
+    public void setCourse_id(long course_id) {
+        this.course_id = course_id;
+    }
+
+    public long getStudent_id() {
+        return student_id;
+    }
+
+    public void setStudent_id(long student_id) {
+        this.student_id = student_id;
+    }
+
     @Override
     public String toString() {
         return "Inscription{" +
