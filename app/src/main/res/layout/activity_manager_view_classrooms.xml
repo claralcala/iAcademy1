@@ -4,25 +4,27 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activities.ManagerViewCourses">
+    tools:context=".activities.ManagerViewClassroomsActivity">
 
     <LinearLayout
-        android:id="@+id/linearLayout12"
+        android:id="@+id/linearLayout14"
         android:layout_width="409dp"
         android:layout_height="729dp"
         android:orientation="vertical"
         tools:layout_editor_absoluteX="1dp"
-        tools:layout_editor_absoluteY="1dp">
+        tools:layout_editor_absoluteY="1dp"
+        tools:ignore="MissingConstraints">
 
 
         <ListView
-            android:id="@+id/lvCourses"
+            android:id="@+id/lvClassrooms"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:clickable="true" />
 
 
     </LinearLayout>
+
 
     <Button
         android:id="@+id/btnAddCourse"
@@ -33,5 +35,5 @@
         android:backgroundTint="#200FAB"
         android:text="Agregar curso"
         android:textSize="20dp"
-        app:layout_constraintBottom_toBottomOf="@id/linearLayout12" />
+        app:layout_constraintBottom_toBottomOf="@id/linearLayout14" />
 </androidx.constraintlayout.widget.ConstraintLayout>

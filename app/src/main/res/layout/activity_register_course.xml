@@ -4,114 +4,91 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activities.MnagerEditAcademyActivity">
+    tools:context=".activities.RegisterCourseActivity">
 
     <LinearLayout
-        android:id="@+id/linearLayout10"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginStart="1dp"
-        android:layout_marginTop="1dp"
-        android:layout_marginEnd="1dp"
-        android:layout_marginBottom="1dp"
+        android:layout_width="409dp"
+        android:layout_height="729dp"
         android:orientation="vertical"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        tools:layout_editor_absoluteX="1dp"
+        tools:layout_editor_absoluteY="1dp">
+
 
         <TextView
-            android:id="@+id/tvTitle"
+            android:id="@+id/tvCourseRegister"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:textSize="30sp"
             android:gravity="center"
-            android:text="Editar academia"
-            android:textSize="30sp" />
+            android:text="Registrar un curso" />
 
         <EditText
-            android:id="@+id/etAcademyName"
+            android:id="@+id/etCourseTitle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:ems="10"
-            android:text=""
+            android:hint="Título"
             android:inputType="text" />
 
         <EditText
-            android:id="@+id/etAcademyDescription"
+            android:id="@+id/etCourseDescription"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:ems="10"
-            android:text=""
+            android:hint="Description"
             android:inputType="text" />
 
         <EditText
-            android:id="@+id/etAcademyCountry"
+            android:id="@+id/etCourseLevel"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:ems="10"
-            android:text=""
+            android:hint="Nivel"
             android:inputType="text" />
 
 
         <EditText
-            android:id="@+id/etAcademyState"
+            android:id="@+id/etCourseCapacity"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:ems="10"
-            android:text=""
+            android:hint="Capacidad"
             android:inputType="text" />
 
         <EditText
-            android:id="@+id/etAcademyCity"
+            android:id="@+id/etCourseStart"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:ems="10"
-            android:text=""
-            android:inputType="text" />
-
-
-        <EditText
-            android:id="@+id/etAcademyAddress"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:ems="10"
-            android:text=""
+            android:hint="Fecha inicio"
             android:inputType="text" />
 
 
         <EditText
-            android:id="@+id/etAcademyWeb"
+            android:id="@+id/etCourseEnd"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:ems="10"
-            android:text=""
+            android:hint="Fecha fin"
             android:inputType="text" />
 
 
         <EditText
-            android:id="@+id/etAcademyMail"
+            android:id="@+id/etCourseActivated"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:ems="10"
-            android:text=""
+            android:hint="Activo (true/false)"
             android:inputType="text" />
 
-        <EditText
-            android:id="@+id/etAcademyPhone"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:ems="10"
-            android:text=""
-            android:inputType="text" />
+
 
         <Button
             android:id="@+id/btnSave"
@@ -120,6 +97,10 @@
             android:layout_gravity="center"
             android:layout_marginTop="30dp"
             android:text="Guardar" />
+
+
+
+
 
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
