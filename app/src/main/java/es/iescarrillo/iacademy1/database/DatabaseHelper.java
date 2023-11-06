@@ -32,7 +32,7 @@ import es.iescarrillo.iacademy1.models.User;
 en nuestra base de datos.
    La versión tendremos que ir incementándola cada vez que hagamos un cambio dentro de nuestra BBDD
 * */
-    @Database(entities = {Manager.class, Academy.class, Course.class, Student.class, Inscription.class,Admin.class, Classroom.class, Lesson.class, Teacher.class}, version = 1)
+    @Database(entities = {Manager.class, Academy.class, Course.class, Student.class, Inscription.class,Admin.class, Classroom.class, Lesson.class, Teacher.class}, version = 2)
     @TypeConverters({LocalDateConverter.class, LocalTimeConverter.class, LocalDateTimeConverter.class})
     public abstract class DatabaseHelper extends RoomDatabase {
 

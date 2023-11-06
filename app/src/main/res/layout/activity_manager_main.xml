@@ -7,55 +7,73 @@
     tools:context=".activities.ManagerMainActivity">
 
     <LinearLayout
-        android:layout_width="409dp"
-        android:layout_height="729dp"
+        android:id="@+id/linearLayout19"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="1dp"
+        android:layout_marginTop="1dp"
+        android:layout_marginEnd="1dp"
+        android:layout_marginBottom="1dp"
         android:orientation="vertical"
-        tools:layout_editor_absoluteX="1dp"
-        tools:layout_editor_absoluteY="1dp">
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
         <TextView
             android:id="@+id/tvManager"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="30sp"
-            android:gravity="center"
             android:layout_marginTop="20dp"
             android:layout_marginBottom="20dp"
-            android:text="Bienvenido, gerente" />
+            android:gravity="center"
+            android:text="Bienvenido, gerente"
+            android:textSize="30sp" />
 
         <Button
             android:id="@+id/btnViewTeachers"
             android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginBottom="20dp"
-            android:layout_height="wrap_content"
             android:text="Consultar profesores" />
 
 
         <Button
             android:id="@+id/btnViewAcademy"
             android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginBottom="20dp"
-            android:layout_height="wrap_content"
             android:text="Datos academia" />
 
 
         <Button
             android:id="@+id/btnViewCourses"
             android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginBottom="20dp"
-            android:layout_height="wrap_content"
             android:text="Consultar cursos" />
 
         <Button
             android:id="@+id/btnViewClassrooms"
             android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginBottom="20dp"
-            android:layout_height="wrap_content"
             android:text="Consultar aulas" />
+
+
+        <Button
+            android:id="@+id/btnLogout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="100dp"
+            android:layout_marginBottom="20dp"
+            android:backgroundTint="@color/black"
+            android:text="Logout" />
 
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
