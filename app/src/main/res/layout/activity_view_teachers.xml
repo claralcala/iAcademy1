@@ -23,14 +23,28 @@
     </LinearLayout>
 
     <Button
-        android:id="@+id/btnAddTeacher"
+        android:id="@+id/btnBack"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="40dp"
         android:layout_marginRight="40dp"
         android:backgroundTint="#200FAB"
-        android:text="Agregar profesor"
+        android:text="Volver pantalla principal"
         android:textSize="20dp"
         app:layout_constraintBottom_toBottomOf="@id/linearLayout5" />
+
+
+    <Button
+        android:id="@+id/btnAddTeacher"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="40dp"
+        android:layout_marginRight="40dp"
+        android:layout_marginBottom="60dp"
+        android:backgroundTint="#200FAB"
+        android:text="Agregar profesor"
+        android:textSize="20dp"
+        app:layout_constraintBottom_toBottomOf="@id/linearLayout5"
+         />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
