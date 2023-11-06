@@ -42,4 +42,9 @@ public class StudentService implements StudentDAO {
     public Map<Student, List<Inscription>> getStudentWithInscriptionsMap() {
         return studentDAO.getStudentWithInscriptionsMap();
     }
+
+    @Override
+    public Student getStudentByUsername(String username) {
+        return studentDAO.getStudentByUsername(username);
+    }
 }

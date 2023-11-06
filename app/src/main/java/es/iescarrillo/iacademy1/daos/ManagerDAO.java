@@ -35,4 +35,9 @@ public interface ManagerDAO {
     Map<Manager, List<Course>> getManagerWithCoursesMap();
 
 
+    @Query("SELECT * FROM manager WHERE username = :username")
+    Manager getManagerByUsername(String username);
+
+
+
 }

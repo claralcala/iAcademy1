@@ -18,8 +18,10 @@
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0">
 
 
         <TextView
@@ -47,6 +49,42 @@
             android:hint="Contraseña"
             android:inputType="text" />
 
+
+
+        <TextView
+            android:id="@+id/tvError"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="" />
+
+        <TextView
+            android:id="@+id/tvRol"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Seleccionar rol:" />
+        <RadioGroup
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <RadioButton
+                android:id="@+id/rbManager"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Gerente" />
+
+            <RadioButton
+                android:id="@+id/rbStudent"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Estudiante" />
+
+            <RadioButton
+                android:id="@+id/rbTeacher"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Profesor" />
+        </RadioGroup>
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="77dp"
@@ -65,7 +103,7 @@
 
 
             <Button
-                android:id="@+id/btnRegiste"
+                android:id="@+id/btnRegister"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="5dp"
@@ -74,13 +112,6 @@
 
 
         </LinearLayout>
-
-        <TextView
-            android:id="@+id/tvError"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="" />
-
 
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
