@@ -13,10 +13,20 @@ public class User {
     @ColumnInfo(name = "password")
     private String password;
 
+    @ColumnInfo(name="role")
+    private String role;
+
     public User() {
     }
 
 
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
+    }
 
     public String getName() {
         return name;
@@ -39,6 +49,7 @@ public class User {
         return "User{" +
                 "name='" + name + '\'' +
                 ", password='" + password + '\'' +
+                ", role='" + role + '\'' +
                 '}';
     }
 }
