@@ -19,8 +19,8 @@ public class StudentService implements StudentDAO {
     }
 
     @Override
-    public long inserStudent(Student student) {
-        return studentDAO.inserStudent(student);
+    public long insertStudent(Student student) {
+        return studentDAO.insertStudent(student);
     }
 
     @Override

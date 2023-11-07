@@ -16,6 +16,8 @@ import org.mindrot.jbcrypt.BCrypt;
 
 import es.iescarrillo.iacademy1.R;
 import es.iescarrillo.iacademy1.models.Manager;
+import es.iescarrillo.iacademy1.models.Student;
+import es.iescarrillo.iacademy1.models.Teacher;
 import es.iescarrillo.iacademy1.services.AcademyService;
 import es.iescarrillo.iacademy1.services.ClassRoomService;
 import es.iescarrillo.iacademy1.services.CourseService;
@@ -38,7 +40,7 @@ public class MainActivity extends AppCompatActivity {
     private TeacherService teacherService;
 
     EditText etUsername, etPassword;
-    RadioButton rbManager, rbTeacher, rbStudent;
+
     TextView tvError;
 
     Button btnLogin;
@@ -69,9 +71,7 @@ public class MainActivity extends AppCompatActivity {
 
         btnRegister = findViewById(R.id.btnRegister);
 
-        rbManager = findViewById(R.id.rbManager);
-        rbStudent = findViewById(R.id.rbStudent);
-        rbTeacher= findViewById(R.id.rbTeacher);
+
 
         btnRegister.setOnClickListener(v -> {
                 Intent intentRegister = new Intent(this, RegisterActivity.class);
@@ -84,15 +84,60 @@ public class MainActivity extends AppCompatActivity {
             Thread thread = new Thread(() -> {
 
 
-                if(rbManager.isChecked()){
                     Manager m = managerService.getManagerByUsername(etUsername.getText().toString());
 
-                    if (m.getUser().getRole().equals("PROFESOR") || m.getUser().getRole().equals("ALUMNO")){
-                        tvError.setText("El rol no coincide con el especificado en el registro");
-                    }
-                    if (m==null) {
-                        tvError.setText("El usuario no es válido");
 
+                    if (m==null) {
+                        Student s = studentService.getStudentByUsername(etUsername.getText().toString());
+                                if (s==null){
+                                    Teacher t = teacherService.getTeacherByUsername(etUsername.getText().toString());
+                                    if (t==null){
+                                        tvError.setText("El usuario no es válido");
+                                    }else {
+
+                                        Boolean checkPassword = BCrypt.checkpw(etPassword.getText().toString(), t.getUser().getPassword());
+                                        if (checkPassword){
+
+                                            sharedPreferences = getSharedPreferences("PreferencesAcademy", Context.MODE_PRIVATE);
+                                            SharedPreferences.Editor editor = sharedPreferences.edit();
+
+                                            editor.putBoolean("login", true);
+                                            editor.putString("username", t.getUser().getName());
+                                            editor.putLong("id", t.getId());
+                                            editor.putString("role", t.getUser().getRole());
+                                            editor.putString("password", t.getUser().getPassword());
+                                            editor.apply();
+
+                                            tvError.setText("Login correcto");
+                                            //Falta el intent para ir a la actividad
+
+                                        }else {
+                                            tvError.setText("Contraseña no válida");
+                                        }
+                                    }
+                                }else {
+
+                                    Boolean checkPassword = BCrypt.checkpw(etPassword.getText().toString(), s.getUser().getPassword());
+                                    if (checkPassword){
+
+                                        sharedPreferences = getSharedPreferences("PreferencesAcademy", Context.MODE_PRIVATE);
+                                        SharedPreferences.Editor editor = sharedPreferences.edit();
+
+                                        editor.putBoolean("login", true);
+                                        editor.putString("username", s.getUser().getName());
+                                        editor.putLong("id", s.getId());
+                                        editor.putString("role", s.getUser().getRole());
+                                        editor.putString("password", s.getUser().getPassword());
+                                        editor.apply();
+
+                                        tvError.setText("Login correcto");
+                                        //Falta el intent para ir a la actividad
+
+                                    }else {
+                                        tvError.setText("Contraseña no válida");
+                                    }
+
+                                }
                     }else {
                         Boolean checkPassword = BCrypt.checkpw(etPassword.getText().toString(), m.getUser().getPassword());
                         if (checkPassword){
@@ -113,8 +158,14 @@ public class MainActivity extends AppCompatActivity {
                         }else {
                             tvError.setText("Contraseña no válida");
                         }
+
+
                     }
-                }
+
+
+
+
+
 
 
 

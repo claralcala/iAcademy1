@@ -9,16 +9,14 @@ import androidx.room.Update;
 import java.util.List;
 import java.util.Map;
 
-import es.iescarrillo.iacademy1.models.Course;
 import es.iescarrillo.iacademy1.models.Inscription;
-import es.iescarrillo.iacademy1.models.Manager;
 import es.iescarrillo.iacademy1.models.Student;
 
 @Dao
 public interface StudentDAO {
 
     @Insert
-    long inserStudent(Student student);
+    long insertStudent(Student student);
 
     @Update
 

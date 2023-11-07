@@ -3,16 +3,21 @@ package es.iescarrillo.iacademy1.activities;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
+import android.text.TextUtils;
 import android.util.Log;
 import android.widget.Button;
 import android.os.Bundle;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import org.mindrot.jbcrypt.BCrypt;
 
 import java.time.LocalDate;
-
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+import java.util.logging.SimpleFormatter;
 
 
 import es.iescarrillo.iacademy1.R;
@@ -63,7 +68,15 @@ public class RegisterStudentActivity extends AppCompatActivity {
             s.setDni(etDNI.getText().toString());
             s.setPhone(etPhone.getText().toString());
             s.setFamilyPhone(etFamPhone.getText().toString());
-            s.setBirthdate(LocalDate.parse(etBirthdate.getText()));
+
+
+            if (!TextUtils.isEmpty(etBirthdate.getText().toString())) {
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+                s.setBirthdate(LocalDate.parse(etBirthdate.getText().toString(), formatter));
+            } else {
+                Toast.makeText(this, "La fecha no puede estar vacía", Toast.LENGTH_SHORT).show();
+                return; // Detener la ejecución del método si el campo de fecha de nacimiento está vacío
+            }
 
             User u = new User();
 
@@ -79,7 +92,7 @@ public class RegisterStudentActivity extends AppCompatActivity {
 
             Thread thread = new Thread(()->{
 
-                studentService.inserStudent(s);
+                studentService.insertStudent(s);
 
             });
 
@@ -89,6 +102,10 @@ public class RegisterStudentActivity extends AppCompatActivity {
             }catch(Exception e ){
                 Log.i("error", e.getMessage());
             }
+
+            Intent back = new Intent(this, MainActivity.class);
+
+            startActivity(back);
 
         });
 

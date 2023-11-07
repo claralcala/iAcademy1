@@ -47,7 +47,7 @@
             android:layout_marginTop="40dp"
             android:ems="10"
             android:hint="Contraseña"
-            android:inputType="text" />
+            android:inputType="textPassword"/>
 
 
 
@@ -62,28 +62,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Seleccionar rol:" />
-        <RadioGroup
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
 
-            <RadioButton
-                android:id="@+id/rbManager"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Gerente" />
-
-            <RadioButton
-                android:id="@+id/rbStudent"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Estudiante" />
-
-            <RadioButton
-                android:id="@+id/rbTeacher"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Profesor" />
-        </RadioGroup>
 
         <LinearLayout
             android:layout_width="match_parent"
