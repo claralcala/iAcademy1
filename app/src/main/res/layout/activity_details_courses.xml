@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activities.DetailsCourses">
+
+    <LinearLayout
+        android:layout_width="409dp"
+        android:layout_height="729dp"
+        android:orientation="vertical"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="1dp"
+        tools:layout_editor_absoluteY="1dp">
+
+        <TextView
+            android:id="@+id/tvInforAcademy"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="20dp"
+            android:text="Información Cursos"
+            android:textAlignment="center"
+            android:textSize="30dp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/tvTitle"
+            android:layout_width="256dp"
+            android:layout_height="30dp"
+            android:layout_gravity="center"
+            android:layout_marginBottom="20dp"
+            android:background="@drawable/border"
+            android:hint="Titulo"
+            android:paddingLeft="20dp"
+            android:paddingTop="2dp"
+            android:textSize="17dp"
+
+
+            />
+
+        <TextView
+            android:id="@+id/tvDescription"
+            android:layout_width="256dp"
+            android:layout_height="31dp"
+            android:layout_gravity="center"
+            android:layout_marginBottom="20dp"
+            android:background="@drawable/border"
+            android:hint="Description"
+            android:paddingLeft="20dp"
+            android:paddingTop="2dp"
+            android:textSize="17dp" />
+
+        <TextView
+            android:id="@+id/tvLevel"
+            android:layout_width="256dp"
+            android:layout_height="31dp"
+            android:layout_gravity="center"
+            android:layout_marginBottom="20dp"
+            android:background="@drawable/border"
+            android:hint="Level"
+            android:paddingLeft="20dp"
+            android:paddingTop="2dp"
+            android:textSize="17dp" />
+
+        <TextView
+            android:id="@+id/tvCapacity"
+            android:layout_width="256dp"
+            android:layout_height="31dp"
+            android:layout_gravity="center"
+            android:layout_marginBottom="20dp"
+            android:background="@drawable/border"
+            android:hint="Capacity"
+            android:paddingLeft="20dp"
+            android:paddingTop="2dp"
+            android:textSize="17dp" />
+
+        <TextView
+            android:id="@+id/tvStartDate"
+            android:layout_width="256dp"
+            android:layout_height="31dp"
+            android:layout_gravity="center"
+            android:layout_marginBottom="20dp"
+            android:background="@drawable/border"
+            android:hint="StartDate"
+            android:paddingLeft="20dp"
+            android:paddingTop="2dp"
+            android:textSize="17dp" />
+
+        <TextView
+            android:id="@+id/tvEndDate"
+            android:layout_width="256dp"
+            android:layout_height="31dp"
+            android:layout_gravity="center"
+            android:layout_marginBottom="20dp"
+            android:background="@drawable/border"
+            android:hint="EndDate"
+            android:paddingLeft="20dp"
+            android:paddingTop="2dp"
+            android:textSize="17dp" />
+
+        <Button
+            android:id="@+id/btnRegistration"
+            android:layout_width="295dp"
+            android:layout_height="wrap_content"
+            android:text="Matriculacion"
+
+            android:layout_gravity="center"
+            />
+
+    </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
