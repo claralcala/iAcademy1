@@ -54,4 +54,9 @@ public class ManagerService implements ManagerDAO {
     public Manager getManagerByUsername(String username) {
         return managerDAO.getManagerByUsername(username);
     }
+
+    @Override
+    public int getUsernameUnique(String username) {
+        return managerDAO.getUsernameUnique(username);
+    }
 }

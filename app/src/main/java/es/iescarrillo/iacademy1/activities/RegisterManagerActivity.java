@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import org.mindrot.jbcrypt.BCrypt;
 
@@ -53,6 +54,8 @@ public class RegisterManagerActivity extends AppCompatActivity {
 
         btnSave.setOnClickListener(v -> {
 
+
+
             Manager m = new Manager();
             m.setName(etName.getText().toString());
             m.setSurname(etSurname.getText().toString());
@@ -73,6 +76,15 @@ public class RegisterManagerActivity extends AppCompatActivity {
             m.setUser(u);
 
             Thread thread = new Thread(()->{
+
+               /* int numUsers= managerService.getUsernameUnique(etUsername.getText().toString())
+                if (numUsers==0) {
+                    // El nombre de usuario es único, puedes continuar con el registro
+                    // Crea el nuevo usuario y guárdalo en la base de datos
+                } else {
+                    // Muestra un mensaje de error informando que el nombre de usuario ya está en uso
+                    Toast.makeText(this, "El nombre de usuario ya está en uso", Toast.LENGTH_SHORT).show();
+                }*/
 
                 managerService.insertManager(m);
 
