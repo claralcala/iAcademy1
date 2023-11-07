@@ -49,6 +49,11 @@ public class RegisterManagerActivity extends AppCompatActivity {
         btnSave = findViewById(R.id.btnSaveManager);
 
 
+        SharedPreferences sharedPreferences= getSharedPreferences("PreferencesAcademy", Context.MODE_PRIVATE);
+        String username= sharedPreferences.getString("user", "");
+        String role = sharedPreferences.getString("role", "");
+        Boolean login = sharedPreferences.getBoolean("login", false);
+        Long id = sharedPreferences.getLong("id", 0);
 
         managerService = new ManagerService(getApplication());
 
