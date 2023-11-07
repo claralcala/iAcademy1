@@ -19,8 +19,8 @@ public class StudentService implements StudentDAO {
     }
 
     @Override
-    public long inserStudent(Student student) {
-        return studentDAO.inserStudent(student);
+    public long insertStudent(Student student) {
+        return studentDAO.insertStudent(student);
     }
 
     @Override
@@ -41,5 +41,10 @@ public class StudentService implements StudentDAO {
     @Override
     public Map<Student, List<Inscription>> getStudentWithInscriptionsMap() {
         return studentDAO.getStudentWithInscriptionsMap();
+    }
+
+    @Override
+    public Student getStudentByUsername(String username) {
+        return studentDAO.getStudentByUsername(username);
     }
 }

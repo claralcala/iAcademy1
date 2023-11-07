@@ -12,6 +12,7 @@ import java.util.Map;
 import es.iescarrillo.iacademy1.models.Academy;
 import es.iescarrillo.iacademy1.models.Admin;
 import es.iescarrillo.iacademy1.models.Course;
+import es.iescarrillo.iacademy1.models.Manager;
 import es.iescarrillo.iacademy1.models.Teacher;
 
 @Dao
@@ -32,5 +33,6 @@ public interface TeacherDAO {
     Map<Teacher, List<Course>> getTeacherWithCoursesMap();
 
 
-
+    @Query("SELECT * FROM teacher WHERE username = :username")
+    Teacher getTeacherByUsername(String username);
 }
