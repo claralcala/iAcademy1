@@ -105,7 +105,6 @@ public class MainActivity extends AppCompatActivity {
                                             editor.putString("username", t.getUser().getName());
                                             editor.putLong("id", t.getId());
                                             editor.putString("role", t.getUser().getRole());
-                                            editor.putString("password", t.getUser().getPassword());
                                             editor.apply();
 
                                             tvError.setText("Login correcto");
@@ -127,9 +126,7 @@ public class MainActivity extends AppCompatActivity {
                                         editor.putString("username", s.getUser().getName());
                                         editor.putLong("id", s.getId());
                                         editor.putString("role", s.getUser().getRole());
-                                        editor.putString("password", s.getUser().getPassword());
                                         editor.apply();
-
                                         tvError.setText("Login correcto");
                                         //Falta el intent para ir a la actividad
 
