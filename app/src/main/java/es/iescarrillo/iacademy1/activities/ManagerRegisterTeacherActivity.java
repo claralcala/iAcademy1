@@ -62,6 +62,7 @@ public class ManagerRegisterTeacherActivity extends AppCompatActivity {
             t.setAddress(etAddress.getText().toString());
             t.setEmail(etMail.getText().toString());
             t.setPhone(etPhone.getText().toString());
+            t.setAcademy_id(id);
 
             User u = new User();
 
@@ -74,7 +75,7 @@ public class ManagerRegisterTeacherActivity extends AppCompatActivity {
             u.setPassword(encryptPassword);
 
             t.setUser(u);
-            //ID DE LA ACADEMIA ?
+
 
             Thread thread = new Thread(()->{
                 teacherService.insertTeacher(t);

@@ -48,4 +48,9 @@ public class TeacherService implements TeacherDAO {
     public Teacher getTeacherByUsername(String username) {
         return teacherDAO.getTeacherByUsername(username);
     }
+
+    @Override
+    public List<Teacher> getTeachersByAcademy(long id) {
+        return teacherDAO.getTeachersByAcademy(id);
+    }
 }

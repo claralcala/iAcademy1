@@ -35,6 +35,10 @@ public class ManagerMainActivity extends AppCompatActivity {
 
 
 
+
+
+
+
         btnViewTeachers.setOnClickListener(v -> {
             Intent intentViewTeachers = new Intent(this, ViewTeachersActivity.class);
            startActivity(intentViewTeachers);

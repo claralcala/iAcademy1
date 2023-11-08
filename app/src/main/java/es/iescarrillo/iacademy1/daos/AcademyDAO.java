@@ -21,6 +21,8 @@ public interface AcademyDAO {
     @Update
     void updateAcademy(Academy academy);
 
+
+
     @Delete
     void deleteAcademy(Academy academy);
 
@@ -32,6 +34,15 @@ public interface AcademyDAO {
 
     @Query("SELECT * FROM academy a JOIN course c on a.id=c.academy_id")
     Map<Academy, List<Course>> getAcademyWithCoursesMap();
+
+
+    @Query("SELECT * FROM academy WHERE manager_id = :managerId")
+    Academy getAcademyByManagerid(Long managerId);
+
+
+    @Query("UPDATE academy SET name=:name_, description=:description_, country=:country_, state=:state_, address=:address_, city=:city_, web=:web_, phone=:phone_, email=:email_  WHERE manager_id = :id")
+    void updatebyId(String name_, String description_, String city_, String country_, String state_, String address_, String phone_, String web_, String email_, long id);
+
 
 
 }
