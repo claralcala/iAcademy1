@@ -60,8 +60,7 @@ public class ManagerRegisterAcademyActivity extends AppCompatActivity {
             a.setWeb(etWeb.getText().toString());
             a.setEmail(etMail.getText().toString());
             a.setPhone(etPhone.getText().toString());
-
-            //Manager id?
+            a.setManager_id(id);
 
             Thread thread = new Thread(()->{
                 academyService.insertAcademy(a);

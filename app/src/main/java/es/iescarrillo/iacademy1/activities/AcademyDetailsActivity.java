@@ -15,6 +15,7 @@ import java.util.Map;
 import es.iescarrillo.iacademy1.R;
 import es.iescarrillo.iacademy1.models.Academy;
 import es.iescarrillo.iacademy1.models.Manager;
+import es.iescarrillo.iacademy1.services.AcademyService;
 import es.iescarrillo.iacademy1.services.ManagerService;
 
 public class AcademyDetailsActivity extends AppCompatActivity {
@@ -22,6 +23,7 @@ public class AcademyDetailsActivity extends AppCompatActivity {
     TextView tvName, tvDescription, tvCountry, tvState, tvCity, tvAddress, tvWeb, tvEmail, tvPhone;
     Button btnBack, btnEditAcademy;
     private ManagerService managerService;
+    private AcademyService academyService;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -48,43 +50,20 @@ public class AcademyDetailsActivity extends AppCompatActivity {
 
 
         managerService = new ManagerService(getApplication());
+        academyService = new AcademyService(getApplication());
         Thread thread = new Thread(()->{
 
+            Academy a = academyService.getAcademyByManagerid(id);
 
-
-            Map<Manager, Academy> map =managerService.getManagerWithAcademyMap();
-
-            Manager manager = managerService.getManagerWithAcademyMap().keySet().iterator().next();
-            if (manager==null){
-                tvName.setText("sin datos");
-                tvDescription.setText("sin datos");
-                tvCountry.setText("sin datos");
-                tvState.setText("sin datos");
-                tvCity.setText("sin datos");
-                tvEmail.setText("sin datos");
-                tvWeb.setText("sin datos");
-                tvPhone.setText("sin datos");
-                tvAddress.setText("sin datos");
-            }else {
-                Academy a = new Academy();
-                a=map.get(manager);
-
-                tvName.setText(a.getName());
-                tvDescription.setText(a.getDescription());
-                tvCountry.setText(a.getCountry());
-                tvState.setText(a.getState());
-                tvCity.setText(a.getCity());
-                tvEmail.setText(a.getEmail());
-                tvWeb.setText(a.getWeb());
-                tvPhone.setText(a.getPhone());
-                tvAddress.setText(a.getAddress());
-
-            }
-
-
-
-
-
+            tvName.setText(a.getName());
+            tvDescription.setText(a.getDescription());
+            tvCountry.setText(a.getCountry());
+            tvState.setText(a.getState());
+            tvCity.setText(a.getCity());
+            tvAddress.setText(a.getAddress());
+            tvPhone.setText(a.getPhone());
+            tvEmail.setText(a.getEmail());
+            tvWeb.setText(a.getWeb());
 
 
         });
@@ -105,7 +84,19 @@ public class AcademyDetailsActivity extends AppCompatActivity {
 
 
         btnEditAcademy.setOnClickListener(v -> {
+
             Intent edit = new Intent(this, MnagerEditAcademyActivity.class);
+
+            edit.putExtra("name", tvName.getText().toString());
+            edit.putExtra("description", tvDescription.getText().toString());
+            edit.putExtra("country", tvCountry.getText().toString());
+            edit.putExtra("state", tvState.getText().toString());
+            edit.putExtra("city", tvCity.getText().toString());
+            edit.putExtra("address", tvAddress.getText().toString());
+            edit.putExtra("email", tvEmail.getText().toString());
+            edit.putExtra("phone", tvPhone.getText().toString());
+            edit.putExtra("web", tvWeb.getText().toString());
+            edit.putExtra("id", id);
             startActivity(edit);
 
         });

@@ -35,4 +35,7 @@ public interface TeacherDAO {
 
     @Query("SELECT * FROM teacher WHERE username = :username")
     Teacher getTeacherByUsername(String username);
+
+    @Query("SELECT * FROM teacher WHERE academy_id= :id")
+    List<Teacher> getTeachersByAcademy(long id);
 }
