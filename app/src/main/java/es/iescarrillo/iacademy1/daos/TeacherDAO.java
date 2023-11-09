@@ -29,8 +29,6 @@ public interface TeacherDAO {
     @Query("SELECT * FROM teacher")
     List<Teacher> getAll();
 
-    @Query("SELECT * FROM teacher t JOIN course c ON t.id=c.teacher_id")
-    Map<Teacher, List<Course>> getTeacherWithCoursesMap();
 
 
     @Query("SELECT * FROM teacher WHERE username = :username")
@@ -38,4 +36,5 @@ public interface TeacherDAO {
 
     @Query("SELECT * FROM teacher WHERE academy_id= :id")
     List<Teacher> getTeachersByAcademy(long id);
+
 }
