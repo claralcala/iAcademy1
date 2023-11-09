@@ -27,6 +27,9 @@ public class ManagerRegisterTeacherActivity extends AppCompatActivity {
     EditText etName, etSurname, etMail, etDNI, etPhone, etAddress, etUsername, etPassword;
 
     private TeacherService teacherService;
+    Academy a;
+    long idAcademy;
+    private AcademyService academyService;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,6 +57,7 @@ public class ManagerRegisterTeacherActivity extends AppCompatActivity {
         Long id = sharedPreferences.getLong("id", 0);
 
         teacherService= new TeacherService(getApplication());
+        academyService = new AcademyService(getApplication());
 
         btnSave.setOnClickListener(v -> {
            Teacher t = new Teacher();
@@ -62,7 +66,25 @@ public class ManagerRegisterTeacherActivity extends AppCompatActivity {
             t.setAddress(etAddress.getText().toString());
             t.setEmail(etMail.getText().toString());
             t.setPhone(etPhone.getText().toString());
-            t.setAcademy_id(id);
+
+            Thread thread = new Thread(()->{
+
+                a =academyService.getAcademyByManagerid(id);
+                idAcademy=a.getId();
+
+
+
+            });
+
+
+            thread.start();
+            try{
+                thread.join();
+            }catch(Exception e ){
+                Log.i("error", e.getMessage());
+            }
+
+            t.setAcademy_id(idAcademy);
 
             User u = new User();
 
@@ -77,14 +99,14 @@ public class ManagerRegisterTeacherActivity extends AppCompatActivity {
             t.setUser(u);
 
 
-            Thread thread = new Thread(()->{
+            Thread thread2 = new Thread(()->{
                 teacherService.insertTeacher(t);
 
             });
 
-            thread.start();
+            thread2.start();
             try{
-                thread.join();
+                thread2.join();
             }catch(Exception e){
                 Log.i("error", e.getMessage());
             }

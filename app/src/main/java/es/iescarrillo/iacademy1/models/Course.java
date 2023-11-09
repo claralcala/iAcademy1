@@ -140,6 +140,8 @@ public Course(){
                 ", startDate=" + startDate +
                 ", endDate=" + endDate +
                 ", activated=" + activated +
+                ", academy_id=" + academy_id +
+                ", teacher_id=" + teacher_id +
                 '}';
     }
 }

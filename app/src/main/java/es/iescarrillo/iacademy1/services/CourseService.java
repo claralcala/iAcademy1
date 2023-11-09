@@ -49,4 +49,9 @@ public class CourseService implements CourseDAO {
     public Map<Course, List<Inscription>> getCoursesWithInscriptionMap() {
         return courseDAO.getCoursesWithInscriptionMap();
     }
+
+    @Override
+    public List<Course> getCoursebyAcademyID(Long acID) {
+        return courseDAO.getCoursebyAcademyID(acID);
+    }
 }

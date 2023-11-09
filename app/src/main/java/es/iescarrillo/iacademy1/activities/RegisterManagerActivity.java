@@ -21,6 +21,7 @@ import es.iescarrillo.iacademy1.models.Student;
 import es.iescarrillo.iacademy1.models.User;
 import es.iescarrillo.iacademy1.services.ManagerService;
 import es.iescarrillo.iacademy1.services.StudentService;
+import es.iescarrillo.iacademy1.services.TeacherService;
 
 public class RegisterManagerActivity extends AppCompatActivity {
 
@@ -31,6 +32,8 @@ public class RegisterManagerActivity extends AppCompatActivity {
     EditText etName, etSurname, etUsername, etPasswordRegister, etMail, etDNI, etPhone;
 
     private ManagerService managerService;
+    private StudentService studentService;
+    private TeacherService teacherService;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,6 +59,8 @@ public class RegisterManagerActivity extends AppCompatActivity {
         Long id = sharedPreferences.getLong("id", 0);
 
         managerService = new ManagerService(getApplication());
+        teacherService = new TeacherService(getApplication());
+        studentService = new StudentService(getApplication());
 
         btnSave.setOnClickListener(v -> {
 
@@ -82,16 +87,21 @@ public class RegisterManagerActivity extends AppCompatActivity {
 
             Thread thread = new Thread(()->{
 
-               /* int numUsers= managerService.getUsernameUnique(etUsername.getText().toString())
-                if (numUsers==0) {
-                    // El nombre de usuario es único, puedes continuar con el registro
-                    // Crea el nuevo usuario y guárdalo en la base de datos
-                } else {
-                    // Muestra un mensaje de error informando que el nombre de usuario ya está en uso
-                    Toast.makeText(this, "El nombre de usuario ya está en uso", Toast.LENGTH_SHORT).show();
-                }*/
+                String userName = etUsername.getText().toString();
 
-                managerService.insertManager(m);
+                if (managerService.getManagerByUsername(userName)!=null || studentService.getStudentByUsername(userName)!=null || teacherService.getTeacherByUsername(userName)!=null) {
+                   runOnUiThread(()->{
+
+                       Toast.makeText(this, "El nombre de usuario ya está en uso", Toast.LENGTH_SHORT).show();
+                    });
+
+                } else {
+
+
+                    managerService.insertManager(m);
+                }
+
+
 
             });
 
