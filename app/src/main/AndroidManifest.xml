@@ -91,6 +91,30 @@
             android:name=".activities.RegisterActivity"
             android:exported="false" />
         <activity
+            android:name=".activities.Teacher_Edit_Lesson"
+            android:exported="false" />
+        <activity
+            android:name=".activities.Teacher_Add_Lesson"
+            android:exported="false" />
+        <activity
+            android:name=".activities.Teacher_Details_Lesson"
+            android:exported="false" />
+        <activity
+            android:name=".activities.Teacher_View_Lesson"
+            android:exported="false" />
+        <activity
+            android:name=".activities.Teacher_Edit_Course"
+            android:exported="false" />
+        <activity
+            android:name=".activities.Teacher_Details_Course"
+            android:exported="false" />
+        <activity
+            android:name=".activities.Teacher_Add_Course"
+            android:exported="false" />
+        <activity
+            android:name=".activities.Teacher_View_Courses"
+            android:exported="false" />
+        <activity
             android:name=".activities.MainActivity"
             android:exported="true">
             <intent-filter>
