@@ -92,6 +92,8 @@ public class RegisterStudentActivity extends AppCompatActivity {
 
             Thread thread = new Thread(()->{
 
+
+
                 studentService.insertStudent(s);
 
             });

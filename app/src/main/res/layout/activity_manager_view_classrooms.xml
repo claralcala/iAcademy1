@@ -8,12 +8,9 @@
 
     <LinearLayout
         android:id="@+id/linearLayout14"
-        android:layout_width="409dp"
-        android:layout_height="729dp"
-        android:orientation="vertical"
-        tools:layout_editor_absoluteX="1dp"
-        tools:layout_editor_absoluteY="1dp"
-        tools:ignore="MissingConstraints">
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
 
         <ListView
@@ -33,7 +30,7 @@
         android:layout_marginLeft="40dp"
         android:layout_marginRight="40dp"
         android:backgroundTint="#200FAB"
-        android:text="Agregar curso"
+        android:text="Agregar aula"
         android:textSize="20dp"
         app:layout_constraintBottom_toBottomOf="@id/linearLayout14" />
 

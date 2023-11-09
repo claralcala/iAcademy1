@@ -31,6 +31,8 @@ public class AcademyService implements AcademyDAO {
         academyDAO.updateAcademy(academy);
     }
 
+
+
     @Override
     public void deleteAcademy(Academy academy) {
         academyDAO.deleteAcademy(academy);
@@ -50,4 +52,16 @@ public class AcademyService implements AcademyDAO {
     public Map<Academy, List<Course>> getAcademyWithCoursesMap() {
         return academyDAO.getAcademyWithCoursesMap();
     }
+
+    @Override
+    public Academy getAcademyByManagerid(Long managerId) {
+        return academyDAO.getAcademyByManagerid(managerId);
+    }
+
+    @Override
+    public void updatebyId(String name_, String description_, String city_, String country_, String state_, String address_, String phone_, String web_, String email_, long id) {
+        academyDAO.updatebyId(name_, description_, city_, country_, state_, address_, phone_, web_, email_, id);
+    }
+
+
 }
