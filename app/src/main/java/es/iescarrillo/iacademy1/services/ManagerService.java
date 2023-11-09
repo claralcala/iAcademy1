@@ -45,6 +45,7 @@ public class ManagerService implements ManagerDAO {
         return managerDAO.getManagerWithAcademyMap();
     }
 
+
     @Override
     public Map<Manager, List<Course>> getManagerWithCoursesMap() {
         return managerDAO.getManagerWithCoursesMap();

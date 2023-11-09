@@ -10,36 +10,34 @@
         android:layout_width="409dp"
         android:layout_height="729dp"
         android:orientation="vertical"
+        tools:ignore="MissingConstraints"
         tools:layout_editor_absoluteX="1dp"
-        tools:layout_editor_absoluteY="1dp"
-        tools:ignore="MissingConstraints">
+        tools:layout_editor_absoluteY="1dp">
 
         <TextView
             android:id="@+id/tvWelcomeStudent"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="50dp"
+            android:layout_marginBottom="30dp"
             android:text="Bienvenido Student"
             android:textAlignment="center"
             android:textSize="30dp"
-            android:textStyle="bold"
-            android:layout_marginBottom="30dp"
-            />
+            android:textStyle="bold" />
 
         <ImageView
             android:id="@+id/ivStudent"
             android:layout_width="match_parent"
-            android:layout_height="118dp"
-            app:srcCompat="@drawable/student"
+            android:layout_height="171dp"
             android:layout_marginBottom="100dp"
-            />
+            app:srcCompat="@drawable/student" />
 
         <Button
             android:id="@+id/btnVisualizarAcademias"
             android:layout_width="254dp"
             android:layout_height="wrap_content"
+            android:layout_gravity="center"
             android:text="Visualizar Academias"
             android:textAlignment="center"
-            android:layout_gravity="center"
 
             />
 
@@ -47,16 +45,15 @@
             android:id="@+id/btnViewAllCourses"
             android:layout_width="255dp"
             android:layout_height="wrap_content"
-            android:text="Visualizar todos los cursos"
             android:layout_gravity="center"
-            />
+            android:text="Visualizar todos los cursos" />
 
         <Button
             android:id="@+id/btnViewCoursesEnrolled"
             android:layout_width="255dp"
             android:layout_height="wrap_content"
-            android:text="Visualizar cursos matriculados"
             android:layout_gravity="center"
-            />
+            android:text="Visualizar cursos matriculados" />
+
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.RadioButton;
 import android.widget.TextView;
 
@@ -43,8 +44,8 @@ public class MainActivity extends AppCompatActivity {
 
     TextView tvError;
 
-    Button btnLogin;
-    Button btnRegister;
+    ImageButton btnLogin;
+    ImageButton btnRegister;
 
     SharedPreferences sharedPreferences;
 
@@ -67,100 +68,100 @@ public class MainActivity extends AppCompatActivity {
 
         tvError = findViewById(R.id.tvError);
 
-        btnLogin = findViewById(R.id.btnLogin);
+        ImageButton btnLogin = findViewById(R.id.btnLogin);
 
-        btnRegister = findViewById(R.id.btnRegister);
+        ImageButton btnRegister = findViewById(R.id.btnRegister);
 
 
 
         btnRegister.setOnClickListener(v -> {
-                Intent intentRegister = new Intent(this, RegisterActivity.class);
+            Intent intentRegister = new Intent(this, RegisterActivity.class);
 
-                startActivity(intentRegister);
+            startActivity(intentRegister);
 
         });
 
-       btnLogin.setOnClickListener(v ->{
+        btnLogin.setOnClickListener(v ->{
             Thread thread = new Thread(() -> {
 
 
-                    Manager m = managerService.getManagerByUsername(etUsername.getText().toString());
+                Manager m = managerService.getManagerByUsername(etUsername.getText().toString());
 
 
-                    if (m==null) {
-                        Student s = studentService.getStudentByUsername(etUsername.getText().toString());
-                                if (s==null){
-                                    Teacher t = teacherService.getTeacherByUsername(etUsername.getText().toString());
-                                    if (t==null){
-                                        tvError.setText("El usuario no es válido");
-                                    }else {
+                if (m==null) {
+                    Student s = studentService.getStudentByUsername(etUsername.getText().toString());
+                    if (s==null){
+                        Teacher t = teacherService.getTeacherByUsername(etUsername.getText().toString());
+                        if (t==null){
+                            tvError.setText("El usuario no es válido");
+                        }else {
 
-                                        Boolean checkPassword = BCrypt.checkpw(etPassword.getText().toString(), t.getUser().getPassword());
-                                        if (checkPassword){
+                            Boolean checkPassword = BCrypt.checkpw(etPassword.getText().toString(), t.getUser().getPassword());
+                            if (checkPassword){
 
-                                            sharedPreferences = getSharedPreferences("PreferencesAcademy", Context.MODE_PRIVATE);
-                                            SharedPreferences.Editor editor = sharedPreferences.edit();
+                                sharedPreferences = getSharedPreferences("PreferencesAcademy", Context.MODE_PRIVATE);
+                                SharedPreferences.Editor editor = sharedPreferences.edit();
 
-                                            editor.putBoolean("login", true);
-                                            editor.putString("username", t.getUser().getName());
-                                            editor.putLong("id", t.getId());
-                                            editor.putString("role", t.getUser().getRole());
-                                            editor.putString("password", t.getUser().getPassword());
-                                            editor.apply();
+                                editor.putBoolean("login", true);
+                                editor.putString("username", t.getUser().getName());
+                                editor.putLong("id", t.getId());
+                                editor.putString("role", t.getUser().getRole());
+                                editor.apply();
 
-                                            tvError.setText("Login correcto");
-                                            //Falta el intent para ir a la actividad
+                                tvError.setText("Login correcto");
+                                //Falta el intent para ir a la actividad
 
-                                        }else {
-                                            tvError.setText("Contraseña no válida");
-                                        }
-                                    }
-                                }else {
-
-                                    Boolean checkPassword = BCrypt.checkpw(etPassword.getText().toString(), s.getUser().getPassword());
-                                    if (checkPassword){
-
-                                        sharedPreferences = getSharedPreferences("PreferencesAcademy", Context.MODE_PRIVATE);
-                                        SharedPreferences.Editor editor = sharedPreferences.edit();
-
-                                        editor.putBoolean("login", true);
-                                        editor.putString("username", s.getUser().getName());
-                                        editor.putLong("id", s.getId());
-                                        editor.putString("role", s.getUser().getRole());
-                                        editor.putString("password", s.getUser().getPassword());
-                                        editor.apply();
-
-                                        tvError.setText("Login correcto");
-                                        //Falta el intent para ir a la actividad
-
-                                    }else {
-                                        tvError.setText("Contraseña no válida");
-                                    }
-
-                                }
+                            }else {
+                                tvError.setText("Contraseña no válida");
+                            }
+                        }
                     }else {
-                        Boolean checkPassword = BCrypt.checkpw(etPassword.getText().toString(), m.getUser().getPassword());
+
+                        Boolean checkPassword = BCrypt.checkpw(etPassword.getText().toString(), s.getUser().getPassword());
                         if (checkPassword){
 
                             sharedPreferences = getSharedPreferences("PreferencesAcademy", Context.MODE_PRIVATE);
                             SharedPreferences.Editor editor = sharedPreferences.edit();
 
                             editor.putBoolean("login", true);
-                            editor.putString("username", m.getUser().getName());
-                            editor.putLong("id", m.getId());
-                            editor.putString("role", m.getUser().getRole());
+                            editor.putString("username", s.getUser().getName());
+                            editor.putLong("id", s.getId());
+                            editor.putString("role", s.getUser().getRole());
                             editor.apply();
-
                             tvError.setText("Login correcto");
-                            Intent mainManager = new Intent(this, ManagerMainActivity.class);
-                            startActivity(mainManager);
+
+                            Intent intent  = new Intent(this, StudentActivity.class);
+
+                            startActivity(intent);
 
                         }else {
                             tvError.setText("Contraseña no válida");
                         }
 
-
                     }
+                }else {
+                    Boolean checkPassword = BCrypt.checkpw(etPassword.getText().toString(), m.getUser().getPassword());
+                    if (checkPassword){
+
+                        sharedPreferences = getSharedPreferences("PreferencesAcademy", Context.MODE_PRIVATE);
+                        SharedPreferences.Editor editor = sharedPreferences.edit();
+
+                        editor.putBoolean("login", true);
+                        editor.putString("username", m.getUser().getName());
+                        editor.putLong("id", m.getId());
+                        editor.putString("role", m.getUser().getRole());
+                        editor.apply();
+
+                        tvError.setText("Login correcto");
+                        Intent mainManager = new Intent(this, ManagerMainActivity.class);
+                        startActivity(mainManager);
+
+                    }else {
+                        tvError.setText("Contraseña no válida");
+                    }
+
+
+                }
 
 
 

@@ -21,6 +21,7 @@ public class StudentActivity extends AppCompatActivity {
 
             Intent intent = new Intent(this, ViewAcademy.class);
 
+            startActivity(intent);
         });
 
     }

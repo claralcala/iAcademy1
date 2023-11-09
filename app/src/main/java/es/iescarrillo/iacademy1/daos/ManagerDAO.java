@@ -31,6 +31,7 @@ public interface ManagerDAO {
     @Query("SELECT * FROM manager m JOIN academy a on m.id=a.manager_id")
     Map<Manager,Academy> getManagerWithAcademyMap();
 
+
     @Query("SELECT * FROM manager m JOIN academy a on m.id=a.manager_id JOIN course c on a.id=c.academy_id")
     Map<Manager, List<Course>> getManagerWithCoursesMap();
 
