@@ -1,14 +1,18 @@
-package es.iescarrillo.iacademy1;
+package es.iescarrillo.iacademy1.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 
-public class MainActivity extends AppCompatActivity {
+import es.iescarrillo.iacademy1.R;
+
+public class DetailsCourses extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_details_courses);
+
+
     }
 }

@@ -4,6 +4,7 @@ import android.content.Context;
 import androidx.room.Database;
 import androidx.room.Room;
 import androidx.room.RoomDatabase;
+import androidx.room.TypeConverters;
 
 import es.iescarrillo.iacademy1.daos.AdminDAO;
 import es.iescarrillo.iacademy1.daos.ClassroomDAO;
@@ -14,7 +15,6 @@ import es.iescarrillo.iacademy1.models.Manager;
 import es.iescarrillo.iacademy1.models.Course;
 import es.iescarrillo.iacademy1.daos.InscriptionDAO;
 import es.iescarrillo.iacademy1.daos.StudentDAO;
-import es.iescarrillo.iacademy1.daos.UserDAO;
 import es.iescarrillo.iacademy1.models.Inscription;
 import es.iescarrillo.iacademy1.daos.AcademyDAO;
 import es.iescarrillo.iacademy1.daos.CourseDAO;
@@ -32,11 +32,12 @@ import es.iescarrillo.iacademy1.models.User;
 en nuestra base de datos.
    La versión tendremos que ir incementándola cada vez que hagamos un cambio dentro de nuestra BBDD
 * */
-    @Database(entities = {Manager.class, Academy.class, Course.class,User.class, Student.class, Inscription.class,Admin.class, Classroom.class, Lesson.class, Teacher.class}, version = 1)
+    @Database(entities = {Manager.class, Academy.class, Course.class, Student.class, Inscription.class,Admin.class, Classroom.class, Lesson.class, Teacher.class}, version = 7)
+    @TypeConverters({LocalDateConverter.class, LocalTimeConverter.class, LocalDateTimeConverter.class})
     public abstract class DatabaseHelper extends RoomDatabase {
 
 
-        public abstract UserDAO userDAO();
+
 
         public abstract StudentDAO studentDAO();
 

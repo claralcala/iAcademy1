@@ -42,4 +42,9 @@ dependencies {
     implementation("androidx.room:room-runtime:2.5.0" )
     annotationProcessor ("androidx.room:room-compiler:2.5.0" )
 
+    // Dependencia BCrypt
+    implementation ("de.svenkubiak:jBCrypt:0.4.3")
+
+
+
 }

@@ -7,9 +7,6 @@ import androidx.room.PrimaryKey;
 @Entity(tableName = "student")
 public class Student extends Person{
 
-    @PrimaryKey(autoGenerate = true)
-    @ColumnInfo(name = "id")
-    private long   id;
 
     @ColumnInfo(name = "dni")
     private String dni;
@@ -24,13 +21,7 @@ public class Student extends Person{
         super();
     }
 
-    public long getId() {
-        return id;
-    }
 
-    public void setId(long id) {
-        this.id = id;
-    }
 
     public String getDni() {
         return dni;
@@ -67,11 +58,14 @@ public class Student extends Person{
     @Override
     public String toString() {
         return "Student{" +
-                "id=" + id +
-                ", dni='" + dni + '\'' +
+                "dni='" + dni + '\'' +
                 ", phone='" + phone + '\'' +
                 ", familyPhone='" + familyPhone + '\'' +
                 ", birthdate=" + birthdate +
+                ", id=" + id +
+                ", name='" + name + '\'' +
+                ", surname='" + surname + '\'' +
+                ", email='" + email + '\'' +
                 '}';
     }
 }

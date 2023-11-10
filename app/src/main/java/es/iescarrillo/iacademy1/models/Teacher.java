@@ -2,8 +2,10 @@ package es.iescarrillo.iacademy1.models;
 
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
+import androidx.room.ForeignKey;
 
-@Entity(tableName = "teacher")
+@Entity(tableName = "teacher", foreignKeys = @ForeignKey(entity = Academy.class, parentColumns = "id",
+childColumns = "academy_id", onDelete = ForeignKey.CASCADE))
 public class Teacher extends Person{
     @ColumnInfo(name="dni")
     private String dni;
@@ -13,6 +15,9 @@ public class Teacher extends Person{
 
     @ColumnInfo(name="address")
     private String address;
+
+    @ColumnInfo(name="academy_id")
+    private long academy_id;
 
     public Teacher() {
     }
@@ -41,12 +46,22 @@ public class Teacher extends Person{
         this.address = address;
     }
 
+    public long getAcademy_id() {
+        return academy_id;
+    }
+
+    public void setAcademy_id(long academy_id) {
+        this.academy_id = academy_id;
+    }
+
+
     @Override
     public String toString() {
         return "Teacher{" +
                 "dni='" + dni + '\'' +
                 ", phone='" + phone + '\'' +
                 ", address='" + address + '\'' +
+                ", academy_id=" + academy_id +
                 ", id=" + id +
                 ", name='" + name + '\'' +
                 ", surname='" + surname + '\'' +

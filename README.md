@@ -5,4 +5,4 @@ Miembros del grupo:
 
 -Jesús Bautista Partida
 -Manuel Ángel Rodríguez Portillo
--Clara Alcalá García - Jefa de proyecto
+-Clara Alcalá García (Jefa de proyecto)

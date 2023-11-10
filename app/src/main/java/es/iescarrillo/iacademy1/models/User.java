@@ -4,26 +4,28 @@ package es.iescarrillo.iacademy1.models;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
-@Entity(tableName = "user")
+@Entity
 public class User {
 
-    @PrimaryKey(autoGenerate = true)
-    @ColumnInfo(name = "id")
-    private long id;
-    @ColumnInfo(name = "name")
+
+    @ColumnInfo(name = "username")
     private String name;
     @ColumnInfo(name = "password")
     private String password;
 
+    @ColumnInfo(name="role")
+    private String role;
+
     public User() {
     }
 
-    public long getId() {
-        return id;
+
+    public String getRole() {
+        return role;
     }
 
-    public void setId(long id) {
-        this.id = id;
+    public void setRole(String role) {
+        this.role = role;
     }
 
     public String getName() {
@@ -45,9 +47,9 @@ public class User {
     @Override
     public String toString() {
         return "User{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
+                "name='" + name + '\'' +
                 ", password='" + password + '\'' +
+                ", role='" + role + '\'' +
                 '}';
     }
 }

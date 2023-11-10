@@ -3,9 +3,12 @@ package es.iescarrillo.iacademy1.services;
 import android.app.Application;
 
 import java.util.List;
+import java.util.Map;
 
 import es.iescarrillo.iacademy1.daos.ManagerDAO;
 import es.iescarrillo.iacademy1.database.DatabaseHelper;
+import es.iescarrillo.iacademy1.models.Academy;
+import es.iescarrillo.iacademy1.models.Course;
 import es.iescarrillo.iacademy1.models.Manager;
 
 
@@ -35,5 +38,25 @@ public class ManagerService implements ManagerDAO {
     @Override
     public List<Manager> getAll() {
         return managerDAO.getAll();
+    }
+
+    @Override
+    public Map<Manager, Academy> getManagerWithAcademyMap() {
+        return managerDAO.getManagerWithAcademyMap();
+    }
+
+    @Override
+    public Map<Manager, List<Course>> getManagerWithCoursesMap() {
+        return managerDAO.getManagerWithCoursesMap();
+    }
+
+    @Override
+    public Manager getManagerByUsername(String username) {
+        return managerDAO.getManagerByUsername(username);
+    }
+
+    @Override
+    public int getUsernameUnique(String username) {
+        return managerDAO.getUsernameUnique(username);
     }
 }

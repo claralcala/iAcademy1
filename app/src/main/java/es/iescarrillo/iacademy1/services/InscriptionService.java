@@ -12,7 +12,7 @@ public class InscriptionService implements InscriptionDAO {
 
     private InscriptionDAO inscriptionDAO;
 
-    public void InscriptionDao(Application application){
+    public InscriptionService(Application application){
         DatabaseHelper db = DatabaseHelper.getInstance(application);
         inscriptionDAO=db.inscriptionDAO();
     }

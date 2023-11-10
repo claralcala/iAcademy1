@@ -1,11 +1,15 @@
 package es.iescarrillo.iacademy1.models;
 import androidx.room.ColumnInfo;
+import androidx.room.Embedded;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
 @Entity
 public abstract class Person {
 
+
+    @Embedded
+    private User user;
 
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name="id")
@@ -22,6 +26,22 @@ public abstract class Person {
 
     public Person (){
 
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
     }
 
     public String getName() {
@@ -51,7 +71,9 @@ public abstract class Person {
     @Override
     public String toString() {
         return "Person{" +
-                "name='" + name + '\'' +
+                "user=" + user +
+                ", id=" + id +
+                ", name='" + name + '\'' +
                 ", surname='" + surname + '\'' +
                 ", email='" + email + '\'' +
                 '}';

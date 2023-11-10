@@ -6,8 +6,10 @@ import androidx.room.Query;
 import androidx.room.Update;
 
 import java.util.List;
+import java.util.Map;
 
 import es.iescarrillo.iacademy1.models.Academy;
+import es.iescarrillo.iacademy1.models.Course;
 import es.iescarrillo.iacademy1.models.Manager;
 
 
@@ -25,4 +27,21 @@ public interface ManagerDAO {
 
     @Query("SELECT * FROM manager")
     List<Manager> getAll();
+
+    @Query("SELECT * FROM manager m JOIN academy a on m.id=a.manager_id")
+    Map<Manager,Academy> getManagerWithAcademyMap();
+
+    @Query("SELECT * FROM manager m JOIN academy a on m.id=a.manager_id JOIN course c on a.id=c.academy_id")
+    Map<Manager, List<Course>> getManagerWithCoursesMap();
+
+
+    @Query("SELECT * FROM manager WHERE username = :username")
+    Manager getManagerByUsername(String username);
+
+
+    @Query("SELECT COUNT(*) FROM manager WHERE username= :username")
+    int getUsernameUnique(String username);
+
+
+
 }
