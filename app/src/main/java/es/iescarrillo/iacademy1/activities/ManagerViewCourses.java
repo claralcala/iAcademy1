@@ -10,6 +10,8 @@ import android.util.Log;
 import android.widget.Button;
 import android.widget.ListView;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 import es.iescarrillo.iacademy1.R;
@@ -101,7 +103,20 @@ public class ManagerViewCourses extends AppCompatActivity {
 
             Course c = (Course) parent.getItemAtPosition(position);
 
+
             Intent intent = new Intent(this, ManagerCourseDetails.class);
+
+            String startDate = format(c.getStartDate());
+            String endDate = format(c.getEndDate());
+            intent.putExtra("title", c.getTitle());
+            intent.putExtra("description", c.getDescription());
+            intent.putExtra("level", c.getLevel());
+            intent.putExtra("capacity", c.getCapacity().toString());
+            intent.putExtra("startDate", startDate);
+            intent.putExtra("endDate", endDate);
+            intent.putExtra("activated", String.valueOf(c.isActivated()));
+            intent.putExtra("id", Long.toString(c.getId()));
+
 
 
             startActivity(intent);
@@ -120,5 +135,12 @@ public class ManagerViewCourses extends AppCompatActivity {
             startActivity(back);
         });
 
+    }
+
+
+    private String format(LocalDate localdate){
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+
+        return formatter.format(localdate);
     }
 }

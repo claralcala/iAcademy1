@@ -109,6 +109,8 @@ public class ViewTeachersActivity extends AppCompatActivity {
                     intent.putExtra("phone", t.getPhone().toString());
                     intent.putExtra("dni", t.getDni().toString());
                     intent.putExtra("address", t.getAddress().toString());
+                    intent.putExtra("username", t.getUser().getName().toString());
+                    intent.putExtra("id", Long.toString(t.getId()));
 
 
                     startActivity(intent);

@@ -54,4 +54,9 @@ public class CourseService implements CourseDAO {
     public List<Course> getCoursebyAcademyID(Long acID) {
         return courseDAO.getCoursebyAcademyID(acID);
     }
+
+    @Override
+    public void deleteCourseById(long course_id) {
+        courseDAO.deleteCourseById(course_id);
+    }
 }
