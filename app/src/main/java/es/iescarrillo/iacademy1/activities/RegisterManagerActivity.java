@@ -99,6 +99,10 @@ public class RegisterManagerActivity extends AppCompatActivity {
 
 
                     managerService.insertManager(m);
+
+                    Intent back = new Intent(this, MainActivity.class);
+
+                    startActivity(back);
                 }
 
 
@@ -112,9 +116,7 @@ public class RegisterManagerActivity extends AppCompatActivity {
                 Log.i("error", e.getMessage());
             }
 
-            Intent back = new Intent(this, MainActivity.class);
 
-            startActivity(back);
 
         });
 

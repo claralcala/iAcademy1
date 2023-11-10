@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import org.mindrot.jbcrypt.BCrypt;
 
@@ -17,6 +18,8 @@ import es.iescarrillo.iacademy1.models.Academy;
 import es.iescarrillo.iacademy1.models.Teacher;
 import es.iescarrillo.iacademy1.models.User;
 import es.iescarrillo.iacademy1.services.AcademyService;
+import es.iescarrillo.iacademy1.services.ManagerService;
+import es.iescarrillo.iacademy1.services.StudentService;
 import es.iescarrillo.iacademy1.services.TeacherService;
 
 public class ManagerRegisterTeacherActivity extends AppCompatActivity {
@@ -27,6 +30,10 @@ public class ManagerRegisterTeacherActivity extends AppCompatActivity {
     EditText etName, etSurname, etMail, etDNI, etPhone, etAddress, etUsername, etPassword;
 
     private TeacherService teacherService;
+    private StudentService studentService;
+
+    private ManagerService managerService;
+
     Academy a;
     long idAcademy;
     private AcademyService academyService;
@@ -58,6 +65,9 @@ public class ManagerRegisterTeacherActivity extends AppCompatActivity {
 
         teacherService= new TeacherService(getApplication());
         academyService = new AcademyService(getApplication());
+        managerService = new ManagerService(getApplication());
+        studentService = new StudentService(getApplication());
+
 
         btnSave.setOnClickListener(v -> {
            Teacher t = new Teacher();
@@ -66,7 +76,7 @@ public class ManagerRegisterTeacherActivity extends AppCompatActivity {
             t.setAddress(etAddress.getText().toString());
             t.setEmail(etMail.getText().toString());
             t.setPhone(etPhone.getText().toString());
-
+            t.setDni(etDNI.getText().toString());
             Thread thread = new Thread(()->{
 
                 a =academyService.getAcademyByManagerid(id);
@@ -100,7 +110,25 @@ public class ManagerRegisterTeacherActivity extends AppCompatActivity {
 
 
             Thread thread2 = new Thread(()->{
-                teacherService.insertTeacher(t);
+
+                String userName = etUsername.getText().toString();
+
+                if (managerService.getManagerByUsername(userName)!=null || studentService.getStudentByUsername(userName)!=null || teacherService.getTeacherByUsername(userName)!=null) {
+                    runOnUiThread(()->{
+
+                        Toast.makeText(this, "El nombre de usuario ya está en uso", Toast.LENGTH_SHORT).show();
+                    });
+
+                } else {
+
+
+                    teacherService.insertTeacher(t);
+
+                    Intent back = new Intent(this, ManagerMainActivity.class);
+
+                    startActivity(back);
+                }
+
 
             });
 
@@ -111,8 +139,7 @@ public class ManagerRegisterTeacherActivity extends AppCompatActivity {
                 Log.i("error", e.getMessage());
             }
 
-            Intent back = new Intent(this, ManagerMainActivity.class);
-            startActivity(back);
+
         });
     }
 }

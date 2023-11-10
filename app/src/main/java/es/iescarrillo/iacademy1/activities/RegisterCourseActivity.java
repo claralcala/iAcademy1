@@ -65,7 +65,7 @@ public class RegisterCourseActivity extends AppCompatActivity {
 
 
 
-        courseService = new CourseService(getApplication());
+
 
         academyService = new AcademyService(getApplication());
 

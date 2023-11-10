@@ -23,7 +23,9 @@ import java.util.logging.SimpleFormatter;
 import es.iescarrillo.iacademy1.R;
 import es.iescarrillo.iacademy1.models.Student;
 import es.iescarrillo.iacademy1.models.User;
+import es.iescarrillo.iacademy1.services.ManagerService;
 import es.iescarrillo.iacademy1.services.StudentService;
+import es.iescarrillo.iacademy1.services.TeacherService;
 
 public class RegisterStudentActivity extends AppCompatActivity {
 
@@ -34,6 +36,8 @@ public class RegisterStudentActivity extends AppCompatActivity {
     SharedPreferences sharedPreferences;
 
     private StudentService studentService;
+    private ManagerService managerService;
+    private TeacherService teacherService;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -58,6 +62,8 @@ public class RegisterStudentActivity extends AppCompatActivity {
         long id = sharedPreferences.getLong("id", 0);
 
         studentService = new StudentService(getApplication());
+        managerService = new ManagerService(getApplication());
+        teacherService = new TeacherService(getApplication());
 
         btnSave.setOnClickListener(v -> {
 
@@ -92,9 +98,27 @@ public class RegisterStudentActivity extends AppCompatActivity {
 
             Thread thread = new Thread(()->{
 
+                String userName = etUsername.getText().toString();
+
+                if (managerService.getManagerByUsername(userName)!=null || studentService.getStudentByUsername(userName)!=null || teacherService.getTeacherByUsername(userName)!=null) {
+                    runOnUiThread(()->{
+
+                        Toast.makeText(this, "El nombre de usuario ya está en uso", Toast.LENGTH_SHORT).show();
+                    });
+
+                } else {
 
 
-                studentService.insertStudent(s);
+                    studentService.insertStudent(s);
+
+                    Intent back = new Intent(this, MainActivity.class);
+
+                    startActivity(back);
+                }
+
+
+
+
 
             });
 
@@ -105,9 +129,7 @@ public class RegisterStudentActivity extends AppCompatActivity {
                 Log.i("error", e.getMessage());
             }
 
-            Intent back = new Intent(this, MainActivity.class);
 
-            startActivity(back);
 
         });
 

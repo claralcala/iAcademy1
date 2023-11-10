@@ -30,4 +30,8 @@ public interface ClassroomDAO {
 
     @Query("SELECT * FROM classroom class JOIN lesson s on class.id=s.classroom_id")
     Map<Classroom, List<Lesson>> getClassroomWithLessonsMap();
+
+    @Query ("SELECT * FROM classroom WHERE academy_id= :academyid")
+    List<Classroom> getClassroomsByAcademy(long academyid);
+
 }
