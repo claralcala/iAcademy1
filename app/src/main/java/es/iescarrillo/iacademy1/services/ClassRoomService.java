@@ -46,4 +46,9 @@ public class ClassRoomService implements ClassroomDAO {
     public Map<Classroom, List<Lesson>> getClassroomWithLessonsMap() {
         return classroomDAO.getClassroomWithLessonsMap();
     }
+
+    @Override
+    public List<Classroom> getClassroomsByAcademy(long academyid) {
+        return classroomDAO.getClassroomsByAcademy(academyid);
+    }
 }
