@@ -131,6 +131,10 @@ public class RegisterCourseActivity extends AppCompatActivity {
 
 
             Thread thread3 = new Thread(()->{
+
+
+
+
                courseService.insertCourse(c);
 
             });
