@@ -37,7 +37,7 @@ public interface TeacherDAO {
     @Query("SELECT * FROM teacher WHERE academy_id= :id")
     List<Teacher> getTeachersByAcademy(long id);
 
-    @Query("DELETE FROM teacher WHERE id = :teacher_id")
-    void deleteTeacherById(long teacher_id);
+    @Query("DELETE FROM teacher WHERE id = :teacher_id AND academy_id = :ac_id")
+    void deleteTeacherById(long teacher_id, long ac_id);
 
 }

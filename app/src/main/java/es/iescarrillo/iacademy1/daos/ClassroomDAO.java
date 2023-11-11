@@ -34,4 +34,7 @@ public interface ClassroomDAO {
     @Query ("SELECT * FROM classroom WHERE academy_id= :academyid")
     List<Classroom> getClassroomsByAcademy(long academyid);
 
+    @Query("DELETE FROM classroom WHERE id = :class_id AND academy_id= :ac_id")
+    void deleteClassById(long class_id, long ac_id);
+
 }

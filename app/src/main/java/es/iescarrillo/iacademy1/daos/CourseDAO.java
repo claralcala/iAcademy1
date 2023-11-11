@@ -6,6 +6,7 @@ import androidx.room.Insert;
 import androidx.room.Query;
 import androidx.room.Update;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Map;
 
@@ -41,7 +42,11 @@ public interface CourseDAO {
     @Query("SELECT * FROM course WHERE academy_id = :acID")
     List<Course> getCoursebyAcademyID(Long acID);
 
-    @Query("DELETE FROM course WHERE id = :course_id")
-    void deleteCourseById(long course_id);
+    @Query("DELETE FROM course WHERE id = :course_id AND academy_id= :ac_id")
+    void deleteCourseById(long course_id, long ac_id);
+
+    @Query("UPDATE course SET title=:title_, description=:description_, level = :level_, capacity= :capacity_, startDate= :startDate_, endDate= :endDate_, activated= :activated_  WHERE academy_id = :ac_id AND id = :id ")
+    void updateCoursebyId(String title_, String description_, String level_, int capacity_, LocalDate startDate_, LocalDate endDate_, boolean activated_, long ac_id, long id);
+
 
 }

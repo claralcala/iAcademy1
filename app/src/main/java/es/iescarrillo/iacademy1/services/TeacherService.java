@@ -52,7 +52,7 @@ public class TeacherService implements TeacherDAO {
     }
 
     @Override
-    public void deleteTeacherById(long teacher_id) {
-        teacherDAO.deleteTeacherById(teacher_id);
+    public void deleteTeacherById(long teacher_id, long ac_id) {
+        teacherDAO.deleteTeacherById(teacher_id, ac_id);
     }
 }

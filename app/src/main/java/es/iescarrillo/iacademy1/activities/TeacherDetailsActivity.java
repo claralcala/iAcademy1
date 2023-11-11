@@ -80,7 +80,7 @@ public class TeacherDetailsActivity extends AppCompatActivity {
             Thread thread = new Thread(()->{
 
 
-                teacherService.deleteTeacherById(Long.parseLong(intent.getStringExtra("id")));
+                teacherService.deleteTeacherById(Long.parseLong(intent.getStringExtra("id")), Long.parseLong(intent.getStringExtra("ac_id")));
 
 
             });

@@ -51,4 +51,9 @@ public class ClassRoomService implements ClassroomDAO {
     public List<Classroom> getClassroomsByAcademy(long academyid) {
         return classroomDAO.getClassroomsByAcademy(academyid);
     }
+
+    @Override
+    public void deleteClassById(long class_id, long ac_id) {
+        classroomDAO.deleteClassById(class_id, ac_id);
+    }
 }

@@ -2,7 +2,9 @@ package es.iescarrillo.iacademy1.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.Button;
@@ -10,6 +12,8 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import es.iescarrillo.iacademy1.R;
+import es.iescarrillo.iacademy1.models.Academy;
+import es.iescarrillo.iacademy1.services.AcademyService;
 import es.iescarrillo.iacademy1.services.CourseService;
 
 
@@ -17,6 +21,13 @@ public class ManagerCourseDetails extends AppCompatActivity {
 
     Button btnBack, btnDelete, btnEdit;
     TextView tvTitle, tvDescription, tvLevel, tvCapacity, tvstart, tvend, tvActivated;
+
+    private AcademyService academyService;
+
+    long idAcademy;
+
+    Academy a;
+
 
     private CourseService courseService;
     @Override
@@ -37,9 +48,17 @@ public class ManagerCourseDetails extends AppCompatActivity {
         tvLevel=findViewById(R.id.tvCourseLevel);
         tvActivated=findViewById(R.id.tvCourseActivated);
 
+        SharedPreferences sharedPreferences= getSharedPreferences("PreferencesAcademy", Context.MODE_PRIVATE);
+        String username= sharedPreferences.getString("user", "");
+        String role = sharedPreferences.getString("role", "");
+        Boolean login = sharedPreferences.getBoolean("login", false);
+        Long id = sharedPreferences.getLong("id", 0);
+
 
 
         courseService = new CourseService(getApplication());
+
+        academyService = new AcademyService(getApplication());
 
         tvTitle.setText(intent.getStringExtra("title"));
         tvDescription.setText(intent.getStringExtra("description"));
@@ -51,28 +70,64 @@ public class ManagerCourseDetails extends AppCompatActivity {
 
 
 
+
+
         btnBack.setOnClickListener(v -> {
             Intent back = new Intent(this, ManagerViewCourses.class);
             startActivity(back);
         });
 
+        btnEdit.setOnClickListener(v -> {
+            Intent edit = new Intent (this, EditCourseActivity.class);
+
+            edit.putExtra("title", tvTitle.getText().toString());
+            edit.putExtra("description", tvDescription.getText().toString());
+            edit.putExtra("level", tvLevel.getText().toString());
+            edit.putExtra("capacity", tvCapacity.getText().toString());
+            edit.putExtra("start", tvstart.getText().toString());
+            edit.putExtra("end", tvend.getText().toString());
+            edit.putExtra("activated", tvActivated.getText().toString());
+            edit.putExtra("id", intent.getStringExtra("id"));
+
+
+            startActivity(edit);
+        });
+
+
+        Thread thread = new Thread(()->{
+
+
+            a = academyService.getAcademyByManagerid(id);
+
+            idAcademy = a.getId();
+
+
+        });
+
+
+        thread.start();
+        try{
+            thread.join();
+        }catch(Exception e ){
+            Log.i("error", e.getMessage());
+        }
 
 
         btnDelete.setOnClickListener(v -> {
 
 
-                Thread thread = new Thread(()->{
+                Thread thread2 = new Thread(()->{
 
 
-                   courseService.deleteCourseById(Long.parseLong(intent.getStringExtra("id")));
+                   courseService.deleteCourseById(Long.parseLong(intent.getStringExtra("id")), idAcademy);
 
 
                 });
 
 
-                thread.start();
+                thread2.start();
                 try{
-                    thread.join();
+                    thread2.join();
                 }catch(Exception e ){
                     Log.i("error", e.getMessage());
                 }
