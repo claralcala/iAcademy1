@@ -106,6 +106,11 @@ public class ManagerViewClassroomsActivity extends AppCompatActivity {
 
             Intent intent = new Intent(this, ManagerClassroomDetails.class);
 
+            intent.putExtra("name", cl.getName());
+            intent.putExtra("capacity", cl.getCapacity().toString());
+            intent.putExtra("id", Long.toString(cl.getId()));
+            intent.putExtra("ac_id", Long.toString(cl.getAcademy_id()));
+
 
             startActivity(intent);
         });
@@ -122,6 +127,9 @@ public class ManagerViewClassroomsActivity extends AppCompatActivity {
             Intent back = new Intent(this, ManagerMainActivity.class);
             startActivity(back);
         });
+
+
+
 
 
 

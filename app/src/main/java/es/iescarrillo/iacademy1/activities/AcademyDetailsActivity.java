@@ -18,17 +18,22 @@ import es.iescarrillo.iacademy1.models.Manager;
 import es.iescarrillo.iacademy1.services.AcademyService;
 import es.iescarrillo.iacademy1.services.ManagerService;
 
+/**
+ * @author clara
+ * Activity para ver los detalles de la academia
+ */
 public class AcademyDetailsActivity extends AppCompatActivity {
 
     TextView tvName, tvDescription, tvCountry, tvState, tvCity, tvAddress, tvWeb, tvEmail, tvPhone;
     Button btnBack, btnEditAcademy;
-    private ManagerService managerService;
+
     private AcademyService academyService;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_academy_details);
 
+        //Inicializamos todos los componentes
         btnBack = findViewById(R.id.btnBack);
 
         btnEditAcademy=findViewById(R.id.btnEditAcademy);
@@ -42,6 +47,7 @@ public class AcademyDetailsActivity extends AppCompatActivity {
         tvEmail=findViewById(R.id.tvAcademyEmail);
         tvPhone=findViewById(R.id.tvAcademyPhone);
 
+        //Ponemos las sharedpreferences (por si acaso, estarán en todas las pantallas del manager
         SharedPreferences sharedPreferences= getSharedPreferences("PreferencesAcademy", Context.MODE_PRIVATE);
         String username= sharedPreferences.getString("user", "");
         String role = sharedPreferences.getString("role", "");
@@ -49,12 +55,16 @@ public class AcademyDetailsActivity extends AppCompatActivity {
         Long id = sharedPreferences.getLong("id", 0);
 
 
-        managerService = new ManagerService(getApplication());
-        academyService = new AcademyService(getApplication());
-        Thread thread = new Thread(()->{
+        //Iniciamos el servicio
 
+
+        academyService = new AcademyService(getApplication());
+
+        Thread thread = new Thread(()->{
+            //Buscamos la academia por el id del manager
             Academy a = academyService.getAcademyByManagerid(id);
 
+            //Ponemos en los campos de texto los datos extraídos de la bd
             tvName.setText(a.getName());
             tvDescription.setText(a.getDescription());
             tvCountry.setText(a.getCountry());
@@ -76,6 +86,7 @@ public class AcademyDetailsActivity extends AppCompatActivity {
             Log.i("error", e.getMessage());
         }
 
+        //Botón volver
         btnBack.setOnClickListener(v -> {
             Intent back = new Intent(this, ManagerMainActivity.class);
             startActivity(back);
@@ -83,6 +94,7 @@ public class AcademyDetailsActivity extends AppCompatActivity {
 
 
 
+        //Botón para editar. Nos llevamos los datos a través del intent
         btnEditAcademy.setOnClickListener(v -> {
 
             Intent edit = new Intent(this, MnagerEditAcademyActivity.class);

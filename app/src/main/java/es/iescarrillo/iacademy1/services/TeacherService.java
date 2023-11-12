@@ -50,4 +50,9 @@ public class TeacherService implements TeacherDAO {
     public List<Teacher> getTeachersByAcademy(long id) {
         return teacherDAO.getTeachersByAcademy(id);
     }
+
+    @Override
+    public void deleteTeacherById(long teacher_id, long ac_id) {
+        teacherDAO.deleteTeacherById(teacher_id, ac_id);
+    }
 }

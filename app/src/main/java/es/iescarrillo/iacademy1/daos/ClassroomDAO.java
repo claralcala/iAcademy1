@@ -6,6 +6,7 @@ import androidx.room.Insert;
 import androidx.room.Query;
 import androidx.room.Update;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Map;
 
@@ -33,5 +34,11 @@ public interface ClassroomDAO {
 
     @Query ("SELECT * FROM classroom WHERE academy_id= :academyid")
     List<Classroom> getClassroomsByAcademy(long academyid);
+
+    @Query("DELETE FROM classroom WHERE id = :class_id AND academy_id= :ac_id")
+    void deleteClassById(long class_id, long ac_id);
+
+    @Query("UPDATE classroom SET name=:name_, capacity= :capacity_ WHERE academy_id = :ac_id AND id = :id ")
+    void updateClassbyId(String name_, int capacity_, long ac_id, long id);
 
 }
