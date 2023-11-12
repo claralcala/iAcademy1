@@ -99,9 +99,11 @@ public class RegisterCourseActivity extends AppCompatActivity {
 
 
 
-                    Teacher t =  teacherService.getTeacherByUsername(etTeacher.getText().toString());
+                    Teacher t = teacherService.getTeacherByUsername(etTeacher.getText().toString());
 
                     c.setTeacher_id(t.getId());
+
+                 
             });
 
 
@@ -136,19 +138,23 @@ public class RegisterCourseActivity extends AppCompatActivity {
 
 
 
-               courseService.insertCourse(c);
+
+
+                    courseService.insertCourse(c);
+                    Intent back = new Intent(this, ManagerMainActivity.class);
+                    startActivity(back);
+
 
             });
 
             thread3.start();
             try{
-                thread3.join();
+              thread3.join();
             }catch(Exception e){
-                Log.i("error", e.getMessage());
+              Log.i("error", e.getMessage());
             }
 
-            Intent back = new Intent(this, ManagerMainActivity.class);
-            startActivity(back);
+
         });
 
 
