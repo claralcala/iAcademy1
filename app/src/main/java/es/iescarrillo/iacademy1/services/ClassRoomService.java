@@ -56,4 +56,9 @@ public class ClassRoomService implements ClassroomDAO {
     public void deleteClassById(long class_id, long ac_id) {
         classroomDAO.deleteClassById(class_id, ac_id);
     }
+
+    @Override
+    public void updateClassbyId(String name_, int capacity_, long ac_id, long id) {
+        classroomDAO.updateClassbyId(name_, capacity_, ac_id, id);
+    }
 }

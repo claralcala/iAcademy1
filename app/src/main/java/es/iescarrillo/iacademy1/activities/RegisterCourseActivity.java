@@ -135,6 +135,7 @@ public class RegisterCourseActivity extends AppCompatActivity {
 
 
 
+
                courseService.insertCourse(c);
 
             });

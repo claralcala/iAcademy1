@@ -18,7 +18,12 @@ import es.iescarrillo.iacademy1.models.Academy;
 import es.iescarrillo.iacademy1.services.AcademyService;
 import es.iescarrillo.iacademy1.services.CourseService;
 
+/**
+ * @author clara
+ * Actividad para editar el curso (desde el manager)
+ */
 public class EditCourseActivity extends AppCompatActivity {
+
 
     EditText etTitle, etDescription, etLevel, etCapacity, etStart, etEnd, etActivated;
 
@@ -38,14 +43,17 @@ public class EditCourseActivity extends AppCompatActivity {
         setContentView(R.layout.activity_edit_course);
 
 
+
         Intent intent = getIntent();
 
+        //Shared preferences, las ponemos en todas las activities por si acaso
         SharedPreferences sharedPreferences= getSharedPreferences("PreferencesAcademy", Context.MODE_PRIVATE);
         String username= sharedPreferences.getString("user", "");
         String role = sharedPreferences.getString("role", "");
         Boolean login = sharedPreferences.getBoolean("login", false);
         Long id = sharedPreferences.getLong("id", 0);
 
+        //Inicializamos los componentes
         btnSave =findViewById(R.id.btnSave);
         etTitle= findViewById(R.id.etCourseTitle);
         etDescription= findViewById(R.id.etCourseDescription);
@@ -55,6 +63,7 @@ public class EditCourseActivity extends AppCompatActivity {
         etActivated=findViewById(R.id.etCourseActivated);
         etCapacity=findViewById(R.id.etCourseCapacity);
 
+        //Les ponemos el texto que nos traemos a través del intent en los edit text
         etTitle.setText(intent.getStringExtra("title"));
         etDescription.setText(intent.getStringExtra("description"));
         etCapacity.setText(intent.getStringExtra("capacity"));
@@ -63,6 +72,7 @@ public class EditCourseActivity extends AppCompatActivity {
         etEnd.setText(intent.getStringExtra("end"));
         etActivated.setText(intent.getStringExtra("activated"));
 
+        //Inicializamos los servicios
 
         academyService= new AcademyService(getApplication());
         courseService = new CourseService(getApplication());
@@ -71,6 +81,7 @@ public class EditCourseActivity extends AppCompatActivity {
         Thread thread = new Thread(()->{
 
 
+            //Buscamos una academia por el id del manager y cogemos su id
                a = academyService.getAcademyByManagerid(id);
 
                idAcademy = a.getId();
@@ -93,11 +104,16 @@ public class EditCourseActivity extends AppCompatActivity {
 
             Thread thread2 = new Thread(()->{
 
+                //Acción del botón guardar
+                //Guardamos las fechas en dos variables y nos aseguramos de que tengan el formato
                 DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
                 LocalDate startDate= LocalDate.parse(etStart.getText().toString(), formatter);
                 LocalDate endDate = LocalDate.parse(etEnd.getText().toString(), formatter);
+                //Lo mismo con el booleano
                 Boolean active = Boolean.parseBoolean(etActivated.getText().toString());
 
+                //Llamamos a la query de actualizar
+                //Es una query personalizada que hemos hecho, actualizando por id y el id de la academia, porque la por defecto de Room no funcionaba
                 courseService.updateCoursebyId(etTitle.getText().toString(), etDescription.getText().toString(), etLevel.getText().toString(), Integer.parseInt(etCapacity.getText().toString()), startDate, endDate, active, idAcademy, Long.parseLong(intent.getStringExtra("id")));
 
 
@@ -111,6 +127,7 @@ public class EditCourseActivity extends AppCompatActivity {
                 Log.i("error", e.getMessage());
             }
 
+            //Tras acrualizar, volvemos a la vista de todos los cursos
             Intent back = new Intent(this, ManagerViewCourses.class);
 
             startActivity(back);

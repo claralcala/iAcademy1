@@ -27,15 +27,14 @@ import es.iescarrillo.iacademy1.services.ManagerService;
 import es.iescarrillo.iacademy1.services.StudentService;
 import es.iescarrillo.iacademy1.services.TeacherService;
 
+/**
+ * @author clara
+ * Pantalla principal de la aplicación. Se trata de una pantalla de login
+ *
+ */
 public class MainActivity extends AppCompatActivity {
 
     private ManagerService managerService;
-    private AcademyService academyService;
-    private ClassRoomService classroomService;
-    private CourseService courseService;
-    private InscriptionService inscriptionService;
-
-    private LessonService lessonService;
     private StudentService studentService;
     private TeacherService teacherService;
 
@@ -53,12 +52,9 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        //Inicializamos los servicios y componentes
+
         managerService = new ManagerService(getApplication());
-        academyService = new AcademyService(getApplication());
-        classroomService = new ClassRoomService(getApplication());
-        courseService = new CourseService(getApplication());
-        inscriptionService = new InscriptionService(getApplication());
-        lessonService = new LessonService(getApplication());
         studentService = new StudentService(getApplication());
         teacherService = new TeacherService(getApplication());
 
@@ -72,6 +68,7 @@ public class MainActivity extends AppCompatActivity {
         btnRegister = findViewById(R.id.btnRegister);
 
 
+        //Acción del botón registrar que lleva a la pantalla correspondiente
 
         btnRegister.setOnClickListener(v -> {
                 Intent intentRegister = new Intent(this, RegisterActivity.class);
@@ -80,10 +77,12 @@ public class MainActivity extends AppCompatActivity {
 
         });
 
+        //Acción del botón login
        btnLogin.setOnClickListener(v ->{
             Thread thread = new Thread(() -> {
 
 
+                    //Lo que hacemos es ir comprobando de forma escalada si existe un username como manager, student o teacher
                     Manager m = managerService.getManagerByUsername(etUsername.getText().toString());
 
 
@@ -92,9 +91,10 @@ public class MainActivity extends AppCompatActivity {
                                 if (s==null){
                                     Teacher t = teacherService.getTeacherByUsername(etUsername.getText().toString());
                                     if (t==null){
+                                        //Si no existe tal usuario, avisamos
                                         tvError.setText("El usuario no es válido");
                                     }else {
-
+                                        //Luego comprobamos la contraseña y ponemos las variables de sesión con el editor
                                         Boolean checkPassword = BCrypt.checkpw(etPassword.getText().toString(), t.getUser().getPassword());
                                         if (checkPassword){
 
