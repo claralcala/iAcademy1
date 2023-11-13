@@ -70,12 +70,12 @@ public class RegisterCourseActivity extends AppCompatActivity {
         academyService = new AcademyService(getApplication());
 
         btnSave.setOnClickListener(v -> {
-           Course c = new Course();
-           c.setTitle(etTitle.getText().toString());
-           c.setDescription(etDescription.getText().toString());
-           c.setCapacity((Integer.parseInt(etCapacity.getText().toString())));
-           c.setLevel(etLevel.getText().toString());
-           c.setActivated(Boolean.parseBoolean(etActivated.getText().toString()));
+            Course c = new Course();
+            c.setTitle(etTitle.getText().toString());
+            c.setDescription(etDescription.getText().toString());
+            c.setCapacity((Integer.parseInt(etCapacity.getText().toString())));
+            c.setLevel(etLevel.getText().toString());
+            c.setActivated(Boolean.parseBoolean(etActivated.getText().toString()));
 
             Thread thread = new Thread(()->{
 
@@ -93,15 +93,15 @@ public class RegisterCourseActivity extends AppCompatActivity {
                 Log.i("error", e.getMessage());
             }
 
-           c.setAcademy_id(idAcademy);
+            c.setAcademy_id(idAcademy);
 
             Thread thread2 = new Thread(()->{
 
 
 
-                    Teacher t = teacherService.getTeacherByUsername(etTeacher.getText().toString());
+                Teacher t = teacherService.getTeacherByUsername(etTeacher.getText().toString());
 
-                    c.setTeacher_id(t.getId());
+                c.setTeacher_id(t.getId());
 
 
             });
@@ -140,18 +140,18 @@ public class RegisterCourseActivity extends AppCompatActivity {
 
 
 
-                    courseService.insertCourse(c);
-                    Intent back = new Intent(this, ManagerMainActivity.class);
-                    startActivity(back);
+                courseService.insertCourse(c);
+                Intent back = new Intent(this, ManagerMainActivity.class);
+                startActivity(back);
 
 
             });
 
             thread3.start();
             try{
-              thread3.join();
+                thread3.join();
             }catch(Exception e){
-              Log.i("error", e.getMessage());
+                Log.i("error", e.getMessage());
             }
 
 

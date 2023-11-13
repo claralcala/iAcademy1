@@ -13,6 +13,11 @@ import android.widget.EditText;
 import es.iescarrillo.iacademy1.R;
 import es.iescarrillo.iacademy1.services.ClassRoomService;
 
+/**
+ * @author clara
+ * Pantalla para que el manager edite las clases de su academia
+ *
+ */
 public class ManagerEditClassroomActivity extends AppCompatActivity {
 
     Button btnSave;
@@ -25,29 +30,36 @@ public class ManagerEditClassroomActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_manager_edit_classroom);
 
+        //Variables de sesión
         SharedPreferences sharedPreferences= getSharedPreferences("PreferencesAcademy", Context.MODE_PRIVATE);
         String username= sharedPreferences.getString("user", "");
         String role = sharedPreferences.getString("role", "");
         Boolean login = sharedPreferences.getBoolean("login", false);
         Long id = sharedPreferences.getLong("id", 0);
 
+        //Recuperamos el intent
         Intent intent = getIntent();
 
+        //Inicializamos componentes
         btnSave=findViewById(R.id.btnSave);
         etName=findViewById(R.id.etClassroomName);
         etCapacity=findViewById(R.id.etClassroomCapacity);
 
+        //Inicializamos el servicio
         classroomService = new ClassRoomService(getApplication());
 
 
+        //Ponemos los datos en los campos de texto
         etName.setText(intent.getStringExtra("name"));
         etCapacity.setText(intent.getStringExtra("capacity"));
 
+        //Acción del botón guardar
         btnSave.setOnClickListener(v -> {
 
             Thread thread = new Thread(()->{
 
 
+                //Actualizamos la clase usando el id de la academia y de la clase extraídos del intent
                 long academy_id = Long.parseLong(intent.getStringExtra("ac_id"));
                 long class_id = Long.parseLong(intent.getStringExtra("id"));
 
@@ -64,6 +76,7 @@ public class ManagerEditClassroomActivity extends AppCompatActivity {
                 Log.i("error", e.getMessage());
             }
 
+            //Tras actualizar, volvemos
             Intent back = new Intent(this, ManagerViewClassroomsActivity.class);
             startActivity(back);
 

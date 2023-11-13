@@ -16,7 +16,11 @@ import es.iescarrillo.iacademy1.models.Academy;
 import es.iescarrillo.iacademy1.services.AcademyService;
 import es.iescarrillo.iacademy1.services.CourseService;
 
-
+/**
+ * @author clara
+ * Pantalla para ver los detalles de cada curso
+ *
+ */
 public class ManagerCourseDetails extends AppCompatActivity {
 
     Button btnBack, btnDelete, btnEdit;
@@ -35,8 +39,10 @@ public class ManagerCourseDetails extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_manager_course_details);
 
+        //Recuperamos el intent
         Intent intent = getIntent();
 
+        //Inicializamos componentes
         btnBack=findViewById(R.id.btnBack);
         btnEdit=findViewById(R.id.btnEdit);
         btnDelete=findViewById(R.id.btnDelete);
@@ -48,6 +54,7 @@ public class ManagerCourseDetails extends AppCompatActivity {
         tvLevel=findViewById(R.id.tvCourseLevel);
         tvActivated=findViewById(R.id.tvCourseActivated);
 
+        //Variables de sesión
         SharedPreferences sharedPreferences= getSharedPreferences("PreferencesAcademy", Context.MODE_PRIVATE);
         String username= sharedPreferences.getString("user", "");
         String role = sharedPreferences.getString("role", "");
@@ -55,11 +62,13 @@ public class ManagerCourseDetails extends AppCompatActivity {
         Long id = sharedPreferences.getLong("id", 0);
 
 
+        //Inicializamos los servicios
 
         courseService = new CourseService(getApplication());
 
         academyService = new AcademyService(getApplication());
 
+        //Ponemos los datos que traemos del intent en los campos de texto
         tvTitle.setText(intent.getStringExtra("title"));
         tvDescription.setText(intent.getStringExtra("description"));
         tvLevel.setText(intent.getStringExtra("level"));
@@ -72,11 +81,13 @@ public class ManagerCourseDetails extends AppCompatActivity {
 
 
 
+    //Acción del botón volver
         btnBack.setOnClickListener(v -> {
             Intent back = new Intent(this, ManagerViewCourses.class);
             startActivity(back);
         });
 
+        //Acción del botón editar
         btnEdit.setOnClickListener(v -> {
             Intent edit = new Intent (this, EditCourseActivity.class);
 
@@ -93,6 +104,7 @@ public class ManagerCourseDetails extends AppCompatActivity {
             startActivity(edit);
         });
 
+        //Obtenemos el id de la academia
 
         Thread thread = new Thread(()->{
 
@@ -113,6 +125,8 @@ public class ManagerCourseDetails extends AppCompatActivity {
         }
 
 
+        //Botón borrar con nuestra query personalizada. Nos traemos el id del curso por el intent.
+        //El id de la academia se puede extraer del intent o bien hacer una consulta como hemos hecho nosotros en este caso
         btnDelete.setOnClickListener(v -> {
 
 

@@ -13,6 +13,11 @@ import android.widget.TextView;
 import es.iescarrillo.iacademy1.R;
 import es.iescarrillo.iacademy1.services.ClassRoomService;
 
+/**
+ * @author clara
+ * Pantalla de detalles de las clases de cada academia que puede ver el Manager
+ *
+ */
 public class ManagerClassroomDetails extends AppCompatActivity {
 
     Button btnBack, btnDelete, btnEdit;
@@ -27,31 +32,39 @@ public class ManagerClassroomDetails extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_manager_classroom_details);
 
+
+        //Variables de sesión que siempre nos traemos por si acaso
         SharedPreferences sharedPreferences= getSharedPreferences("PreferencesAcademy", Context.MODE_PRIVATE);
         String username= sharedPreferences.getString("user", "");
         String role = sharedPreferences.getString("role", "");
         Boolean login = sharedPreferences.getBoolean("login", false);
         Long id = sharedPreferences.getLong("id", 0);
 
+        //Inicializamos componentes
         btnBack=findViewById(R.id.btnBack);
         btnDelete=findViewById(R.id.btnDelete);
         btnEdit=findViewById(R.id.btnEdit);
         tvName=findViewById(R.id.tvClassroomName);
         tvCapacity=findViewById(R.id.tvClassroomCapacity);
 
+        //Recuperamos el intent
         Intent intent = getIntent();
 
+        //Ponemos los datos en los campos de texto que nos traemos del intent
         tvName.setText(intent.getStringExtra("name"));
         tvCapacity.setText(intent.getStringExtra("capacity"));
 
+        //Inicializamos el servicio
         classroomService = new ClassRoomService(getApplication());
 
+        //Acción del botón volver
         btnBack.setOnClickListener(v -> {
             Intent back = new Intent (this, ManagerViewClassroomsActivity.class);
             startActivity(back);
         });
 
 
+        //Acción del botón editar. Nos llevamos los datos en intent
         btnEdit.setOnClickListener(v -> {
             Intent edit = new Intent(this, ManagerEditClassroomActivity.class);
 
@@ -64,6 +77,7 @@ public class ManagerClassroomDetails extends AppCompatActivity {
         });
 
 
+        //Acción del botón borrar. Llamamos a nuestro método personalizado para borrar la clase a través del id de la clase y de la academia
         btnDelete.setOnClickListener(v ->{
             Thread thread = new Thread(()->{
 
@@ -83,6 +97,7 @@ public class ManagerClassroomDetails extends AppCompatActivity {
             }
 
 
+            //Tras borar, volvemos
             Intent b = new Intent (this, ManagerViewClassroomsActivity.class);
             startActivity(b);
         });

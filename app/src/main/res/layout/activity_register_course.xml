@@ -95,15 +95,15 @@
             android:hint="Activo (true/false)"
             android:inputType="text" />
 
+
         <EditText
             android:id="@+id/etCourseTeacher"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:ems="10"
-            android:hint="nombre de usuario del profesor"
+            android:hint="Nombre de usuario del profesor"
             android:inputType="text" />
-
 
         <Button
             android:id="@+id/btnSaveCourse"
