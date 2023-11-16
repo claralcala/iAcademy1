@@ -23,6 +23,12 @@ import es.iescarrillo.iacademy1.services.AcademyService;
 import es.iescarrillo.iacademy1.services.CourseService;
 import es.iescarrillo.iacademy1.services.TeacherService;
 
+/**
+ * @author clara
+ *
+ * Pantalla para que el manager registre un curso en su academia
+ *
+ */
 public class RegisterCourseActivity extends AppCompatActivity {
 
     Button btnSave;
@@ -40,6 +46,7 @@ public class RegisterCourseActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register_course);
 
+        //Inicializamos componentes
         etTitle=findViewById(R.id.etCourseTitle);
         etDescription=findViewById(R.id.etCourseDescription);
         etLevel=findViewById(R.id.etCourseLevel);
@@ -50,13 +57,13 @@ public class RegisterCourseActivity extends AppCompatActivity {
 
         etTeacher=findViewById(R.id.etCourseTeacher);
 
-
-
         btnSave =findViewById(R.id.btnSaveCourse);
 
+        //Inicializamos servicios
         courseService=new CourseService(getApplication());
         teacherService= new TeacherService(getApplication());
 
+        //Variables de sesión
         SharedPreferences sharedPreferences= getSharedPreferences("PreferencesAcademy", Context.MODE_PRIVATE);
         String username= sharedPreferences.getString("user", "");
         String role = sharedPreferences.getString("role", "");
@@ -77,6 +84,7 @@ public class RegisterCourseActivity extends AppCompatActivity {
             c.setLevel(etLevel.getText().toString());
             c.setActivated(Boolean.parseBoolean(etActivated.getText().toString()));
 
+            //Buscamos una academia por el id del gerente
             Thread thread = new Thread(()->{
 
                 a =academyService.getAcademyByManagerid(id);
@@ -99,6 +107,7 @@ public class RegisterCourseActivity extends AppCompatActivity {
 
 
 
+                //Buscamos el profesor por el username especificado
                 Teacher t = teacherService.getTeacherByUsername(etTeacher.getText().toString());
 
                 c.setTeacher_id(t.getId());
@@ -114,6 +123,7 @@ public class RegisterCourseActivity extends AppCompatActivity {
                 Log.i("error", e.getMessage());
             }
 
+            //Comprobamos que los campos de las fechas no estén vacíos
             if (!TextUtils.isEmpty(etStartDate.getText().toString())) {
                 DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
                 c.setStartDate(LocalDate.parse(etStartDate.getText().toString(), formatter));

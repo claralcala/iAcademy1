@@ -24,6 +24,11 @@ import es.iescarrillo.iacademy1.services.AcademyService;
 import es.iescarrillo.iacademy1.services.CourseService;
 import es.iescarrillo.iacademy1.services.TeacherService;
 
+/**
+ *
+ * @author clara
+ * Pantalla para que el manager visualice los cursos de su academia
+ */
 public class ManagerViewCourses extends AppCompatActivity {
 
     CourseAdapter adapter;
@@ -42,24 +47,29 @@ public class ManagerViewCourses extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_manager_view_courses);
 
+        //Inicializamos los botones
         btnAddCourse=findViewById(R.id.btnAddCourse);
         btnBack=findViewById(R.id.btnBack);
 
+        //Variables de sesión
         SharedPreferences sharedPreferences= getSharedPreferences("PreferencesAcademy", Context.MODE_PRIVATE);
         String username= sharedPreferences.getString("user", "");
         String role = sharedPreferences.getString("role", "");
         Boolean login = sharedPreferences.getBoolean("login", false);
         Long id_ = sharedPreferences.getLong("id", 0);
 
+        //Listview
         ListView lvCourses = findViewById(R.id.lvCourses);
 
 
+        //Inicializamos servicios
         courseService = new CourseService(getApplication());
 
         academyService = new AcademyService(getApplication());
 
-        Thread thread = new Thread(()->{
 
+        Thread thread = new Thread(()->{
+            //Buscamos la academia por el id del manager
             a =academyService.getAcademyByManagerid(id_);
             idAcademy=a.getId();
 
@@ -76,6 +86,7 @@ public class ManagerViewCourses extends AppCompatActivity {
 
 
         Thread thread2 = new Thread(()->{
+            //Nos traemos una lista de los cursos por el id de la academia que hemos obtenido previamente
 
            courses= courseService.getCoursebyAcademyID(idAcademy);
 
@@ -98,6 +109,7 @@ public class ManagerViewCourses extends AppCompatActivity {
         lvCourses.setAdapter(adapter);
 
 
+        //Cuando clicamos en un item de la lista, nos llevamos en el intent sus datos
 
         lvCourses.setOnItemClickListener((parent, view, position, id)->{
 
@@ -122,6 +134,7 @@ public class ManagerViewCourses extends AppCompatActivity {
             startActivity(intent);
         });
 
+        //Acción del botón de añadir
         btnAddCourse.setOnClickListener(v->{
             Intent addCourse = new Intent(this, RegisterCourseActivity.class);
             startActivity(addCourse);
@@ -130,6 +143,7 @@ public class ManagerViewCourses extends AppCompatActivity {
         });
 
 
+        //Acción del botón de volver
         btnBack.setOnClickListener(v->{
             Intent back = new Intent(this, ManagerMainActivity.class);
             startActivity(back);
@@ -138,6 +152,7 @@ public class ManagerViewCourses extends AppCompatActivity {
     }
 
 
+    //Este método para formatear las fechas con el formatter lo vi en stack overflow y decidí incluirlo aquí
     private String format(LocalDate localdate){
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
