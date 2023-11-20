@@ -108,7 +108,8 @@ public class MainActivity extends AppCompatActivity {
                                             editor.apply();
 
                                             tvError.setText("Login correcto");
-                                            //Falta el intent para ir a la actividad
+                                            Intent mainTeacher = new Intent(this, Teacher_View_Courses.class);
+                                            startActivity(mainTeacher);
 
                                         }else {
                                             tvError.setText("Contraseña no válida");
