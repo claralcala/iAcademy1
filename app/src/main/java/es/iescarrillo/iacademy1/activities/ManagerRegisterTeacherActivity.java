@@ -22,6 +22,10 @@ import es.iescarrillo.iacademy1.services.ManagerService;
 import es.iescarrillo.iacademy1.services.StudentService;
 import es.iescarrillo.iacademy1.services.TeacherService;
 
+/**
+ * @author clara
+ * Pantalla para que el manager inserte/registre un profesor
+ */
 public class ManagerRegisterTeacherActivity extends AppCompatActivity {
 
     Button btnSave;
@@ -45,6 +49,7 @@ public class ManagerRegisterTeacherActivity extends AppCompatActivity {
 
 
 
+        //Inicializamos componentes
         etName=findViewById(R.id.etTeacherName);
         etSurname=findViewById(R.id.etTeacherSurname);
         etMail=findViewById(R.id.etTeacherMail);
@@ -57,12 +62,14 @@ public class ManagerRegisterTeacherActivity extends AppCompatActivity {
 
         btnSave=findViewById(R.id.btnSave);
 
+        //Variables de sesión
         SharedPreferences sharedPreferences= getSharedPreferences("PreferencesAcademy", Context.MODE_PRIVATE);
         String username= sharedPreferences.getString("user", "");
         String role = sharedPreferences.getString("role", "");
         Boolean login = sharedPreferences.getBoolean("login", true);
         Long id = sharedPreferences.getLong("id", 0);
 
+        //Inicializamos servicios
         teacherService= new TeacherService(getApplication());
         academyService = new AcademyService(getApplication());
         managerService = new ManagerService(getApplication());
@@ -79,6 +86,8 @@ public class ManagerRegisterTeacherActivity extends AppCompatActivity {
             t.setDni(etDNI.getText().toString());
             Thread thread = new Thread(()->{
 
+                //Buscamos la academia por el id del manager
+
                 a =academyService.getAcademyByManagerid(id);
                 idAcademy=a.getId();
 
@@ -94,6 +103,7 @@ public class ManagerRegisterTeacherActivity extends AppCompatActivity {
                 Log.i("error", e.getMessage());
             }
 
+            //Le asignamos el id de la academia al profesor
             t.setAcademy_id(idAcademy);
 
             User u = new User();
@@ -113,6 +123,7 @@ public class ManagerRegisterTeacherActivity extends AppCompatActivity {
 
                 String userName = etUsername.getText().toString();
 
+                //Comprobamos que el nombre de usuario no esté en uso
                 if (managerService.getManagerByUsername(userName)!=null || studentService.getStudentByUsername(userName)!=null || teacherService.getTeacherByUsername(userName)!=null) {
                     runOnUiThread(()->{
 

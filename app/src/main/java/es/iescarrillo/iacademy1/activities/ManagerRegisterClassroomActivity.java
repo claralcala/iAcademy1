@@ -25,6 +25,10 @@ import es.iescarrillo.iacademy1.services.ClassRoomService;
 import es.iescarrillo.iacademy1.services.CourseService;
 import es.iescarrillo.iacademy1.services.TeacherService;
 
+/**
+ * @author clara
+ * Página para que el manager registre una clase asociada a su academia
+ */
 public class ManagerRegisterClassroomActivity extends AppCompatActivity {
 
     Button btnSave;
@@ -44,12 +48,14 @@ public class ManagerRegisterClassroomActivity extends AppCompatActivity {
         setContentView(R.layout.activity_manager_register_classroom);
 
 
+        //Inicializamos componentes
         btnSave=findViewById(R.id.btnSave);
         etName=findViewById(R.id.etClassroomName);
         etCapacity=findViewById(R.id.etClassroomCapacity);
 
 
 
+        //Variables de sesión
         SharedPreferences sharedPreferences= getSharedPreferences("PreferencesAcademy", Context.MODE_PRIVATE);
         String username= sharedPreferences.getString("user", "");
         String role = sharedPreferences.getString("role", "");
@@ -62,6 +68,7 @@ public class ManagerRegisterClassroomActivity extends AppCompatActivity {
 
         academyService = new AcademyService(getApplication());
 
+        //Acción del botón guardar
         btnSave.setOnClickListener(v -> {
 
             Classroom cl = new Classroom();
@@ -69,7 +76,7 @@ public class ManagerRegisterClassroomActivity extends AppCompatActivity {
             cl.setCapacity(Integer.parseInt(etCapacity.getText().toString()));
 
             Thread thread = new Thread(()->{
-
+                //Buscamos la academia por el id del manager y obtenemos su id
                 a =academyService.getAcademyByManagerid(id);
                 idAcademy=a.getId();
 
@@ -84,10 +91,12 @@ public class ManagerRegisterClassroomActivity extends AppCompatActivity {
                 Log.i("error", e.getMessage());
             }
 
+            //Le ponemos el id a la clase
             cl.setAcademy_id(idAcademy);
 
 
 
+            //Insertamos la clase
 
             Thread thread2 = new Thread(()->{
                 classroomService.insertClassroom(cl);

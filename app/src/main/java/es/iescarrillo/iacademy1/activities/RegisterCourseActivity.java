@@ -8,12 +8,18 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.List;
 
 import es.iescarrillo.iacademy1.R;
 import es.iescarrillo.iacademy1.models.Academy;
@@ -23,23 +29,36 @@ import es.iescarrillo.iacademy1.services.AcademyService;
 import es.iescarrillo.iacademy1.services.CourseService;
 import es.iescarrillo.iacademy1.services.TeacherService;
 
+/**
+ * @author clara
+ *
+ * Pantalla para que el manager registre un curso en su academia
+ *
+ */
 public class RegisterCourseActivity extends AppCompatActivity {
 
     Button btnSave;
     EditText etTeacher, etTitle, etDescription, etLevel, etCapacity, etStartDate, etEndDate, etActivated;
+
+
+    Spinner spinnerT;
     private CourseService courseService;
     private TeacherService teacherService;
     private AcademyService academyService;
 
     long idAcademy;
+    long teacherId;
+
     Academy a;
 
+    List<Teacher> teachers;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register_course);
 
+        //Inicializamos componentes
         etTitle=findViewById(R.id.etCourseTitle);
         etDescription=findViewById(R.id.etCourseDescription);
         etLevel=findViewById(R.id.etCourseLevel);
@@ -48,72 +67,104 @@ public class RegisterCourseActivity extends AppCompatActivity {
         etStartDate=findViewById((R.id.etCourseStart));
         etActivated=findViewById(R.id.etCourseActivated);
 
-        etTeacher=findViewById(R.id.etCourseTeacher);
-
+        spinnerT = findViewById(R.id.spinnerTeachers);
 
 
         btnSave =findViewById(R.id.btnSaveCourse);
 
+        //Inicializamos servicios
         courseService=new CourseService(getApplication());
         teacherService= new TeacherService(getApplication());
+        academyService=new AcademyService(getApplication());
 
+        //Variables de sesión
         SharedPreferences sharedPreferences= getSharedPreferences("PreferencesAcademy", Context.MODE_PRIVATE);
         String username= sharedPreferences.getString("user", "");
         String role = sharedPreferences.getString("role", "");
         Boolean login = sharedPreferences.getBoolean("login", true);
         Long id = sharedPreferences.getLong("id", 0);
 
+        //Buscamos la academia por el id del manager
+        Thread thread = new Thread(()->{
+
+            a =academyService.getAcademyByManagerid(id);
+            idAcademy=a.getId();
+
+
+
+        });
+
+        thread.start();
+        try{
+            thread.join();
+        }catch(Exception e ){
+            Log.i("error", e.getMessage());
+        }
+
+
+        //Buscamos los profesores y nos traemos una lista. Esto lo necesitaremos para el spinner
+        Thread thread2 = new Thread(()->{
+
+            teachers =teacherService.getTeachersByAcademy(idAcademy);
 
 
 
 
-        academyService = new AcademyService(getApplication());
 
+        });
+
+        thread2.start();
+        try{
+            thread2.join();
+        }catch(Exception e ){
+            Log.i("error", e.getMessage());
+        }
+
+
+        //Creamos otro arraylist para meter los nombres de usuario de los profesores
+        ArrayList<String>teacherName= new ArrayList<String>();
+        for (Teacher te : teachers){
+            String tName=te.getUser().getName();
+            teacherName.add(tName);
+        }
+
+        //Adaptador para el spinner
+        ArrayAdapter tAdapter = new ArrayAdapter(RegisterCourseActivity.this, android.R.layout.simple_spinner_dropdown_item, teacherName);
+        spinnerT.setAdapter(tAdapter);
+
+        //Cuando seleccionamos un item
+        spinnerT.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                //Metemos el id del profesor en la variable que hemos creado
+                teacherId= teachers.get(position).getId();
+
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
+
+
+        //Acción del botón guardar
         btnSave.setOnClickListener(v -> {
-           Course c = new Course();
-           c.setTitle(etTitle.getText().toString());
-           c.setDescription(etDescription.getText().toString());
-           c.setCapacity((Integer.parseInt(etCapacity.getText().toString())));
-           c.setLevel(etLevel.getText().toString());
-           c.setActivated(Boolean.parseBoolean(etActivated.getText().toString()));
-
-            Thread thread = new Thread(()->{
-
-                a =academyService.getAcademyByManagerid(id);
-                idAcademy=a.getId();
+            Course c = new Course();
+            c.setTitle(etTitle.getText().toString());
+            c.setDescription(etDescription.getText().toString());
+            c.setCapacity((Integer.parseInt(etCapacity.getText().toString())));
+            c.setLevel(etLevel.getText().toString());
+            c.setActivated(Boolean.parseBoolean(etActivated.getText().toString()));
 
 
 
-            });
-
-            thread.start();
-            try{
-                thread.join();
-            }catch(Exception e ){
-                Log.i("error", e.getMessage());
-            }
-
-           c.setAcademy_id(idAcademy);
-
-            Thread thread2 = new Thread(()->{
+            c.setAcademy_id(idAcademy);
+            c.setTeacher_id(teacherId);
 
 
-
-                    Teacher t = teacherService.getTeacherByUsername(etTeacher.getText().toString());
-
-                    c.setTeacher_id(t.getId());
-
-
-            });
-
-
-            thread2.start();
-            try{
-                thread2.join();
-            }catch(Exception e ){
-                Log.i("error", e.getMessage());
-            }
-
+            //Comprobamos que los campos de las fechas no estén vacíos
             if (!TextUtils.isEmpty(etStartDate.getText().toString())) {
                 DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
                 c.setStartDate(LocalDate.parse(etStartDate.getText().toString(), formatter));
@@ -132,7 +183,7 @@ public class RegisterCourseActivity extends AppCompatActivity {
             }
 
 
-            Thread thread3 = new Thread(()->{
+            Thread thread4 = new Thread(()->{
 
 
 
@@ -140,18 +191,18 @@ public class RegisterCourseActivity extends AppCompatActivity {
 
 
 
-                    courseService.insertCourse(c);
-                    Intent back = new Intent(this, ManagerMainActivity.class);
-                    startActivity(back);
+                courseService.insertCourse(c);
+                Intent back = new Intent(this, ManagerMainActivity.class);
+                startActivity(back);
 
 
             });
 
-            thread3.start();
+            thread4.start();
             try{
-              thread3.join();
+                thread4.join();
             }catch(Exception e){
-              Log.i("error", e.getMessage());
+                Log.i("error", e.getMessage());
             }
 
 

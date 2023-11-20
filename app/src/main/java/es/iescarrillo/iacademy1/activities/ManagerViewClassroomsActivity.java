@@ -22,6 +22,10 @@ import es.iescarrillo.iacademy1.services.AcademyService;
 import es.iescarrillo.iacademy1.services.ClassRoomService;
 import es.iescarrillo.iacademy1.services.CourseService;
 
+/**
+ * @author clara
+ * Pantalla para visualizar las clases - desde el manager
+ */
 public class ManagerViewClassroomsActivity extends AppCompatActivity {
 
     ClassroomAdapter adapter;
@@ -42,16 +46,19 @@ public class ManagerViewClassroomsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_manager_view_classrooms);
 
+        //Inicializar los botones
         btnBack=findViewById(R.id.btnBack);
         btnAddClassroom=findViewById(R.id.btnAddClassroom);
 
 
+        //Variables de sesión
         SharedPreferences sharedPreferences= getSharedPreferences("PreferencesAcademy", Context.MODE_PRIVATE);
         String username= sharedPreferences.getString("user", "");
         String role = sharedPreferences.getString("role", "");
         Boolean login = sharedPreferences.getBoolean("login", false);
         Long id_ = sharedPreferences.getLong("id", 0);
 
+        //Listview
         ListView lvClassrooms = findViewById(R.id.lvClassrooms);
 
 
@@ -59,6 +66,7 @@ public class ManagerViewClassroomsActivity extends AppCompatActivity {
 
         academyService = new AcademyService(getApplication());
 
+        //Buscamos la academia por el id del manager
         Thread thread = new Thread(()->{
 
             a =academyService.getAcademyByManagerid(id_);
@@ -76,6 +84,7 @@ public class ManagerViewClassroomsActivity extends AppCompatActivity {
         }
 
 
+        //Nos traemos la lista de clases por la academia
         Thread thread2 = new Thread(()->{
 
             classrooms= classroomService.getClassroomsByAcademy(idAcademy);
@@ -100,12 +109,15 @@ public class ManagerViewClassroomsActivity extends AppCompatActivity {
 
 
 
+        //Al hacer click en un elemento de la listview
         lvClassrooms.setOnItemClickListener((parent, view, position, id)->{
 
             Classroom cl = (Classroom) parent.getItemAtPosition(position);
 
             Intent intent = new Intent(this, ManagerClassroomDetails.class);
 
+            //Nos llevamos los datos de la clase en el intent
+            //Incluidos el id de la academia y del manager
             intent.putExtra("name", cl.getName());
             intent.putExtra("capacity", cl.getCapacity().toString());
             intent.putExtra("id", Long.toString(cl.getId()));
@@ -115,6 +127,7 @@ public class ManagerViewClassroomsActivity extends AppCompatActivity {
             startActivity(intent);
         });
 
+        //Acción del botón de añadir clase
         btnAddClassroom.setOnClickListener(v->{
             Intent addClass = new Intent(this, ManagerRegisterClassroomActivity.class);
             startActivity(addClass);
@@ -123,6 +136,7 @@ public class ManagerViewClassroomsActivity extends AppCompatActivity {
         });
 
 
+        //Acción del botón para volver a la pantalla principal del manager
         btnBack.setOnClickListener(v->{
             Intent back = new Intent(this, ManagerMainActivity.class);
             startActivity(back);

@@ -20,6 +20,10 @@ import es.iescarrillo.iacademy1.models.Teacher;
 import es.iescarrillo.iacademy1.services.AcademyService;
 import es.iescarrillo.iacademy1.services.TeacherService;
 
+/**
+ * @author clara
+ * Pantalla para visualizar los profesores de la academia
+ */
 
 public class ViewTeachersActivity extends AppCompatActivity {
 
@@ -41,6 +45,7 @@ public class ViewTeachersActivity extends AppCompatActivity {
         btnAddTeacher=findViewById(R.id.btnAddTeacher);
         btnBack=findViewById(R.id.btnBack);
 
+        //Variables de sesión
         SharedPreferences sharedPreferences= getSharedPreferences("PreferencesAcademy", Context.MODE_PRIVATE);
         String username= sharedPreferences.getString("user", "");
         String role = sharedPreferences.getString("role", "");
@@ -98,6 +103,7 @@ public class ViewTeachersActivity extends AppCompatActivity {
 
 
 
+        //Al hacer clic en un item
         lvTeachers.setOnItemClickListener((parent, view, position, id)->{
 
                     Teacher t = (Teacher) parent.getItemAtPosition(position);
