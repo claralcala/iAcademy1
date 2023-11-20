@@ -16,6 +16,11 @@ import es.iescarrillo.iacademy1.R;
 import es.iescarrillo.iacademy1.models.Teacher;
 import es.iescarrillo.iacademy1.services.TeacherService;
 
+/**
+ * @author clara
+ * Pantalla para ver los detalles de un profesor
+ *
+ */
 public class TeacherDetailsActivity extends AppCompatActivity {
 
     Button btnBack, btnDelete;
@@ -35,6 +40,7 @@ public class TeacherDetailsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_teacher_details);
 
 
+        //Inicializar componentes
         btnDelete=findViewById(R.id.btnDelete);
         btnBack=findViewById(R.id.btnBack);
         tvName=findViewById(R.id.tvTeacherName);
@@ -45,6 +51,7 @@ public class TeacherDetailsActivity extends AppCompatActivity {
         tvAddress=findViewById(R.id.tvTeacherAddress);
         tvUsername = findViewById(R.id.tvTeacherUsername);
 
+        //Variables de sesión
         SharedPreferences sharedPreferences= getSharedPreferences("PreferencesAcademy", Context.MODE_PRIVATE);
         String username= sharedPreferences.getString("user", "");
         String role = sharedPreferences.getString("role", "");
@@ -53,6 +60,7 @@ public class TeacherDetailsActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
 
+        //Ponemos en los campos de texto los datos que nos traemos del intent
         tvName.setText(intent.getStringExtra("name"));
         tvSurname.setText(intent.getStringExtra("surname"));
         tvPhone.setText(intent.getStringExtra("phone"));
@@ -63,17 +71,20 @@ public class TeacherDetailsActivity extends AppCompatActivity {
 
 
 
+        //Inicializamos el servicio
         teacherService = new TeacherService(getApplication());
 
 
 
 
 
+        //Acción del botón volver
         btnBack.setOnClickListener(v -> {
             Intent back = new Intent (this, ViewTeachersActivity.class);
             startActivity(back);
         });
 
+        //Acción del botón borrar
         btnDelete.setOnClickListener(v -> {
 
 
