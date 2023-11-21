@@ -63,20 +63,20 @@
             android:text="Capacidad" />
 
         <TextView
-            android:id="@+id/tvCourseEnd"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textSize="20dp"
-            android:textAlignment="center"
-            android:text="Fecha inicio" />
-
-        <TextView
             android:id="@+id/tvCourseStart"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="20dp"
             android:textAlignment="center"
             android:text="Fecha fin" />
+
+        <TextView
+            android:id="@+id/tvCourseEnd"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="20dp"
+            android:textAlignment="center"
+            android:text="Fecha inicio" />
 
         <TextView
             android:id="@+id/tvActivated"
@@ -106,7 +106,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Cancelar" />
+                android:text="Borrar" />
         </LinearLayout>
 
         <LinearLayout
@@ -129,6 +129,12 @@
                 android:layout_weight="1"
                 android:text="Ver alumnos" />
         </LinearLayout>
+
+        <Button
+            android:id="@+id/btnCancel"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Cancelar" />
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

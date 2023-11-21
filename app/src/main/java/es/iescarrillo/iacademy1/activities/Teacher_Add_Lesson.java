@@ -2,7 +2,9 @@ package es.iescarrillo.iacademy1.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
@@ -27,6 +29,13 @@ public class Teacher_Add_Lesson extends AppCompatActivity {
         //Declaramos los editText
         etLessonHour=findViewById(R.id.etLessonHour);
         etLessonDate=findViewById(R.id.etLessonDate);
+
+        //Variables de sesión
+        SharedPreferences sharedPreferences= getSharedPreferences("PreferencesAcademy", Context.MODE_PRIVATE);
+        String username= sharedPreferences.getString("user", "");
+        String role = sharedPreferences.getString("role", "");
+        Boolean login = sharedPreferences.getBoolean("login", true);
+        Long id = sharedPreferences.getLong("id", 0);
 
         //Boton para
         btnAdd.setOnClickListener(v -> {
