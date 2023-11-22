@@ -58,6 +58,16 @@ public class ManagerViewCourses extends AppCompatActivity {
         Boolean login = sharedPreferences.getBoolean("login", false);
         Long id_ = sharedPreferences.getLong("id", 0);
 
+        //¿Comprobar si el rol no es el de manager y echarlo?
+        if(!role.equals("MANAGER")){
+
+
+            sharedPreferences.edit().clear().apply();
+            Intent backMain = new Intent(this, MainActivity.class);
+            startActivity(backMain);
+
+        }
+
         //Listview
         ListView lvCourses = findViewById(R.id.lvCourses);
 
