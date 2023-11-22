@@ -36,4 +36,7 @@ public interface StudentDAO {
 
     @Query("SELECT * FROM student WHERE username = :username")
     Student getStudentByUsername(String username);
+
+    @Query("SELECT * FROM Student WHERE id IN (SELECT student_id FROM Inscription WHERE course_id = :courseId)")
+    List<Student> getAllStudentInACourse(long courseId);
 }

@@ -6,15 +6,19 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.Button;
 import android.widget.TextView;
 
 import es.iescarrillo.iacademy1.R;
+import es.iescarrillo.iacademy1.services.CourseService;
 
 public class Teacher_Details_Course extends AppCompatActivity {
 
     Button btnEdit, btnDelete, btnViewlesson, btnViewstudent, btnCancel;
     TextView tvTittle, tvDescription, tvLevel, tvCapacity, tvCourseEnd, tvCourseStart, tvActivated;
+
+    private CourseService courseService;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,6 +50,8 @@ public class Teacher_Details_Course extends AppCompatActivity {
         tvCourseStart = findViewById(R.id.tvCourseStart);
         tvActivated = findViewById(R.id.tvActivated);
 
+        courseService = new CourseService(getApplication());
+
         //Ponemos los datos que traemos del intent en los campos de texto
         tvTittle.setText(intent.getStringExtra("title"));
         tvDescription.setText(intent.getStringExtra("description"));
@@ -54,6 +60,9 @@ public class Teacher_Details_Course extends AppCompatActivity {
         tvCourseStart.setText(intent.getStringExtra("startDate"));
         tvCourseEnd.setText(intent.getStringExtra("endDate"));
         tvActivated.setText(intent.getStringExtra("activated"));
+
+        //Long courseID2 = Long.parseLong(intent.getStringExtra("id"));
+        String courseID = intent.getStringExtra("id");
 
         btnCancel.setOnClickListener(v -> {
             Intent back = new Intent(this, Teacher_View_Courses.class);
@@ -75,5 +84,38 @@ public class Teacher_Details_Course extends AppCompatActivity {
 
             startActivity(edit);
         });
+
+        btnViewstudent.setOnClickListener(v -> {
+            Intent viewStudent = new Intent(this, Teacher_View_Student.class);
+            //Log.i("id",courseID);
+            viewStudent.putExtra("courseID", courseID);
+
+
+            startActivity(viewStudent);
+        });
+
+        btnViewlesson.setOnClickListener(v -> {
+            Intent viewLesson = new Intent(this, Teacher_View_Lesson.class);
+            viewLesson.putExtra("courseID", courseID);
+            startActivity(viewLesson);
+        });
+
+        btnDelete.setOnClickListener(v -> {
+            Intent delete = new Intent(this, Teacher_View_Courses.class);
+
+            Thread thread = new Thread(()->{
+
+                courseService.deleteCourseById(Long.parseLong(courseID),academyID);
+
+            });
+            thread.start();
+            try{
+                thread.join();
+            }catch(Exception e ){
+                Log.i("error", e.getMessage());
+            }
+            startActivity(delete);
+        });
+
     }
 }

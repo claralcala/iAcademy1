@@ -47,4 +47,9 @@ public class StudentService implements StudentDAO {
     public Student getStudentByUsername(String username) {
         return studentDAO.getStudentByUsername(username);
     }
+
+    @Override
+    public List<Student> getAllStudentInACourse(long courseId) {
+        return studentDAO.getAllStudentInACourse(courseId);
+    }
 }
