@@ -84,6 +84,16 @@ public class RegisterCourseActivity extends AppCompatActivity {
         Boolean login = sharedPreferences.getBoolean("login", true);
         Long id = sharedPreferences.getLong("id", 0);
 
+        //¿Comprobar si el rol no es el de manager y echarlo?
+        if(!role.equals("MANAGER")){
+
+
+            sharedPreferences.edit().clear().apply();
+            Intent backMain = new Intent(this, MainActivity.class);
+            startActivity(backMain);
+
+        }
+
         //Buscamos la academia por el id del manager
         Thread thread = new Thread(()->{
 

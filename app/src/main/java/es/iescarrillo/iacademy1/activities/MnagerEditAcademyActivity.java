@@ -39,6 +39,16 @@ public class MnagerEditAcademyActivity extends AppCompatActivity {
         Boolean login = sharedPreferences.getBoolean("login", false);
         Long id = sharedPreferences.getLong("id", 0);
 
+        //¿Comprobar si el rol no es el de manager y echarlo?
+        if(!role.equals("MANAGER")){
+
+
+            sharedPreferences.edit().clear().apply();
+            Intent backMain = new Intent(this, MainActivity.class);
+            startActivity(backMain);
+
+        }
+
         //Recuperamos el intent
         Intent edit = getIntent();
 

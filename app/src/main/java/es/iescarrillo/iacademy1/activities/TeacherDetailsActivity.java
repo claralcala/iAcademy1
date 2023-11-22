@@ -58,6 +58,16 @@ public class TeacherDetailsActivity extends AppCompatActivity {
         Boolean login = sharedPreferences.getBoolean("login", false);
         Long id = sharedPreferences.getLong("id", 0);
 
+        //¿Comprobar si el rol no es el de manager y echarlo?
+        if(!role.equals("MANAGER")){
+
+
+            sharedPreferences.edit().clear().apply();
+            Intent backMain = new Intent(this, MainActivity.class);
+            startActivity(backMain);
+
+        }
+
         Intent intent = getIntent();
 
         //Ponemos en los campos de texto los datos que nos traemos del intent
