@@ -39,13 +39,20 @@ public class TeacherService implements TeacherDAO {
         return teacherDAO.getAll();
     }
 
-    @Override
-    public Map<Teacher, List<Course>> getTeacherWithCoursesMap() {
-        return teacherDAO.getTeacherWithCoursesMap();
-    }
+
 
     @Override
     public Teacher getTeacherByUsername(String username) {
         return teacherDAO.getTeacherByUsername(username);
+    }
+
+    @Override
+    public List<Teacher> getTeachersByAcademy(long id) {
+        return teacherDAO.getTeachersByAcademy(id);
+    }
+
+    @Override
+    public void deleteTeacherById(long teacher_id, long ac_id) {
+        teacherDAO.deleteTeacherById(teacher_id, ac_id);
     }
 }

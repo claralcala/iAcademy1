@@ -55,13 +55,13 @@ public class Teacher extends Person{
     }
 
 
-
     @Override
     public String toString() {
         return "Teacher{" +
                 "dni='" + dni + '\'' +
                 ", phone='" + phone + '\'' +
                 ", address='" + address + '\'' +
+                ", academy_id=" + academy_id +
                 ", id=" + id +
                 ", name='" + name + '\'' +
                 ", surname='" + surname + '\'' +

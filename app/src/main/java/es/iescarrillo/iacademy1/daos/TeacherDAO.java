@@ -29,10 +29,15 @@ public interface TeacherDAO {
     @Query("SELECT * FROM teacher")
     List<Teacher> getAll();
 
-    @Query("SELECT * FROM teacher t JOIN course c ON t.id=c.teacher_id")
-    Map<Teacher, List<Course>> getTeacherWithCoursesMap();
 
 
     @Query("SELECT * FROM teacher WHERE username = :username")
     Teacher getTeacherByUsername(String username);
+
+    @Query("SELECT * FROM teacher WHERE academy_id= :id")
+    List<Teacher> getTeachersByAcademy(long id);
+
+    @Query("DELETE FROM teacher WHERE id = :teacher_id AND academy_id = :ac_id")
+    void deleteTeacherById(long teacher_id, long ac_id);
+
 }

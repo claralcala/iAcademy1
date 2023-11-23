@@ -23,8 +23,15 @@ import java.util.logging.SimpleFormatter;
 import es.iescarrillo.iacademy1.R;
 import es.iescarrillo.iacademy1.models.Student;
 import es.iescarrillo.iacademy1.models.User;
+import es.iescarrillo.iacademy1.services.ManagerService;
 import es.iescarrillo.iacademy1.services.StudentService;
+import es.iescarrillo.iacademy1.services.TeacherService;
 
+/**
+ * @author clara
+ * Clase para que se registre el estudiante
+ *
+ */
 public class RegisterStudentActivity extends AppCompatActivity {
 
     EditText etName, etSurname, etMail, etDNI, etPhone, etFamPhone, etBirthdate, etUsername, etPasswordRegister;
@@ -34,11 +41,14 @@ public class RegisterStudentActivity extends AppCompatActivity {
     SharedPreferences sharedPreferences;
 
     private StudentService studentService;
+    private ManagerService managerService;
+    private TeacherService teacherService;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register_student);
 
+        //Inicializamos componentes
         etName = findViewById(R.id.etStudentName);
         etSurname = findViewById(R.id.etStudentSurname);
         etMail = findViewById(R.id.etStudentMail);
@@ -51,14 +61,19 @@ public class RegisterStudentActivity extends AppCompatActivity {
 
         btnSave = findViewById(R.id.btnSaveStudent);
 
+        //Variables de sesión
         sharedPreferences = getSharedPreferences("AcademyPreferences", Context.MODE_PRIVATE);
         String username = sharedPreferences.getString("username", "");
         String role = sharedPreferences.getString("role", "");
         Boolean login = sharedPreferences.getBoolean("login", false);
         long id = sharedPreferences.getLong("id", 0);
 
+        //Inicializamos los servicios
         studentService = new StudentService(getApplication());
+        managerService = new ManagerService(getApplication());
+        teacherService = new TeacherService(getApplication());
 
+        //Acción del botón guardar
         btnSave.setOnClickListener(v -> {
 
             Student s = new Student();
@@ -70,6 +85,7 @@ public class RegisterStudentActivity extends AppCompatActivity {
             s.setFamilyPhone(etFamPhone.getText().toString());
 
 
+            //Comprobamos que los campos de fecha no se queden vacíos y avisamos al usuario en caso de que estén
             if (!TextUtils.isEmpty(etBirthdate.getText().toString())) {
                 DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
                 s.setBirthdate(LocalDate.parse(etBirthdate.getText().toString(), formatter));
@@ -90,9 +106,30 @@ public class RegisterStudentActivity extends AppCompatActivity {
 
             s.setUser(u);
 
+            //Comprobamos que el username sea único
             Thread thread = new Thread(()->{
 
-                studentService.insertStudent(s);
+                String userName = etUsername.getText().toString();
+
+                if (managerService.getManagerByUsername(userName)!=null || studentService.getStudentByUsername(userName)!=null || teacherService.getTeacherByUsername(userName)!=null) {
+                    runOnUiThread(()->{
+
+                        Toast.makeText(this, "El nombre de usuario ya está en uso", Toast.LENGTH_SHORT).show();
+                    });
+
+                } else {
+
+
+                    studentService.insertStudent(s);
+
+                    Intent back = new Intent(this, MainActivity.class);
+
+                    startActivity(back);
+                }
+
+
+
+
 
             });
 
@@ -103,9 +140,7 @@ public class RegisterStudentActivity extends AppCompatActivity {
                 Log.i("error", e.getMessage());
             }
 
-            Intent back = new Intent(this, MainActivity.class);
 
-            startActivity(back);
 
         });
 

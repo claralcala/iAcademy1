@@ -54,6 +54,8 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        //Inicializamos los servicios y componentes
+
         managerService = new ManagerService(getApplication());
         academyService = new AcademyService(getApplication());
         classroomService = new ClassRoomService(getApplication());
@@ -73,6 +75,7 @@ public class MainActivity extends AppCompatActivity {
         ImageButton btnRegister = findViewById(R.id.btnRegister);
 
 
+        //Acción del botón registrar que lleva a la pantalla correspondiente
 
         btnRegister.setOnClickListener(v -> {
             Intent intentRegister = new Intent(this, RegisterActivity.class);
@@ -81,35 +84,40 @@ public class MainActivity extends AppCompatActivity {
 
         });
 
-        btnLogin.setOnClickListener(v ->{
+        //Acción del botón login
+       btnLogin.setOnClickListener(v ->{
             Thread thread = new Thread(() -> {
 
 
-                Manager m = managerService.getManagerByUsername(etUsername.getText().toString());
+                    //Lo que hacemos es ir comprobando de forma escalada si existe un username como manager, student o teacher
+                    Manager m = managerService.getManagerByUsername(etUsername.getText().toString());
 
 
-                if (m==null) {
-                    Student s = studentService.getStudentByUsername(etUsername.getText().toString());
-                    if (s==null){
-                        Teacher t = teacherService.getTeacherByUsername(etUsername.getText().toString());
-                        if (t==null){
-                            tvError.setText("El usuario no es válido");
-                        }else {
-
-                            Boolean checkPassword = BCrypt.checkpw(etPassword.getText().toString(), t.getUser().getPassword());
-                            if (checkPassword){
+                    if (m==null) {
+                        Student s = studentService.getStudentByUsername(etUsername.getText().toString());
+                                if (s==null){
+                                    Teacher t = teacherService.getTeacherByUsername(etUsername.getText().toString());
+                                    if (t==null){
+                                        //Si no existe tal usuario, avisamos
+                                        tvError.setText("El usuario no es válido");
+                                    }else {
+                                        //Luego comprobamos la contraseña y ponemos las variables de sesión con el editor
+                                        Boolean checkPassword = BCrypt.checkpw(etPassword.getText().toString(), t.getUser().getPassword());
+                                        if (checkPassword){
 
                                 sharedPreferences = getSharedPreferences("PreferencesAcademy", Context.MODE_PRIVATE);
                                 SharedPreferences.Editor editor = sharedPreferences.edit();
 
-                                editor.putBoolean("login", true);
-                                editor.putString("username", t.getUser().getName());
-                                editor.putLong("id", t.getId());
-                                editor.putString("role", t.getUser().getRole());
-                                editor.apply();
+                                            editor.putBoolean("login", true);
+                                            editor.putString("username", t.getUser().getName());
+                                            editor.putLong("id", t.getId());
+                                            editor.putString("role", t.getUser().getRole());
+                                            editor.putLong("academyID",t.getAcademy_id());
+                                            editor.apply();
 
-                                tvError.setText("Login correcto");
-                                //Falta el intent para ir a la actividad
+                                            tvError.setText("Login correcto");
+                                            Intent mainTeacher = new Intent(this, Teacher_View_Courses.class);
+                                            startActivity(mainTeacher);
 
                             }else {
                                 tvError.setText("Contraseña no válida");
@@ -123,12 +131,13 @@ public class MainActivity extends AppCompatActivity {
                             sharedPreferences = getSharedPreferences("PreferencesAcademy", Context.MODE_PRIVATE);
                             SharedPreferences.Editor editor = sharedPreferences.edit();
 
-                            editor.putBoolean("login", true);
-                            editor.putString("username", s.getUser().getName());
-                            editor.putLong("id", s.getId());
-                            editor.putString("role", s.getUser().getRole());
-                            editor.apply();
-                            tvError.setText("Login correcto");
+                                        editor.putBoolean("login", true);
+                                        editor.putString("username", s.getUser().getName());
+                                        editor.putLong("id", s.getId());
+                                        editor.putString("role", s.getUser().getRole());
+                                        editor.apply();
+                                        tvError.setText("Login correcto");
+                                        //Falta el intent para ir a la actividad
 
                             Intent intent  = new Intent(this, StudentActivity.class);
 

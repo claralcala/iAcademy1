@@ -22,60 +22,55 @@ import es.iescarrillo.iacademy1.models.Course;
 import es.iescarrillo.iacademy1.models.Teacher;
 import es.iescarrillo.iacademy1.services.AcademyService;
 import es.iescarrillo.iacademy1.services.CourseService;
-import es.iescarrillo.iacademy1.services.TeacherService;
 
-/**
- *
- * @author clara
- * Pantalla para que el manager visualice los cursos de su academia
- */
-public class ManagerViewCourses extends AppCompatActivity {
+public class Teacher_View_Courses extends AppCompatActivity {
 
-    CourseAdapter adapter;
-    Button btnAddCourse, btnBack;
-    CourseService courseService;
+    Button btnAdd;
+    Button btnLogout;
 
+    private CourseService courseService;
+    private CourseAdapter adapter;
     List<Course> courses;
-
-    private AcademyService academyService;
-    long idAcademy;
-
-    Academy a;
+    ListView lvCourses;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_manager_view_courses);
+        setContentView(R.layout.activity_teacher_view_courses);
 
-        //Inicializamos los botones
-        btnAddCourse=findViewById(R.id.btnAddCourse);
-        btnBack=findViewById(R.id.btnBack);
+        //Declaramos los botones
+        btnAdd=findViewById(R.id.btnAdd);
+        btnLogout=findViewById(R.id.btnLogout);
+
+        lvCourses=findViewById(R.id.lvCourses);
 
         //Variables de sesión
         SharedPreferences sharedPreferences= getSharedPreferences("PreferencesAcademy", Context.MODE_PRIVATE);
         String username= sharedPreferences.getString("user", "");
         String role = sharedPreferences.getString("role", "");
-        Boolean login = sharedPreferences.getBoolean("login", false);
+        Boolean login = sharedPreferences.getBoolean("login", true);
         Long id_ = sharedPreferences.getLong("id", 0);
 
-        //Listview
-        ListView lvCourses = findViewById(R.id.lvCourses);
+        //¿Comprobar si el rol no es el de manager y echarlo?
+        if(!role.equals("TEACHER")){
 
 
-        //Inicializamos servicios
+            sharedPreferences.edit().clear().apply();
+            Intent backMain = new Intent(this, MainActivity.class);
+            startActivity(backMain);
+
+        }
+
         courseService = new CourseService(getApplication());
 
-        academyService = new AcademyService(getApplication());
-
-
         Thread thread = new Thread(()->{
-            //Buscamos la academia por el id del manager
-            a =academyService.getAcademyByManagerid(id_);
-            idAcademy=a.getId();
+
+            courses = courseService.getCoursebyTeacherID(id_);
 
 
 
         });
+
 
         thread.start();
         try{
@@ -85,29 +80,11 @@ public class ManagerViewCourses extends AppCompatActivity {
         }
 
 
-        Thread thread2 = new Thread(()->{
-            //Nos traemos una lista de los cursos por el id de la academia que hemos obtenido previamente
-
-           courses= courseService.getCoursebyAcademyID(idAcademy);
-
-
-
-        });
-
-
-        thread2.start();
-        try{
-            thread2.join();
-        }catch(Exception e ){
-            Log.i("error", e.getMessage());
-        }
-
         adapter = new CourseAdapter((Context)this, courses);
 
 
 
         lvCourses.setAdapter(adapter);
-
 
         //Cuando clicamos en un item de la lista, nos llevamos en el intent sus datos
 
@@ -116,7 +93,7 @@ public class ManagerViewCourses extends AppCompatActivity {
             Course c = (Course) parent.getItemAtPosition(position);
 
 
-            Intent intent = new Intent(this, ManagerCourseDetails.class);
+            Intent intent = new Intent(this, Teacher_Details_Course.class);
 
             String startDate = format(c.getStartDate());
             String endDate = format(c.getEndDate());
@@ -131,27 +108,23 @@ public class ManagerViewCourses extends AppCompatActivity {
 
 
 
+
+
             startActivity(intent);
         });
-
-        //Acción del botón de añadir
-        btnAddCourse.setOnClickListener(v->{
-            Intent addCourse = new Intent(this, RegisterCourseActivity.class);
-            startActivity(addCourse);
-
-
+        //Boton para ir a la pagina de añadir curso
+        btnAdd.setOnClickListener(v -> {
+            Intent add = new Intent(this, Teacher_Add_Course.class);
+            startActivity(add);
         });
 
+        btnLogout.setOnClickListener(v -> {
 
-        //Acción del botón de volver
-        btnBack.setOnClickListener(v->{
-            Intent back = new Intent(this, ManagerMainActivity.class);
-            startActivity(back);
+            sharedPreferences.edit().clear().apply();
+            Intent backMain = new Intent(this, MainActivity.class);
+            startActivity(backMain);
         });
-
     }
-
-
     //Este método para formatear las fechas con el formatter lo vi en stack overflow y decidí incluirlo aquí
     private String format(LocalDate localdate){
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");

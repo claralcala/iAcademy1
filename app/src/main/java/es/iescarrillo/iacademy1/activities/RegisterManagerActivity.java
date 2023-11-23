@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import org.mindrot.jbcrypt.BCrypt;
 
@@ -20,7 +21,14 @@ import es.iescarrillo.iacademy1.models.Student;
 import es.iescarrillo.iacademy1.models.User;
 import es.iescarrillo.iacademy1.services.ManagerService;
 import es.iescarrillo.iacademy1.services.StudentService;
+import es.iescarrillo.iacademy1.services.TeacherService;
 
+/**
+ * @author clara
+ * Pantalla para que se registre el manager
+ *
+ *
+ */
 public class RegisterManagerActivity extends AppCompatActivity {
 
     Button btnSave;
@@ -30,6 +38,8 @@ public class RegisterManagerActivity extends AppCompatActivity {
     EditText etName, etSurname, etUsername, etPasswordRegister, etMail, etDNI, etPhone;
 
     private ManagerService managerService;
+    private StudentService studentService;
+    private TeacherService teacherService;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,6 +47,8 @@ public class RegisterManagerActivity extends AppCompatActivity {
         setContentView(R.layout.activity_register_manager);
 
 
+
+        //Inicializamos componentes
         etName = findViewById(R.id.etManagerName);
         etSurname = findViewById(R.id.etManagerSurname);
         etMail = findViewById(R.id.etManagerMail);
@@ -48,11 +60,24 @@ public class RegisterManagerActivity extends AppCompatActivity {
         btnSave = findViewById(R.id.btnSaveManager);
 
 
+        //Variables de sesión
+        SharedPreferences sharedPreferences= getSharedPreferences("PreferencesAcademy", Context.MODE_PRIVATE);
+        String username= sharedPreferences.getString("user", "");
+        String role = sharedPreferences.getString("role", "");
+        Boolean login = sharedPreferences.getBoolean("login", false);
+        Long id = sharedPreferences.getLong("id", 0);
 
+        //Inicializamos los servicios
         managerService = new ManagerService(getApplication());
+        teacherService = new TeacherService(getApplication());
+        studentService = new StudentService(getApplication());
 
+        //Acción del botón guardar
         btnSave.setOnClickListener(v -> {
 
+
+
+            //Creamos una instancia de la clase Manager
             Manager m = new Manager();
             m.setName(etName.getText().toString());
             m.setSurname(etSurname.getText().toString());
@@ -60,6 +85,7 @@ public class RegisterManagerActivity extends AppCompatActivity {
             m.setDni(etDNI.getText().toString());
             m.setPhone(etPhone.getText().toString());
 
+            //Le asignamos el usuario
             User u = new User();
 
             u.setName(etUsername.getText().toString());
@@ -74,7 +100,27 @@ public class RegisterManagerActivity extends AppCompatActivity {
 
             Thread thread = new Thread(()->{
 
-                managerService.insertManager(m);
+                //Comprobamos que el nombre de usuario sea único
+                String userName = etUsername.getText().toString();
+
+                if (managerService.getManagerByUsername(userName)!=null || studentService.getStudentByUsername(userName)!=null || teacherService.getTeacherByUsername(userName)!=null) {
+                   runOnUiThread(()->{
+
+                       Toast.makeText(this, "El nombre de usuario ya está en uso", Toast.LENGTH_SHORT).show();
+                    });
+
+                } else {
+
+
+
+                    managerService.insertManager(m);
+
+                    Intent back = new Intent(this, MainActivity.class);
+
+                    startActivity(back);
+                }
+
+
 
             });
 
@@ -85,9 +131,7 @@ public class RegisterManagerActivity extends AppCompatActivity {
                 Log.i("error", e.getMessage());
             }
 
-            Intent back = new Intent(this, MainActivity.class);
 
-            startActivity(back);
 
         });
 

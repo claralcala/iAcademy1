@@ -39,4 +39,9 @@ public class LessonService implements LessonDAO {
     public List<Lesson> getAll() {
         return lessonDAO.getAll();
     }
+
+    @Override
+    public List<Lesson> getLessonByCourseID(Long courseID) {
+        return lessonDAO.getLessonByCourseID(courseID);
+    }
 }

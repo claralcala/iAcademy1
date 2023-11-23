@@ -40,5 +40,9 @@ public interface ManagerDAO {
     Manager getManagerByUsername(String username);
 
 
+    @Query("SELECT COUNT(*) FROM manager WHERE username= :username")
+    int getUsernameUnique(String username);
+
+
 
 }

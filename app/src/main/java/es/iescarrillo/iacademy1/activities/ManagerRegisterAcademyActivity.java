@@ -14,6 +14,11 @@ import es.iescarrillo.iacademy1.R;
 import es.iescarrillo.iacademy1.models.Academy;
 import es.iescarrillo.iacademy1.services.AcademyService;
 
+/**
+ * @author clara
+ * Pantalla en la que el manager registra una academia
+ *
+ */
 public class ManagerRegisterAcademyActivity extends AppCompatActivity {
 
     Button btnSave;
@@ -28,6 +33,7 @@ public class ManagerRegisterAcademyActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_manager_register_academy);
 
+        //Inicializamos componentes
 
         etName=findViewById(R.id.etAcademyName);
         etDescription=findViewById(R.id.etAcademyDescription);
@@ -41,15 +47,19 @@ public class ManagerRegisterAcademyActivity extends AppCompatActivity {
 
         btnSave=findViewById(R.id.btnSave);
 
+        //Variables de sesión
         SharedPreferences sharedPreferences= getSharedPreferences("PreferencesAcademy", Context.MODE_PRIVATE);
         String username= sharedPreferences.getString("user", "");
         String role = sharedPreferences.getString("role", "");
         Boolean login = sharedPreferences.getBoolean("login", true);
         Long id = sharedPreferences.getLong("id", 0);
 
+        //Inicializar el servicio
         academyService = new AcademyService(getApplication());
 
+        //Acción del botón guardar
         btnSave.setOnClickListener(v -> {
+
             Academy a = new Academy();
             a.setName(etName.getText().toString());
             a.setDescription(etDescription.getText().toString());
@@ -60,8 +70,8 @@ public class ManagerRegisterAcademyActivity extends AppCompatActivity {
             a.setWeb(etWeb.getText().toString());
             a.setEmail(etMail.getText().toString());
             a.setPhone(etPhone.getText().toString());
+            a.setManager_id(id);
 
-            //Manager id?
 
             Thread thread = new Thread(()->{
                 academyService.insertAcademy(a);
@@ -74,6 +84,7 @@ public class ManagerRegisterAcademyActivity extends AppCompatActivity {
                 Log.i("error", e.getMessage());
             }
 
+            //Tras insertar la academia volvemos a la página principal del manager
             Intent back = new Intent(this, ManagerMainActivity.class);
             startActivity(back);
         });
