@@ -59,7 +59,7 @@ public class ViewTeachersActivity extends AppCompatActivity {
             a =academyService.getAcademyByManagerid(id_);
             idAcademy=a.getId();
 
-
+            Log.i("ID de la Academia: ", String.valueOf(idAcademy));
 
         });
 
@@ -100,6 +100,7 @@ public class ViewTeachersActivity extends AppCompatActivity {
 
         lvTeachers.setOnItemClickListener((parent, view, position, id)->{
 
+
                     Teacher t = (Teacher) parent.getItemAtPosition(position);
 
                     Intent intent = new Intent(this, TeacherDetailsActivity.class);
@@ -109,7 +110,6 @@ public class ViewTeachersActivity extends AppCompatActivity {
                     intent.putExtra("phone", t.getPhone().toString());
                     intent.putExtra("dni", t.getDni().toString());
                     intent.putExtra("address", t.getAddress().toString());
-
 
                     startActivity(intent);
         });

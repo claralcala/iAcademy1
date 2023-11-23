@@ -18,17 +18,34 @@
             android:id="@+id/tvListAcademy"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Cursos Matriculados"
+            android:layout_marginBottom="20dp"
+            android:text="Listado de cursos matriculados"
             android:textAlignment="center"
             android:textSize="30dp"
             android:textStyle="bold"
-            android:layout_marginBottom="20dp"
 
             />
 
         <ListView
+            android:id="@+id/lvCoursesRegistration"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="524dp"
+            android:layout_marginBottom="30dp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/btnbackCoursesRegistration"
+                android:layout_width="235dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Volver" />
+
+        </LinearLayout>
+
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

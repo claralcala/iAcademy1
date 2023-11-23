@@ -54,4 +54,10 @@ public class CourseService implements CourseDAO {
     public List<Course> getCoursebyAcademyID(Long acID) {
         return courseDAO.getCoursebyAcademyID(acID);
     }
+
+    @Override
+    public List<Course> getEnrolledCoursesStudent(long userId) {
+        return courseDAO.getEnrolledCoursesStudent(userId);
+    }
+
 }

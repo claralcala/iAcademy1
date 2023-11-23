@@ -66,6 +66,7 @@ public class ManagerRegisterTeacherActivity extends AppCompatActivity {
             t.setAddress(etAddress.getText().toString());
             t.setEmail(etMail.getText().toString());
             t.setPhone(etPhone.getText().toString());
+            t.setDni(etDNI.getText().toString());
 
             Thread thread = new Thread(()->{
 

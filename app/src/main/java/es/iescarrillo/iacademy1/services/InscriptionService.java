@@ -12,10 +12,11 @@ public class InscriptionService implements InscriptionDAO {
 
     private InscriptionDAO inscriptionDAO;
 
-    public InscriptionService(Application application){
+    public InscriptionService(Application application) {
         DatabaseHelper db = DatabaseHelper.getInstance(application);
-        inscriptionDAO=db.inscriptionDAO();
+        inscriptionDAO = db.inscriptionDAO();
     }
+
     @Override
     public long insertInscription(Inscription inscription) {
         return inscriptionDAO.insertInscription(inscription);
@@ -23,9 +24,7 @@ public class InscriptionService implements InscriptionDAO {
 
     @Override
     public void updateInscription(Inscription inscription) {
-
         inscriptionDAO.updateInscription(inscription);
-
     }
 
     @Override
@@ -37,4 +36,14 @@ public class InscriptionService implements InscriptionDAO {
     public List<Inscription> getAll() {
         return inscriptionDAO.getAll();
     }
+
+    @Override
+    public Inscription getInscriptionByStudentAndCourse(Long studentId, Long courseId) {
+        return inscriptionDAO.getInscriptionByStudentAndCourse(studentId, courseId);
+    }
+
+    public boolean isStudentEnrolled(Long studentId, Long courseId) {
+        return inscriptionDAO.getInscriptionByStudentAndCourse(studentId, courseId) != null;
+    }
+
 }

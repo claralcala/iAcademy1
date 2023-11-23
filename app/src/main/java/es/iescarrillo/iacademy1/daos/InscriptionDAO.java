@@ -28,4 +28,9 @@ public interface InscriptionDAO {
 
     @Query("SELECT * FROM inscription")
     List<Inscription> getAll();
+
+    @Query("SELECT * FROM inscription WHERE student_id = :studentId AND course_id = :courseId LIMIT 1")
+    Inscription getInscriptionByStudentAndCourse(Long studentId, Long courseId);
 }
+
+

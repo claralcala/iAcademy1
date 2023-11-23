@@ -36,4 +36,6 @@ public interface StudentDAO {
 
     @Query("SELECT * FROM student WHERE username = :username")
     Student getStudentByUsername(String username);
+
+
 }

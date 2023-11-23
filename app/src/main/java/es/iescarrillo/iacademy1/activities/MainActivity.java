@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.RadioButton;
 import android.widget.TextView;
 
@@ -43,8 +44,8 @@ public class MainActivity extends AppCompatActivity {
 
     TextView tvError;
 
-    Button btnLogin;
-    Button btnRegister;
+    ImageButton btnLogin;
+    ImageButton btnRegister;
 
     SharedPreferences sharedPreferences;
 
@@ -128,7 +129,9 @@ public class MainActivity extends AppCompatActivity {
                                         editor.putString("role", s.getUser().getRole());
                                         editor.apply();
                                         tvError.setText("Login correcto");
-                                        //Falta el intent para ir a la actividad
+
+                                        Intent intent = new Intent(this, StudentActivity.class);
+                                        startActivity(intent);
 
                                     }else {
                                         tvError.setText("Contraseña no válida");

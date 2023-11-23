@@ -8,8 +8,8 @@ import androidx.room.Update;
 
 import java.util.List;
 
-import es.iescarrillo.iacademy1.models.Admin;
 import es.iescarrillo.iacademy1.models.Lesson;
+import es.iescarrillo.iacademy1.models.LessonWithClassroom;
 
 @Dao
 public interface LessonDAO {
@@ -24,4 +24,7 @@ public interface LessonDAO {
 
     @Query("SELECT * FROM lesson")
     List<Lesson> getAll();
+
+    @Query("SELECT * FROM lesson WHERE course_id = course_id = :courseID ORDER BY lessonDate ASC, lessonHour ASC")
+    List<LessonWithClassroom> getLessonWithCouseById(long courseID);
 }
