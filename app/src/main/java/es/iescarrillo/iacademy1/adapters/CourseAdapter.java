@@ -11,7 +11,6 @@ import java.util.List;
 
 import es.iescarrillo.iacademy1.R;
 import es.iescarrillo.iacademy1.models.Course;
-import es.iescarrillo.iacademy1.models.Person;
 
 public class CourseAdapter extends ArrayAdapter<Course> {
 

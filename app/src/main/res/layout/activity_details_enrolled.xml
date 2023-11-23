@@ -4,45 +4,41 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activities.ViewCourses">
+    tools:context=".activities.DetailsEnrolled">
 
     <LinearLayout
         android:layout_width="409dp"
         android:layout_height="729dp"
         android:orientation="vertical"
-        tools:ignore="MissingConstraints"
         tools:layout_editor_absoluteX="1dp"
-        tools:layout_editor_absoluteY="1dp">
-
+        tools:layout_editor_absoluteY="1dp"
+        tools:ignore="MissingConstraints">
 
         <TextView
-            android:id="@+id/tvListCourses"
+            android:id="@+id/tvWelcomeStudent"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="20dp"
-            android:text="Lista de cursos"
+            android:text="Detalles lecciones"
             android:textAlignment="center"
             android:textSize="30dp"
             android:textStyle="bold"
-            tools:ignore="MissingConstraints"></TextView>
-
+            />
 
         <ListView
-            android:id="@+id/lvLisCourses"
+            android:id="@+id/lvlessonEnrroled"
             android:layout_width="match_parent"
-            android:layout_height="580dp"
+            android:layout_height="547dp"
             android:layout_marginBottom="50dp"
             />
 
         <Button
-            android:id="@+id/btnbackCourses"
-            android:layout_width="320dp"
+            android:id="@+id/btnBackDetailsLesson"
+            android:layout_width="277dp"
             android:layout_height="wrap_content"
             android:text="Volver"
             android:layout_gravity="center"
-
             />
+
+
     </LinearLayout>
-
-
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -70,4 +70,15 @@ public class CourseService implements CourseDAO {
     public List<Course> getCoursebyTeacherID(Long tID) {
         return courseDAO.getCoursebyTeacherID(tID);
     }
+
+    @Override
+    public List<Course> getCoursebyAcademyID(Long acID) {
+        return courseDAO.getCoursebyAcademyID(acID);
+    }
+
+    @Override
+    public List<Course> getEnrolledCoursesStudent(long userId) {
+        return courseDAO.getEnrolledCoursesStudent(userId);
+    }
+
 }

@@ -47,9 +47,8 @@
             android:id="@+id/btnViewAllCourses"
             android:layout_width="255dp"
             android:layout_height="wrap_content"
-            android:text="Visualizar todos los cursos"
             android:layout_gravity="center"
-            />
+            android:text="Visualizar todos los cursos" />
 
         <Button
             android:id="@+id/btnViewCoursesEnrolled"
@@ -57,6 +56,16 @@
             android:layout_height="wrap_content"
             android:text="Visualizar cursos matriculados"
             android:layout_gravity="center"
+            android:layout_marginBottom="100dp"
+            />
+
+        <Button
+            android:id="@+id/btnStudenLogOut"
+            android:layout_width="131dp"
+            android:layout_height="wrap_content"
+            android:text="Logout"
+            android:layout_gravity="center"
+            android:backgroundTint="@color/black"
             />
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -50,4 +50,14 @@ public interface CourseDAO {
 
     @Query("SELECT * FROM course WHERE teacher_id = :tID")
     List<Course> getCoursebyTeacherID(Long tID);
+    @Query("SELECT * FROM course WHERE academy_id = :acID")
+    List<Course> getCoursebyAcademyID(Long acID);
+
+    @Query("SELECT * FROM Course WHERE id IN (SELECT course_id FROM Inscription WHERE student_id = :userId)")
+    List<Course> getEnrolledCoursesStudent(long userId);
+
+
 }
+
+
+

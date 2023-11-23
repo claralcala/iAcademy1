@@ -36,4 +36,7 @@ public interface LessonDAO {
     @Query("SELECT * FROM lesson WHERE id = :lessonID")
     Lesson getLessonByID(Long lessonID);
 
+
+    @Query("SELECT * FROM lesson WHERE course_id = course_id = :courseID ORDER BY lessonDate ASC, lessonHour ASC")
+    List<Lesson> getLessonWithCouseById(long courseID);
 }

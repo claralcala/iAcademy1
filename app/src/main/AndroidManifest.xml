@@ -16,6 +16,18 @@
             android:name=".activities.Teacher_View_Student"
             android:exported="false" />
         <activity
+            android:name=".activities.StudentAcademyCourses"
+            android:exported="false" />
+        <activity
+            android:name=".activities.StudentLessonDetails"
+            android:exported="false" />
+        <activity
+            android:name=".activities.DetailsEnrolled"
+            android:exported="false" />
+        <activity
+            android:name=".activities.ViewCourseRegister"
+            android:exported="false" />
+        <activity
             android:name=".activities.CoursesRegistration"
             android:exported="false" />
         <activity

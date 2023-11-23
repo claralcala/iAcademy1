@@ -25,6 +25,7 @@
             android:id="@+id/tvCourseRegister"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:textSize="30sp"
             android:gravity="center"
             android:text="Registrar un curso"
             android:textSize="30sp" />
@@ -95,14 +96,6 @@
             android:hint="Activo (true/false)"
             android:inputType="text" />
 
-        <EditText
-            android:id="@+id/etCourseTeacher"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:ems="10"
-            android:text="Seleccione el profesor del curso:"
-            android:inputType="text" />
 
 
         <Spinner
@@ -117,6 +110,7 @@
             android:layout_gravity="center"
             android:layout_marginTop="50dp"
             android:text="Guardar" />
+
 
 
 

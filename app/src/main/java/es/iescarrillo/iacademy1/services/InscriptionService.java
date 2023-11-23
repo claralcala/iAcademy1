@@ -42,4 +42,14 @@ public class InscriptionService implements InscriptionDAO {
     public int countInscriptionInACourse(Long courseID) {
         return inscriptionDAO.countInscriptionInACourse(courseID);
     }
+
+    @Override
+    public Inscription getInscriptionByStudentAndCourse(Long studentId, Long courseId) {
+        return inscriptionDAO.getInscriptionByStudentAndCourse(studentId, courseId);
+    }
+
+    public boolean isStudentEnrolled(Long studentId, Long courseId) {
+        return inscriptionDAO.getInscriptionByStudentAndCourse(studentId, courseId) != null;
+    }
+
 }

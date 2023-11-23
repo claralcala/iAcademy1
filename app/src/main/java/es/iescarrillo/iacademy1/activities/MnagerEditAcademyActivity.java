@@ -124,5 +124,4 @@ public class MnagerEditAcademyActivity extends AppCompatActivity {
         });
 
     }
-
 }

@@ -8,12 +8,9 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
-import android.widget.ArrayAdapter;
-
 import android.widget.Button;
 import android.widget.ListView;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import es.iescarrillo.iacademy1.R;
@@ -21,14 +18,16 @@ import es.iescarrillo.iacademy1.adapters.CourseAdapter;
 import es.iescarrillo.iacademy1.models.Course;
 import es.iescarrillo.iacademy1.services.CourseService;
 
-public class ViewCourses extends AppCompatActivity {
 
-private CourseService courseService;
-private CourseAdapter adapter;
-List<Course> courses;
-ListView lvListCourses;
 
-Button btnbackCourses;
+public class StudentAcademyCourses extends AppCompatActivity {
+
+    private CourseService courseService;
+    private CourseAdapter adapter;
+    List<Course> courses;
+    ListView lvListCourses;
+
+    Button btnbackCourses;
     @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,12 +40,16 @@ Button btnbackCourses;
         Boolean login = sharedPreferences.getBoolean("login", false);
         Long id_ = sharedPreferences.getLong("id", 0);
 
+        Intent intent2 = getIntent();
+
+        Long idCourseRegistration = intent2.getLongExtra("id", 0);
+
         @SuppressLint("WrongViewCast") ListView lvListCourses = findViewById(R.id.lvLisCourses);
 
 
         courseService = new CourseService(getApplication());
         Thread thread = new Thread(()->{
-           courses = courseService.getAll();
+            courses = courseService.getCoursebyAcademyID(idCourseRegistration);
         });
         thread.start();
         try{

@@ -132,7 +132,6 @@ public class RegisterManagerActivity extends AppCompatActivity {
             }
 
 
-
         });
 
     }

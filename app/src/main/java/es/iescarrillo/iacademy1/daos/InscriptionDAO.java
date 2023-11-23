@@ -31,4 +31,7 @@ public interface InscriptionDAO {
 
     @Query("select count (*) from Inscription where course_id = :courseID")
     int countInscriptionInACourse (Long courseID);
+
+    @Query("SELECT * FROM inscription WHERE student_id = :studentId AND course_id = :courseId LIMIT 1")
+    Inscription getInscriptionByStudentAndCourse(Long studentId, Long courseId);
 }

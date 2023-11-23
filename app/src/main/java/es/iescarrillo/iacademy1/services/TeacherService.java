@@ -40,7 +40,6 @@ public class TeacherService implements TeacherDAO {
     }
 
 
-
     @Override
     public Teacher getTeacherByUsername(String username) {
         return teacherDAO.getTeacherByUsername(username);
