@@ -92,7 +92,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:ems="10"
-            android:hint="Fecha de nacimiento"
+            android:hint="Fecha de nacimiento (dd/mm/aaaa/)(01/01/2000) "
             android:inputType="text" />
 
 
