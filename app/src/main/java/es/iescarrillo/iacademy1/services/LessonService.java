@@ -2,6 +2,8 @@ package es.iescarrillo.iacademy1.services;
 
 import android.app.Application;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.List;
 
 import es.iescarrillo.iacademy1.daos.ClassroomDAO;
@@ -43,5 +45,14 @@ public class LessonService implements LessonDAO {
     @Override
     public List<Lesson> getLessonByCourseID(Long courseID) {
         return lessonDAO.getLessonByCourseID(courseID);
+    }
+
+    @Override
+    public void updateLessonByID(LocalDate lessonDate_, LocalTime lessonHour_, long classroomID, long id_) {
+        lessonDAO.updateLessonByID(lessonDate_,lessonHour_,classroomID,id_);
+    }
+    @Override
+    public Lesson getLessonByID(Long lessonID) {
+        return lessonDAO.getLessonByID(lessonID);
     }
 }

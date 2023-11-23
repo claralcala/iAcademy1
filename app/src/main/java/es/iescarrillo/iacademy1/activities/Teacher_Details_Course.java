@@ -12,13 +12,15 @@ import android.widget.TextView;
 
 import es.iescarrillo.iacademy1.R;
 import es.iescarrillo.iacademy1.services.CourseService;
+import es.iescarrillo.iacademy1.services.InscriptionService;
 
 public class Teacher_Details_Course extends AppCompatActivity {
 
     Button btnEdit, btnDelete, btnViewlesson, btnViewstudent, btnCancel;
     TextView tvTittle, tvDescription, tvLevel, tvCapacity, tvCourseEnd, tvCourseStart, tvActivated;
-
+    int count;
     private CourseService courseService;
+    private InscriptionService inscriptionService;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -51,6 +53,7 @@ public class Teacher_Details_Course extends AppCompatActivity {
         tvActivated = findViewById(R.id.tvActivated);
 
         courseService = new CourseService(getApplication());
+        inscriptionService = new InscriptionService(getApplication());
 
         //Ponemos los datos que traemos del intent en los campos de texto
         tvTittle.setText(intent.getStringExtra("title"));
@@ -63,6 +66,22 @@ public class Teacher_Details_Course extends AppCompatActivity {
 
         //Long courseID2 = Long.parseLong(intent.getStringExtra("id"));
         String courseID = intent.getStringExtra("id");
+
+        Thread thread50 = new Thread(()->{
+           count =  inscriptionService.countInscriptionInACourse(Long.parseLong(courseID));
+
+        });
+        thread50.start();
+        try{
+            thread50.join();
+        }catch(Exception e ){
+            Log.i("error", e.getMessage());
+        }
+
+        if(count>0){
+            btnEdit.setEnabled(false);
+            btnDelete.setEnabled(false);
+        }
 
         btnCancel.setOnClickListener(v -> {
             Intent back = new Intent(this, Teacher_View_Courses.class);

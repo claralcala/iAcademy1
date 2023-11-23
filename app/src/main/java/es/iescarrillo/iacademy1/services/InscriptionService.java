@@ -37,4 +37,9 @@ public class InscriptionService implements InscriptionDAO {
     public List<Inscription> getAll() {
         return inscriptionDAO.getAll();
     }
+
+    @Override
+    public int countInscriptionInACourse(Long courseID) {
+        return inscriptionDAO.countInscriptionInACourse(courseID);
+    }
 }

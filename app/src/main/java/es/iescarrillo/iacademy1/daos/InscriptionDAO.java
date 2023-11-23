@@ -28,4 +28,7 @@ public interface InscriptionDAO {
 
     @Query("SELECT * FROM inscription")
     List<Inscription> getAll();
+
+    @Query("select count (*) from Inscription where course_id = :courseID")
+    int countInscriptionInACourse (Long courseID);
 }

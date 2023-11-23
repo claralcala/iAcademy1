@@ -50,7 +50,7 @@ public class Teacher_View_Lesson extends AppCompatActivity {
         Boolean login = sharedPreferences.getBoolean("login", true);
         Long id = sharedPreferences.getLong("id", 0);
 
-        String courseID = intent.getStringExtra("courseID");
+        String courseID = getIntent().getStringExtra("courseID");
         Long courseID2 = Long.parseLong(courseID);
 
 
