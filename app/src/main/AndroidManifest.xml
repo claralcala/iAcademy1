@@ -25,13 +25,7 @@
             android:name=".activities.DetailsEnrolled"
             android:exported="false" />
         <activity
-            android:name=".activities.ViewCourseRegister"
-            android:exported="false" />
-        <activity
             android:name=".activities.CoursesRegistration"
-            android:exported="false" />
-        <activity
-            android:name=".activities.RegistrationInformation"
             android:exported="false" />
         <activity
             android:name=".activities.DetailsCourses"
@@ -65,9 +59,6 @@
             android:exported="false" />
         <activity
             android:name=".activities.EditCourseActivity"
-            android:exported="false" />
-        <activity
-            android:name=".activities.CourseDetailsActivity"
             android:exported="false" />
         <activity
             android:name=".activities.ManagerCourseDetails"

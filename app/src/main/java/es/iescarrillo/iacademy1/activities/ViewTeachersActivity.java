@@ -13,7 +13,6 @@ import android.widget.ListView;
 import java.util.List;
 
 import es.iescarrillo.iacademy1.R;
-import es.iescarrillo.iacademy1.adapters.PersonAdapter;
 import es.iescarrillo.iacademy1.adapters.TeacherAdapter;
 import es.iescarrillo.iacademy1.models.Academy;
 import es.iescarrillo.iacademy1.models.Teacher;

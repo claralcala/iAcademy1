@@ -39,9 +39,6 @@ public interface CourseDAO {
     @Query("SELECT * FROM course c JOIN inscription i ON c.id=i.course_id")
     Map<Course, List<Inscription>> getCoursesWithInscriptionMap();
 
-    @Query("SELECT * FROM course WHERE academy_id = :acID")
-    List<Course> getCoursebyAcademyID(Long acID);
-
     @Query("DELETE FROM course WHERE id = :course_id AND academy_id= :ac_id")
     void deleteCourseById(long course_id, long ac_id);
 

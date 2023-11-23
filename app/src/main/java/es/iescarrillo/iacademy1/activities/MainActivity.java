@@ -34,7 +34,6 @@ import es.iescarrillo.iacademy1.services.TeacherService;
  *
  */
 public class MainActivity extends AppCompatActivity {
-
     private ManagerService managerService;
     private StudentService studentService;
     private TeacherService teacherService;
