@@ -27,4 +27,6 @@ public interface LessonDAO {
 
     @Query("SELECT * FROM lesson WHERE course_id=:courseID")
     List<Lesson> getLessonByCourseID(Long courseID);
+
+
 }

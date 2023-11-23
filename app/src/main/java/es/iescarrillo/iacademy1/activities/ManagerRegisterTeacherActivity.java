@@ -10,7 +10,6 @@ import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
-
 import org.mindrot.jbcrypt.BCrypt;
 
 import es.iescarrillo.iacademy1.R;

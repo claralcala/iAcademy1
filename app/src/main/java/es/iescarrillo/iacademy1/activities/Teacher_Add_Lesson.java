@@ -152,7 +152,10 @@ public class Teacher_Add_Lesson extends AppCompatActivity {
             }catch(Exception e){
                 Log.i("error", e.getMessage());
             }
-            onBackPressed();
+
+            Intent add = new Intent(this, Teacher_View_Courses.class);
+            startActivity(add);
+            finish();
 
         });
 

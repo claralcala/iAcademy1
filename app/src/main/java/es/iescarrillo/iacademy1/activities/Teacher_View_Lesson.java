@@ -10,6 +10,9 @@ import android.util.Log;
 import android.widget.Button;
 import android.widget.ListView;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 import es.iescarrillo.iacademy1.R;
@@ -84,11 +87,39 @@ public class Teacher_View_Lesson extends AppCompatActivity {
 
         lvLesson.setAdapter(adapter);
 
+        lvLesson.setOnItemClickListener((parent, view, position, id1) -> {
+            Lesson l = (Lesson) parent.getItemAtPosition(position);
+
+            Intent intent1 = new Intent(this, Teacher_Details_Lesson.class);
+
+            String date = format(l.getLessonDate());
+            String time = formatHour(l.getLessonHour());
+            intent1.putExtra("date", date);
+            intent1.putExtra("time", time);
+            intent1.putExtra("id", l.getId());
+            intent1.putExtra("classroomID", l.getClassroom_id());
+            intent1.putExtra("courseID", l.getCourse_id());
+
+            startActivity(intent1);
+
+        });
+
         //Boton para ir a la pagina de añadir curso
         btnAdd.setOnClickListener(v -> {
             Intent add = new Intent(this, Teacher_Add_Lesson.class);
             add.putExtra("courseID", courseID);
             startActivity(add);
         });
+    }
+    private String format(LocalDate localdate){
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+
+        return formatter.format(localdate);
+    }
+
+    private String formatHour(LocalTime localTime){
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm");
+
+        return formatter.format(localTime);
     }
 }

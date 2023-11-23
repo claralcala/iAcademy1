@@ -47,6 +47,14 @@
             android:textAlignment="center"
             android:text="Hora de la leccion:" />
 
+        <TextView
+            android:id="@+id/tvClassroomName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="20dp"
+            android:textAlignment="center"
+            android:text="Nombre aula:" />
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -61,7 +69,7 @@
                 android:text="Editar" />
 
             <Button
-                android:id="@+id/btnDelete"
+                android:id="@+id/btnBack"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
