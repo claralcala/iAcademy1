@@ -4,12 +4,9 @@ import android.app.Application;
 
 import java.util.List;
 
-import es.iescarrillo.iacademy1.daos.ClassroomDAO;
 import es.iescarrillo.iacademy1.daos.LessonDAO;
 import es.iescarrillo.iacademy1.database.DatabaseHelper;
-import es.iescarrillo.iacademy1.models.Classroom;
 import es.iescarrillo.iacademy1.models.Lesson;
-import es.iescarrillo.iacademy1.models.LessonWithClassroom;
 
 public class LessonService implements LessonDAO {
 
@@ -42,7 +39,7 @@ public class LessonService implements LessonDAO {
     }
 
     @Override
-    public List<LessonWithClassroom> getLessonWithCouseById(long courseID) {
+    public List<Lesson> getLessonWithCouseById(long courseID) {
         return lessonDAO.getLessonWithCouseById(courseID);
     }
 }

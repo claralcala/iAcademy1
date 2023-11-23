@@ -70,10 +70,8 @@ public class DetailsAcademy extends AppCompatActivity {
         Button btnViewcoruses =  findViewById(R.id.btnViewcoruses);
 
         btnViewcoruses.setOnClickListener(v -> {
-
-            Intent intentCourses = new Intent(this,CoursesRegistration.class);
+            Intent intentCourses = new Intent(this, StudentAcademyCourses.class);
             intentCourses.putExtra("id", idCourseRegistration);
-
             startActivity(intentCourses);
 
         });
