@@ -105,10 +105,12 @@ public class MainActivity extends AppCompatActivity {
                                             editor.putString("username", t.getUser().getName());
                                             editor.putLong("id", t.getId());
                                             editor.putString("role", t.getUser().getRole());
+                                            editor.putLong("academyID",t.getAcademy_id());
                                             editor.apply();
 
                                             tvError.setText("Login correcto");
-                                            //Falta el intent para ir a la actividad
+                                            Intent mainTeacher = new Intent(this, Teacher_View_Courses.class);
+                                            startActivity(mainTeacher);
 
                                         }else {
                                             tvError.setText("Contraseña no válida");

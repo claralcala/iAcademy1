@@ -41,4 +41,6 @@ public interface ClassroomDAO {
     @Query("UPDATE classroom SET name=:name_, capacity= :capacity_ WHERE academy_id = :ac_id AND id = :id ")
     void updateClassbyId(String name_, int capacity_, long ac_id, long id);
 
+    @Query("SELECT * FROM classroom WHERE id= :classroomID")
+    Classroom getClassroomByCourseID(long classroomID);
 }

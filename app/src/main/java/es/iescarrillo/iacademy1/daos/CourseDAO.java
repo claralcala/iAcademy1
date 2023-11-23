@@ -48,5 +48,6 @@ public interface CourseDAO {
     @Query("UPDATE course SET title=:title_, description=:description_, level = :level_, capacity= :capacity_, startDate= :startDate_, endDate= :endDate_, activated= :activated_  WHERE academy_id = :ac_id AND id = :id ")
     void updateCoursebyId(String title_, String description_, String level_, int capacity_, LocalDate startDate_, LocalDate endDate_, boolean activated_, long ac_id, long id);
 
-
+    @Query("SELECT * FROM course WHERE teacher_id = :tID")
+    List<Course> getCoursebyTeacherID(Long tID);
 }

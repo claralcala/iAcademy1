@@ -61,4 +61,9 @@ public class ClassRoomService implements ClassroomDAO {
     public void updateClassbyId(String name_, int capacity_, long ac_id, long id) {
         classroomDAO.updateClassbyId(name_, capacity_, ac_id, id);
     }
+
+    @Override
+    public Classroom getClassroomByCourseID(long classroomID) {
+        return classroomDAO.getClassroomByCourseID(classroomID);
+    }
 }

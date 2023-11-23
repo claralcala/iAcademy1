@@ -65,4 +65,9 @@ public class CourseService implements CourseDAO {
     public void updateCoursebyId(String title_, String description_, String level_, int capacity_, LocalDate startDate_, LocalDate endDate_, boolean activated_, long ac_id, long id) {
         courseDAO.updateCoursebyId(title_, description_, level_, capacity_, startDate_, endDate_, activated_, ac_id, id);
     }
+
+    @Override
+    public List<Course> getCoursebyTeacherID(Long tID) {
+        return courseDAO.getCoursebyTeacherID(tID);
+    }
 }
