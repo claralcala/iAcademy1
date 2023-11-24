@@ -11,9 +11,9 @@ import java.util.List;
 
 import es.iescarrillo.iacademy1.R;
 import es.iescarrillo.iacademy1.models.Lesson;
-import es.iescarrillo.iacademy1.models.Student;
 
 public class LessonAdapter extends ArrayAdapter<Lesson> {
+
 
     public LessonAdapter (Context context, List<Lesson> lessonList){
 

@@ -23,17 +23,26 @@ import es.iescarrillo.iacademy1.services.CourseService;
 
 public class ViewCourses extends AppCompatActivity {
 
+    //Declaramos las variables de servicio, adaptadores, botones , ListView.
 private CourseService courseService;
 private CourseAdapter adapter;
 List<Course> courses;
 ListView lvListCourses;
 
 Button btnbackCourses;
+
+    /**
+     * @author Manu Rguez
+     * Pantalla para visualizar cursos
+     *
+     */
     @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_courses);
+
+        //Declaramos las variables de session
 
         SharedPreferences sharedPreferences = getSharedPreferences("PreferencesAcademy", Context.MODE_PRIVATE);
         String username = sharedPreferences.getString("user", "");
@@ -54,8 +63,11 @@ Button btnbackCourses;
         @SuppressLint("WrongViewCast") ListView lvListCourses = findViewById(R.id.lvLisCourses);
 
 
+        //Declaramos el servicio y creamos un hilo
         courseService = new CourseService(getApplication());
         Thread thread = new Thread(()->{
+
+            //Llamamos a la consulta que se encuentra en CourseService y nos traemos lo relacionado con los cursos
            courses = courseService.getAll();
         });
         thread.start();
@@ -64,9 +76,12 @@ Button btnbackCourses;
         }catch(Exception e ){
             Log.i("error", e.getMessage());
         }
+
+        //Introducimos el adaptador y a la listview le guardamos el adaptador que es donde esta toda la informacion
         adapter = new CourseAdapter((Context)this, courses);
         lvListCourses.setAdapter(adapter);
 
+        //Declaramos el boton de volver y le damos funcion
         btnbackCourses = findViewById(R.id.btnbackCourses);
 
         btnbackCourses.setOnClickListener( v ->  {
@@ -77,6 +92,8 @@ Button btnbackCourses;
 
         });
 
+        //Declaramos funcion a la listView que al hacer clic en un item de la listview muestren los detalles del curso creado
+        //Por eso nos traemos los datos con el intent para recuperarlos en la pantalla de details
         lvListCourses.setOnItemClickListener((parent, view, position, id) -> {
             Course c = courses.get(position);
 

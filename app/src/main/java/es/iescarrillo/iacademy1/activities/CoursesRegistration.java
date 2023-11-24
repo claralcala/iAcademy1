@@ -22,6 +22,8 @@ import es.iescarrillo.iacademy1.models.Course;
 import es.iescarrillo.iacademy1.services.CourseService;
 
 public class CoursesRegistration extends AppCompatActivity {
+
+    //Declaramos una variable para pillar la id del curso registrado, bototnes servicios, adaptadores, list y una listView
     Long idCourseRegistration;
 
     Button btnBackCourseRegistration;
@@ -32,11 +34,19 @@ public class CoursesRegistration extends AppCompatActivity {
     private List<Course> listCourse;
     ListView lvCoursesRegistration;
 
+    /**
+     * @author Manu Rguez
+     * Pantalla para visualizar todos los cursos en los que un studen se ha matriculado
+     *
+     */
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_courses_registration);
 
+
+        //Declaramos las variables de session
         SharedPreferences sharedPreferences = getSharedPreferences("PreferencesAcademy", Context.MODE_PRIVATE);
         String username = sharedPreferences.getString("user", "");
         String role = sharedPreferences.getString("role", "");
@@ -53,14 +63,20 @@ public class CoursesRegistration extends AppCompatActivity {
 
         }
 
+        //declamos el boton y la lv que hemos declarado en java con sus correspondientes en el xml
         btnBackCourseRegistration = findViewById(R.id.btnbackCoursesRegistration);
         lvCoursesRegistration = findViewById(R.id.lvCoursesRegistration);
 
+
+        //Recuperamos la variable desde el intent
         Intent intent = getIntent();
         idCourseRegistration = intent.getLongExtra("id", 0);
 
+        //Declaramos el servicio
         courseService = new CourseService(getApplication());
 
+
+        //Creamos un hilo
         Thread thread = new Thread(() -> {
             listCourse = courseService.getEnrolledCoursesStudent(id_);
         });
@@ -71,10 +87,13 @@ public class CoursesRegistration extends AppCompatActivity {
         } catch (Exception e) {
             Log.e("error", e.getMessage());
         }
-        courseAdapter = new CourseAdapter((Context) this,listCourse);
 
+        //Introducimos el adaptador y a la listview le guardamos el adaptador que es donde esta toda la informacion
+        courseAdapter = new CourseAdapter((Context) this,listCourse);
         lvCoursesRegistration.setAdapter(courseAdapter);
 
+
+        //Le damos funcion que al hacer clic en un curso matriculado nos diriga a la lista de las lecciones y le damos el id del course que vamos a recoger alli
         lvCoursesRegistration.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -85,6 +104,7 @@ public class CoursesRegistration extends AppCompatActivity {
             }
         });
 
+        //Le damos funcion al boton de volver
 
         btnBackCourseRegistration.setOnClickListener(v -> {
             Intent intentBack = new Intent(CoursesRegistration.this, StudentActivity.class);

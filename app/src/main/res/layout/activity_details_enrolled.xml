@@ -18,7 +18,7 @@
             android:id="@+id/tvWelcomeStudent"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Detalles lecciones"
+            android:text="Lista de lecciones"
             android:textAlignment="center"
             android:textSize="30dp"
             android:textStyle="bold"

@@ -6,10 +6,8 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.List;
 
-import es.iescarrillo.iacademy1.daos.ClassroomDAO;
 import es.iescarrillo.iacademy1.daos.LessonDAO;
 import es.iescarrillo.iacademy1.database.DatabaseHelper;
-import es.iescarrillo.iacademy1.models.Classroom;
 import es.iescarrillo.iacademy1.models.Lesson;
 
 public class LessonService implements LessonDAO {
@@ -46,6 +44,7 @@ public class LessonService implements LessonDAO {
     public List<Lesson> getLessonByCourseID(Long courseID) {
         return lessonDAO.getLessonByCourseID(courseID);
     }
+
 
     @Override
     public void updateLessonByID(LocalDate lessonDate_, LocalTime lessonHour_, long classroomID, long id_) {
