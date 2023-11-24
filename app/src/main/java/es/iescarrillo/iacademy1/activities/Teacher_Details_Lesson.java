@@ -15,6 +15,12 @@ import es.iescarrillo.iacademy1.models.Classroom;
 import es.iescarrillo.iacademy1.services.ClassRoomService;
 import es.iescarrillo.iacademy1.services.LessonService;
 
+/**
+ * @author jesus
+ *
+ * Pantalla en la que el profesor puede ver los detalles de la leccion seleccionada
+ *
+ */
 public class Teacher_Details_Lesson extends AppCompatActivity {
 
     TextView tvLessonDate,tvlessonHour, tvClassroomName;
@@ -72,16 +78,16 @@ public class Teacher_Details_Lesson extends AppCompatActivity {
         btnBack=findViewById(R.id.btnBack);
         btnEdit=findViewById(R.id.btnEdit);
 
-
-
         tvlessonHour.setText(getIntent().getStringExtra("time"));
         tvLessonDate.setText(getIntent().getStringExtra("date"));
         tvClassroomName.setText(c.getName());
 
+        //Boton para volver a la activity anterior
         btnBack.setOnClickListener(v -> {
             onBackPressed();
         });
 
+        //Boton para editar, pasamos los valores a la activity de editar lecciones
         btnEdit.setOnClickListener(v -> {
             Intent edit = new Intent(this, Teacher_Edit_Lesson.class);
             edit.putExtra("time", tvlessonHour.getText().toString());

@@ -23,6 +23,13 @@ import es.iescarrillo.iacademy1.models.Teacher;
 import es.iescarrillo.iacademy1.services.AcademyService;
 import es.iescarrillo.iacademy1.services.CourseService;
 
+/**
+ * @author jesus
+ *
+ * Pantalla principal del profesor, visualiza la lista de cursos que tiene asociados
+ *
+ */
+
 public class Teacher_View_Courses extends AppCompatActivity {
 
     Button btnAdd;
@@ -60,11 +67,11 @@ public class Teacher_View_Courses extends AppCompatActivity {
             startActivity(backMain);
 
         }
-
+        //Inicializamos los servicios
         courseService = new CourseService(getApplication());
 
         Thread thread = new Thread(()->{
-
+            //Introducimos mediante el metodo todos los cursos asociados a un profesor en una list
             courses = courseService.getCoursebyTeacherID(id_);
 
 
@@ -79,11 +86,11 @@ public class Teacher_View_Courses extends AppCompatActivity {
             Log.i("error", e.getMessage());
         }
 
-
+        //Introducimos en el adapter el contenido de la lista
         adapter = new CourseAdapter((Context)this, courses);
 
 
-
+        //Cargamos la lsitView con el contenido del adapter
         lvCourses.setAdapter(adapter);
 
         //Cuando clicamos en un item de la lista, nos llevamos en el intent sus datos
@@ -117,7 +124,7 @@ public class Teacher_View_Courses extends AppCompatActivity {
             Intent add = new Intent(this, Teacher_Add_Course.class);
             startActivity(add);
         });
-
+        //Boton para desloguearte y volver a la mainActivity
         btnLogout.setOnClickListener(v -> {
 
             sharedPreferences.edit().clear().apply();

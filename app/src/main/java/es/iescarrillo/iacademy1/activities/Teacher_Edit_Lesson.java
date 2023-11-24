@@ -27,7 +27,12 @@ import es.iescarrillo.iacademy1.models.Classroom;
 import es.iescarrillo.iacademy1.models.Lesson;
 import es.iescarrillo.iacademy1.services.ClassRoomService;
 import es.iescarrillo.iacademy1.services.LessonService;
-
+/**
+ * @author jesus
+ *
+ * Pantalla en la que el profesor puede editar los detalles de la leccion seleccionada
+ *
+ */
 public class Teacher_Edit_Lesson extends AppCompatActivity {
 
     EditText etDate,etHour;
@@ -43,6 +48,7 @@ public class Teacher_Edit_Lesson extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_teacher_edit_lesson);
 
+        //Inicializamos los servicios
         lessonService = new LessonService(getApplication());
         classRoomService = new ClassRoomService(getApplication());
         //Variables de sesión
@@ -63,6 +69,7 @@ public class Teacher_Edit_Lesson extends AppCompatActivity {
 
         }
 
+        //Inicializamos los componentes
         etDate = findViewById(R.id.etDate);
         etHour = findViewById(R.id.etHour);
         spinner2 = findViewById(R.id.spinner2);
@@ -72,6 +79,7 @@ public class Teacher_Edit_Lesson extends AppCompatActivity {
         etDate.setText(getIntent().getStringExtra("date"));
         etHour.setText(getIntent().getStringExtra("time"));
 
+        //Hacemos un hilo para realizar las consultas necesarias
         Thread thread2 = new Thread(()->{
             l = lessonService.getLessonByID(getIntent().getLongExtra("id",0));
             classroomList =classRoomService.getClassroomsByAcademy(academyID);
@@ -111,6 +119,7 @@ public class Teacher_Edit_Lesson extends AppCompatActivity {
             }
         });
 
+        //Boton para aceptar la edicion de la leccion
         btnAdd.setOnClickListener(v -> {
 
             DateTimeFormatter fecha = DateTimeFormatter.ofPattern("dd/MM/yyyy");

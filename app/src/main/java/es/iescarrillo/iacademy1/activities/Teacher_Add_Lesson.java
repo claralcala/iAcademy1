@@ -29,6 +29,13 @@ import es.iescarrillo.iacademy1.models.Teacher;
 import es.iescarrillo.iacademy1.services.ClassRoomService;
 import es.iescarrillo.iacademy1.services.LessonService;
 
+/**
+ * @author jesus
+ *
+ * Pantalla en la que el profesor puede añadir una nueva leccion a un curso
+ *
+ */
+
 public class Teacher_Add_Lesson extends AppCompatActivity {
 
     Button btnAdd, btnCancel;

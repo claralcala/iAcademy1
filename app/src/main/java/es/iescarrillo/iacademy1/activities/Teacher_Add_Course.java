@@ -20,6 +20,12 @@ import es.iescarrillo.iacademy1.R;
 import es.iescarrillo.iacademy1.models.Course;
 import es.iescarrillo.iacademy1.services.CourseService;
 
+/**
+ * @author jesus
+ *
+ * Pantalla en la que el profesor puede añadir un nuevo curso
+ *
+ */
 public class Teacher_Add_Course extends AppCompatActivity {
 
     private CourseService courseService;
@@ -68,6 +74,7 @@ public class Teacher_Add_Course extends AppCompatActivity {
         //Inicializamos servicios
         courseService=new CourseService(getApplication());
 
+        //Boton para añadir el curso
         btnAdd.setOnClickListener(v -> {
             Course c = new Course();
             c.setTitle(etTittle.getText().toString());
@@ -95,7 +102,6 @@ public class Teacher_Add_Course extends AppCompatActivity {
                 return; // Detener la ejecución del método si el campo de fecha de nacimiento está vacío
             }
 
-
             if (!TextUtils.isEmpty(etEndDate.getText().toString())) {
                 DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
                 c.setEndDate(LocalDate.parse(etEndDate.getText().toString(), formatter));
@@ -104,19 +110,11 @@ public class Teacher_Add_Course extends AppCompatActivity {
                 return; // Detener la ejecución del método si el campo de fecha de nacimiento está vacío
             }
 
-
             Thread thread4 = new Thread(()->{
-
-
-
-
-
-
 
                 courseService.insertCourse(c);
                 Intent back = new Intent(this, Teacher_View_Courses.class);
                 startActivity(back);
-
 
             });
 
@@ -128,6 +126,7 @@ public class Teacher_Add_Course extends AppCompatActivity {
             }
         });
 
+        //Boton para volver a la pagina main del profesor
         btnCancel.setOnClickListener(v -> {
             onBackPressed();
         });

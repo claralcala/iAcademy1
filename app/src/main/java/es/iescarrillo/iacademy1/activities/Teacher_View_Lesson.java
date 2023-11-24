@@ -22,7 +22,12 @@ import es.iescarrillo.iacademy1.models.Course;
 import es.iescarrillo.iacademy1.models.Lesson;
 import es.iescarrillo.iacademy1.services.CourseService;
 import es.iescarrillo.iacademy1.services.LessonService;
-
+/**
+ * @author jesus
+ *
+ * Pantalla en la que el profesor puede ver las lecciones asociadas a un curso
+ *
+ */
 public class Teacher_View_Lesson extends AppCompatActivity {
 
     Button btnAdd,btnCancel;
@@ -51,7 +56,7 @@ public class Teacher_View_Lesson extends AppCompatActivity {
         Boolean login = sharedPreferences.getBoolean("login", true);
         Long id = sharedPreferences.getLong("id", 0);
 
-
+        //Recuperamos el id del curso y lo parseamos a long
         String courseID = getIntent().getStringExtra("courseID");
         Long courseID2 = Long.parseLong(courseID);
 
@@ -65,13 +70,13 @@ public class Teacher_View_Lesson extends AppCompatActivity {
             startActivity(backMain);
 
         }
-
+        //inicializamos servicios
         lessonService = new LessonService(getApplication());
 
         Thread thread = new Thread(()->{
 
 
-
+            //Recuperamos las lecciones que estan asociadas a un curso
             Lessons = lessonService.getLessonByCourseID(courseID2);
 
 
@@ -85,10 +90,13 @@ public class Teacher_View_Lesson extends AppCompatActivity {
             Log.i("error", e.getMessage());
         }
 
+        //Introducimos en el adapter el contenido de la lista de lecciones
         adapter = new LessonAdapter((Context)this, Lessons);
 
+        //Cargamos el contenido del adapter en la listView de lecciones
         lvLesson.setAdapter(adapter);
 
+        //Implementamos que al darle click a cualquier item de la listview nos cargue sus detalles
         lvLesson.setOnItemClickListener((parent, view, position, id1) -> {
             Lesson l = (Lesson) parent.getItemAtPosition(position);
 
@@ -112,17 +120,18 @@ public class Teacher_View_Lesson extends AppCompatActivity {
             add.putExtra("courseID", courseID);
             startActivity(add);
         });
-
+        //Boton para cancelar/Volver atrás
         btnCancel.setOnClickListener(v -> {
             onBackPressed();
         });
     }
+    //Metodo para darle Formato a la feha
     private String format(LocalDate localdate){
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
         return formatter.format(localdate);
     }
-
+    //Metodo para darle formato a la hora
     private String formatHour(LocalTime localTime){
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm");
 

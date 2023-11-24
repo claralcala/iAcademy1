@@ -17,7 +17,12 @@ import es.iescarrillo.iacademy1.adapters.CourseAdapter;
 import es.iescarrillo.iacademy1.adapters.StudentAdapter;
 import es.iescarrillo.iacademy1.models.Student;
 import es.iescarrillo.iacademy1.services.StudentService;
-
+/**
+ * @author jesus
+ *
+ * Pantalla en la que el profesor puede ver los alumnos asociados a un curso
+ *
+ */
 public class Teacher_View_Student extends AppCompatActivity {
     ListView lvStudent;
     Button btnBack;
@@ -57,10 +62,12 @@ public class Teacher_View_Student extends AppCompatActivity {
         studentService = new StudentService(getApplication());
 
         Thread thread = new Thread(()->{
-
+        //Recuperamos el id del curso
             String courseID = intent.getStringExtra("courseID");
             Long courseID2 = Long.parseLong(courseID);
             Log.i("id", String.valueOf(courseID2));
+
+            //Mediante la consulta conseguimos los alumnos que estan matriculados en el curso que tenga esa id
             students = studentService.getAllStudentInACourse(courseID2);
 
 
@@ -75,17 +82,15 @@ public class Teacher_View_Student extends AppCompatActivity {
             Log.i("error", e.getMessage());
         }
 
-
+        //Llamamos al adapter el cual recorre una list de alumnos
         adapter = new StudentAdapter((Context)this, students);
 
 
-
+        //Volcamos en la listView de alumnos el contenido del adapter
         lvStudent.setAdapter(adapter);
 
+        //Boton para volver a la activity anterior
         btnBack.setOnClickListener(v -> {
-
-           // Intent back = new Intent(this, Teacher_Details_Course.class);
-           // startActivity(back);
             onBackPressed();
         });
     }

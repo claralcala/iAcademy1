@@ -14,6 +14,12 @@ import es.iescarrillo.iacademy1.R;
 import es.iescarrillo.iacademy1.services.CourseService;
 import es.iescarrillo.iacademy1.services.InscriptionService;
 
+/**
+ * @author jesus
+ *
+ * Pantalla en la que el profesor puede ver los detalles del curso seleccionado
+ *
+ */
 public class Teacher_Details_Course extends AppCompatActivity {
 
     Button btnEdit, btnDelete, btnViewlesson, btnViewstudent, btnCancel;
@@ -62,6 +68,7 @@ public class Teacher_Details_Course extends AppCompatActivity {
         tvCourseStart = findViewById(R.id.tvCourseStart);
         tvActivated = findViewById(R.id.tvActivated);
 
+        //inicializamos los componentes
         courseService = new CourseService(getApplication());
         inscriptionService = new InscriptionService(getApplication());
 
@@ -75,8 +82,11 @@ public class Teacher_Details_Course extends AppCompatActivity {
         tvActivated.setText(intent.getStringExtra("activated"));
 
         //Long courseID2 = Long.parseLong(intent.getStringExtra("id"));
+
+        //Nos traemos el id del curso
         String courseID = intent.getStringExtra("id");
 
+        //Realizamos la consulta para saber si hay algun alumno matriculado en un curso
         Thread thread50 = new Thread(()->{
            count =  inscriptionService.countInscriptionInACourse(Long.parseLong(courseID));
 
@@ -88,16 +98,19 @@ public class Teacher_Details_Course extends AppCompatActivity {
             Log.i("error", e.getMessage());
         }
 
+        //En caso de haya algun alumno matriculado desactivamos los botones de editar curso y borrar curso
         if(count>0){
             btnEdit.setEnabled(false);
             btnDelete.setEnabled(false);
         }
 
+        //Boton para volver atrás
         btnCancel.setOnClickListener(v -> {
             Intent back = new Intent(this, Teacher_View_Courses.class);
             startActivity(back);
         });
 
+        //Boton para ir a la activity de editar curso
         btnEdit.setOnClickListener(v -> {
             Intent edit = new Intent (this, Teacher_Edit_Course.class);
 
@@ -114,6 +127,7 @@ public class Teacher_Details_Course extends AppCompatActivity {
             startActivity(edit);
         });
 
+        //Boton para ver los alumnos matriculados en un curso
         btnViewstudent.setOnClickListener(v -> {
             Intent viewStudent = new Intent(this, Teacher_View_Student.class);
             //Log.i("id",courseID);
@@ -123,12 +137,14 @@ public class Teacher_Details_Course extends AppCompatActivity {
             startActivity(viewStudent);
         });
 
+        //Boton para ver las lecciones que tiene un curso
         btnViewlesson.setOnClickListener(v -> {
             Intent viewLesson = new Intent(this, Teacher_View_Lesson.class);
             viewLesson.putExtra("courseID", courseID);
             startActivity(viewLesson);
         });
 
+        //Boton para borrar el curso
         btnDelete.setOnClickListener(v -> {
             Intent delete = new Intent(this, Teacher_View_Courses.class);
 

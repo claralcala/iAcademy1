@@ -17,6 +17,12 @@ import java.time.format.DateTimeFormatter;
 import es.iescarrillo.iacademy1.R;
 import es.iescarrillo.iacademy1.services.CourseService;
 
+/**
+ * @author jesus
+ *
+ * Pantalla en la que el profesor puede editar los detalles del curso seleccionado
+ *
+ */
 public class Teacher_Edit_Course extends AppCompatActivity {
 
     private CourseService courseService;
@@ -69,6 +75,7 @@ public class Teacher_Edit_Course extends AppCompatActivity {
         etStartDate.setText(intent.getStringExtra("start"));
         etEndDate.setText(intent.getStringExtra("end"));
 
+        //Aqui nos traemos el valor del checkbox, en caso de que sea true lo dejamos activado, en caso de que sea false dejamos el checkbox vacio
         String activated = intent.getStringExtra("activated");
 
         if(activated.equals("true")) {
@@ -77,6 +84,7 @@ public class Teacher_Edit_Course extends AppCompatActivity {
             cbActivated.setChecked(false);
         }
 
+        //Inicializamos los servicios
         courseService = new CourseService(getApplication());
 
         btnAdd.setOnClickListener(v -> {
