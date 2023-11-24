@@ -55,6 +55,16 @@ public class Teacher_Add_Course extends AppCompatActivity {
         Long id = sharedPreferences.getLong("id", 0);
         Long academyID = sharedPreferences.getLong("academyID",0);
 
+        //¿Comprobar si el rol no es el de manager y echarlo?
+        if(!role.equals("TEACHER")){
+
+
+            sharedPreferences.edit().clear().apply();
+            Intent backMain = new Intent(this, MainActivity.class);
+            startActivity(backMain);
+
+        }
+
         //Inicializamos servicios
         courseService=new CourseService(getApplication());
 

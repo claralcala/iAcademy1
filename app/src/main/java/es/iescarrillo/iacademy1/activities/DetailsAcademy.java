@@ -26,6 +26,16 @@ public class DetailsAcademy extends AppCompatActivity {
         Boolean login = sharedPreferences.getBoolean("login", false);
         Long id = sharedPreferences.getLong("id", 0);
 
+        //¿Comprobar si el rol no es el de student y echarlo?
+        if(!role.equals("STUDENT")){
+
+
+            sharedPreferences.edit().clear().apply();
+            Intent backMain = new Intent(this, MainActivity.class);
+            startActivity(backMain);
+
+        }
+
         TextView tvName = findViewById(R.id.tvName);
         TextView tvDescription = findViewById(R.id.tvDescription);
         TextView tvCountry = findViewById(R.id.tvCountry);

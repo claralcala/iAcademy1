@@ -40,6 +40,16 @@ public class StudentAcademyCourses extends AppCompatActivity {
         Boolean login = sharedPreferences.getBoolean("login", false);
         Long id_ = sharedPreferences.getLong("id", 0);
 
+        //¿Comprobar si el rol no es el de student y echarlo?
+        if(!role.equals("STUDENT")){
+
+
+            sharedPreferences.edit().clear().apply();
+            Intent backMain = new Intent(this, MainActivity.class);
+            startActivity(backMain);
+
+        }
+
         Intent intent2 = getIntent();
 
         Long idCourseRegistration = intent2.getLongExtra("id", 0);
