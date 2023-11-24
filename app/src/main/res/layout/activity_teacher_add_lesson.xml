@@ -38,7 +38,7 @@
             android:ems="10"
             android:inputType="text"
             android:textAlignment="center"
-            android:hint="Fecha de la leccion" />
+            android:hint="Fecha (dd/mm/aaaa)(01/01/2000)" />
 
         <EditText
             android:id="@+id/etLessonHour"
@@ -48,7 +48,7 @@
             android:ems="10"
             android:inputType="text"
             android:textAlignment="center"
-            android:hint="Hora de la Leccion" />
+            android:hint="Hora (HH:mm)(08:30)" />
 
         <Spinner
             android:id="@+id/spinner"
