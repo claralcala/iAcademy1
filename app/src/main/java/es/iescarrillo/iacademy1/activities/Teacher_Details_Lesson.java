@@ -41,6 +41,16 @@ public class Teacher_Details_Lesson extends AppCompatActivity {
         Long academyID = sharedPreferences.getLong("academyID",0);
 
 
+        //¿Comprobar si el rol no es el de teacher y echarlo?
+        if(!role.equals("TEACHER")){
+
+
+            sharedPreferences.edit().clear().apply();
+            Intent backMain = new Intent(this, MainActivity.class);
+            startActivity(backMain);
+
+        }
+
 
         long classroomID = getIntent().getLongExtra("classroomID",0);
         //Log.i("id", classroomID);

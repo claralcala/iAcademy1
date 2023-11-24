@@ -43,6 +43,16 @@ public class CoursesRegistration extends AppCompatActivity {
         Boolean login = sharedPreferences.getBoolean("login", false);
         Long id_ = sharedPreferences.getLong("id", 0);
 
+        //¿Comprobar si el rol no es el de student y echarlo?
+        if(!role.equals("STUDENT")){
+
+
+            sharedPreferences.edit().clear().apply();
+            Intent backMain = new Intent(this, MainActivity.class);
+            startActivity(backMain);
+
+        }
+
         btnBackCourseRegistration = findViewById(R.id.btnbackCoursesRegistration);
         lvCoursesRegistration = findViewById(R.id.lvCoursesRegistration);
 

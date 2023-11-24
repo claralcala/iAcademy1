@@ -29,6 +29,16 @@ public class StudentActivity extends AppCompatActivity {
         Boolean login = sharedPreferences.getBoolean("login", true);
         Long id = sharedPreferences.getLong("id", 0);
 
+        //¿Comprobar si el rol no es el de student y echarlo?
+        if(!role.equals("STUDENT")){
+
+
+            sharedPreferences.edit().clear().apply();
+            Intent backMain = new Intent(this, MainActivity.class);
+            startActivity(backMain);
+
+        }
+
         btnVisualizarAcademias = findViewById(R.id.btnVisualizarAcademias);
 
 

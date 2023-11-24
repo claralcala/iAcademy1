@@ -50,6 +50,16 @@ public class Teacher_View_Lesson extends AppCompatActivity {
         Boolean login = sharedPreferences.getBoolean("login", true);
         Long id = sharedPreferences.getLong("id", 0);
 
+        //¿Comprobar si el rol no es el de manager y echarlo?
+        if(!role.equals("TEACHER")){
+
+
+            sharedPreferences.edit().clear().apply();
+            Intent backMain = new Intent(this, MainActivity.class);
+            startActivity(backMain);
+
+        }
+
         String courseID = getIntent().getStringExtra("courseID");
         Long courseID2 = Long.parseLong(courseID);
 

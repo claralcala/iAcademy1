@@ -55,6 +55,16 @@ public class DetailsCourses extends AppCompatActivity {
         Long id = sharedPreferences.getLong("id", 0);
 
 
+        //¿Comprobar si el rol no es el de student y echarlo?
+        if(!role.equals("STUDENT")){
+
+
+            sharedPreferences.edit().clear().apply();
+            Intent backMain = new Intent(this, MainActivity.class);
+            startActivity(backMain);
+
+        }
+
 
         tvTitle = findViewById(R.id.tvTitle);
         tvDescription = findViewById(R.id.tvDescription);

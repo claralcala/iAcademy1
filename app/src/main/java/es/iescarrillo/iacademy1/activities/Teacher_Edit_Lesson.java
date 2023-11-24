@@ -53,6 +53,16 @@ public class Teacher_Edit_Lesson extends AppCompatActivity {
         Long id = sharedPreferences.getLong("id", 0);
         Long academyID = sharedPreferences.getLong("academyID",0);
 
+        //¿Comprobar si el rol no es el de manager y echarlo?
+        if(!role.equals("TEACHER")){
+
+
+            sharedPreferences.edit().clear().apply();
+            Intent backMain = new Intent(this, MainActivity.class);
+            startActivity(backMain);
+
+        }
+
         etDate = findViewById(R.id.etDate);
         etHour = findViewById(R.id.etHour);
         spinner2 = findViewById(R.id.spinner2);
