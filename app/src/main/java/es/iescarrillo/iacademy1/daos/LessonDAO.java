@@ -10,7 +10,6 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.List;
 
-import es.iescarrillo.iacademy1.models.Admin;
 import es.iescarrillo.iacademy1.models.Lesson;
 
 @Dao
@@ -27,7 +26,9 @@ public interface LessonDAO {
     @Query("SELECT * FROM lesson")
     List<Lesson> getAll();
 
-    @Query("SELECT * FROM lesson WHERE course_id=:courseID")
+
+
+    @Query("SELECT * FROM Lesson WHERE course_id = :courseID")
     List<Lesson> getLessonByCourseID(Long courseID);
 
     @Query("UPDATE lesson SET lessonDate =:lessonDate_, lessonHour =:lessonHour_, classroom_id=:classroomID WHERE id = :id_")
@@ -37,6 +38,6 @@ public interface LessonDAO {
     Lesson getLessonByID(Long lessonID);
 
 
-    @Query("SELECT * FROM lesson WHERE course_id = course_id = :courseID ORDER BY lessonDate ASC, lessonHour ASC")
+    @Query("SELECT * FROM lesson WHERE course_id = :courseID ORDER BY lessonDate ASC, lessonHour ASC")
     List<Lesson> getLessonWithCouseById(long courseID);
 }

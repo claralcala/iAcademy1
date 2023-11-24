@@ -22,6 +22,7 @@ import es.iescarrillo.iacademy1.services.AcademyService;
 
 public class ViewAcademy extends AppCompatActivity {
 
+    //Declaramos las variables de servicio, adaptadores, botones , ListView.
     private AcademyService academyService;
     private List<Academy> academies;
 
@@ -32,12 +33,17 @@ public class ViewAcademy extends AppCompatActivity {
     private Button btnBackAcademy;
 
 
-
+    /**
+     * @author Manu Rguez
+     * Pantalla para visualizar las academias
+     *
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_academy);
 
+        //Declaramos las variables de session
         SharedPreferences sharedPreferences= getSharedPreferences("PreferencesAcademy", Context.MODE_PRIVATE);
         String username= sharedPreferences.getString("user", "");
         String role = sharedPreferences.getString("role", "");
@@ -49,10 +55,11 @@ public class ViewAcademy extends AppCompatActivity {
         // Inicializa el ListView y el botón btnBackInfoAcademy
         lvAcademy = findViewById(R.id.lvListAcademy);
 
-
+        //Declaramos el servicio y creamos un hilo
         academyService = new AcademyService(getApplication());
         Thread thread = new Thread(()->{
 
+        //Llamamos a la consulta que se encuentra en AcademyService y nos traemos lo relacionado con las academias
             academies = academyService.getAll();
         });
 
@@ -62,16 +69,17 @@ public class ViewAcademy extends AppCompatActivity {
         }catch(Exception e ){
             Log.i("error", e.getMessage());
         }
-
+        //Introducimos el adaptador y a la listview le guardamos el adaptador que es donde esta toda la informacion
         academyAdapter = new AcademyAdapter((Context)this, academies);
-
         lvAcademy.setAdapter(academyAdapter);
 
+        //Declaramos el boton de volver y le damos funcion
         btnBackAcademy.setOnClickListener(v -> {
             Intent intent = new Intent(this, StudentActivity.class);
             startActivity(intent);
         });
-
+        //Declaramos funcion a la listView que al hacer clic en un item de la listview muestren los detalles de la academia creada
+        //Por eso nos traemos los datos con el intent para recuperarlos en la pantalla de detailsAcademy
         lvAcademy.setOnItemClickListener((parent, view, position, id) -> {
             Academy a = academies.get(position);
             Intent intent = new Intent(this, DetailsAcademy.class);

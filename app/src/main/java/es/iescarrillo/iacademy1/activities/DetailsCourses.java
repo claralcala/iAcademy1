@@ -30,6 +30,7 @@ import es.iescarrillo.iacademy1.services.InscriptionService;
 
 public class DetailsCourses extends AppCompatActivity {
 
+    //Declaramos Textview, botnes y LocalDateTime y un booleano para comprobar la matriculacion
     TextView tvTitle, tvDescription, tvLevel, tvCapacity, tvStartDate, tvEndDate, tvActivated;
 
     Button btnBackInfoCourses, btnRegistration;
@@ -40,14 +41,22 @@ public class DetailsCourses extends AppCompatActivity {
 
     boolean alreadyEnrolled = false;
 
+    /**
+     * @author Manu Rguez
+     * Pantalla para visualizar los detalles de los cursos y paara matricularse en alguno de ellos
+     *
+     */
+
     @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_details_courses);
 
+        //DEclaramos el service
         InscriptionService inscriptionService = new InscriptionService(getApplication());
 
+        //Declaramos las variables de session
         SharedPreferences sharedPreferences = getSharedPreferences("PreferencesAcademy", Context.MODE_PRIVATE);
         String username = sharedPreferences.getString("user", "");
         String role = sharedPreferences.getString("role", "");
@@ -55,7 +64,7 @@ public class DetailsCourses extends AppCompatActivity {
         Long id = sharedPreferences.getLong("id", 0);
 
 
-
+        //Le damos funcion a los textview que hemos creado en java con los que se corresponden en el xml
         tvTitle = findViewById(R.id.tvTitle);
         tvDescription = findViewById(R.id.tvDescription);
         tvLevel = findViewById(R.id.tvLevel);
@@ -64,6 +73,7 @@ public class DetailsCourses extends AppCompatActivity {
         tvEndDate = findViewById(R.id.tvEndDate);
         tvActivated = findViewById(R.id.tvCourseActivated);
 
+        //Aqui recuperamos a traves del intent de la clase ViewCourses
         Intent intent = getIntent();
 
         String title = intent.getStringExtra("title");
@@ -75,11 +85,13 @@ public class DetailsCourses extends AppCompatActivity {
         boolean activated = intent.getBooleanExtra("activated", false);
         Long idCourse = intent.getLongExtra("id",0);
 
-
+        //Le damos formato a la fecha y hora
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
         String formattedStartDate = startDate.format(formatter);
         String formattedEndDate = endDate.format(formatter);
+
+        //Le asignamos los nuevos valores a los textview para que se muestren correctamente
 
         tvTitle.setText(title);
         tvDescription.setText(description);
@@ -88,6 +100,7 @@ public class DetailsCourses extends AppCompatActivity {
         tvStartDate.setText(formattedStartDate.toString());
         tvEndDate.setText(formattedEndDate.toString());
 
+        //Le damos funcion al boton de volver
         btnBackInfoCourses = findViewById(R.id.btnBackInfoCourses);
 
         btnBackInfoCourses.setOnClickListener(v -> {
@@ -97,6 +110,13 @@ public class DetailsCourses extends AppCompatActivity {
             startActivity(intentBack);
 
         });
+
+        /*Aqui hemos realiado un boton de matriculacion que en caso de entrar en un curso con la matriculacion en true aparecera un mensaje informativo
+         indicando que la matriculacion esta abierta, en caso de hacer clic por primera vez en dicho boton saldra un mensaje informativo y de que ha salido correctamente,
+         en caso de volver a hacer clic te dira que ya estas matriculado y se ha contemplado de que aunque hagas varias veces clic en el boton de matriculacion solo se registrara en la base de datos una sola vez
+
+         En caso de un curso tenga la matriculacion en false aparecera el boton en rojo y un mensaje informativo correspondiente y no te dejara hacer clic para matricularte
+         */
 
         Inscription matricula = new Inscription();
 
@@ -110,6 +130,7 @@ public class DetailsCourses extends AppCompatActivity {
             btnRegistration.setOnClickListener(v -> {
                 currentDate = LocalDateTime.now();
 
+                //Aqui le añadimos a la estancia de matricula lo que guarda una inscripcion
                 matricula.setCourse_id(idCourse);
                 matricula.setRegistrationTime(currentDate);
                 matricula.setStudent_id(id);
@@ -118,7 +139,6 @@ public class DetailsCourses extends AppCompatActivity {
 
                 try {
                     Thread thread2 = new Thread(() -> {
-
                         alreadyEnrolled = !inscriptionService.isStudentEnrolled(id, idCourse);
                     });
 

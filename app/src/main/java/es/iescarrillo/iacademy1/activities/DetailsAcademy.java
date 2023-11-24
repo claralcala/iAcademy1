@@ -20,12 +20,16 @@ public class DetailsAcademy extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_details_academy);
 
+        //Declaramos las variables de session
         SharedPreferences sharedPreferences = getSharedPreferences("PreferencesAcademy", Context.MODE_PRIVATE);
         String username = sharedPreferences.getString("user", "");
         String role = sharedPreferences.getString("role", "");
         Boolean login = sharedPreferences.getBoolean("login", false);
         Long id = sharedPreferences.getLong("id", 0);
 
+
+
+        //Le damos funcion a los textview que hemos asignado en java con sus correspondientes en los xml
         TextView tvName = findViewById(R.id.tvName);
         TextView tvDescription = findViewById(R.id.tvDescription);
         TextView tvCountry = findViewById(R.id.tvCountry);
@@ -37,6 +41,8 @@ public class DetailsAcademy extends AppCompatActivity {
         TextView tvPhone = findViewById(R.id.tvPhone);
 
 
+
+        //Recuperamos los datos que provienen de ViewAcademy
         Intent intent = getIntent();
 
         String name = intent.getStringExtra("name");
@@ -50,6 +56,8 @@ public class DetailsAcademy extends AppCompatActivity {
         String phone = intent.getStringExtra("phone");
         Long idCourseRegistration = intent.getLongExtra("id", 0);
 
+
+        //Le asignamos los nuevos valores a los TextView
         tvName.setText(name);
         tvDescription.setText(description);
         tvCountry.setText(country);
@@ -60,12 +68,16 @@ public class DetailsAcademy extends AppCompatActivity {
         tvEmail.setText(email);
         tvPhone.setText(phone);
 
+
+        //Declaramos y damos funcion al boton de volver
         Button btnBackInfoAcademy = findViewById(R.id.btnBackInfoAcademy);
 
         btnBackInfoAcademy.setOnClickListener(v -> {
             Intent intent2 = new Intent(this, ViewAcademy.class);
             startActivity(intent2);
         });
+
+        //Aqui encontramos un boton de viewCourses que al hacer clic apareceran todos los cursos que se han registado en esa academia
 
         Button btnViewcoruses =  findViewById(R.id.btnViewcoruses);
 
