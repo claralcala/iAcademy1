@@ -105,5 +105,9 @@ public class Teacher_Edit_Course extends AppCompatActivity {
 
             startActivity(back);
         });
+
+        btnCancel.setOnClickListener(v -> {
+            onBackPressed();
+        });
     }
 }

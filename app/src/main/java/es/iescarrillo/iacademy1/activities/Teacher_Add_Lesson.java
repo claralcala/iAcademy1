@@ -159,5 +159,9 @@ public class Teacher_Add_Lesson extends AppCompatActivity {
 
         });
 
+        btnCancel.setOnClickListener(v -> {
+            onBackPressed();
+        });
+
     }
 }

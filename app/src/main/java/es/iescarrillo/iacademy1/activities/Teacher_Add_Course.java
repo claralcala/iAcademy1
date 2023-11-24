@@ -117,5 +117,9 @@ public class Teacher_Add_Course extends AppCompatActivity {
                 Log.i("error", e.getMessage());
             }
         });
+
+        btnCancel.setOnClickListener(v -> {
+            onBackPressed();
+        });
     }
 }

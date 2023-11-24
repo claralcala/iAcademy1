@@ -25,7 +25,7 @@ import es.iescarrillo.iacademy1.services.LessonService;
 
 public class Teacher_View_Lesson extends AppCompatActivity {
 
-    Button btnAdd;
+    Button btnAdd,btnCancel;
     List<Lesson> Lessons;
     ListView lvLesson;
     private LessonService lessonService;
@@ -41,6 +41,7 @@ public class Teacher_View_Lesson extends AppCompatActivity {
 
         //Declaramos el boton para añadir
         btnAdd=findViewById(R.id.btnAdd);
+        btnCancel=findViewById(R.id.btnCancel);
         lvLesson=findViewById(R.id.lvLesson);
 
         //Variables de sesión
@@ -109,6 +110,10 @@ public class Teacher_View_Lesson extends AppCompatActivity {
             Intent add = new Intent(this, Teacher_Add_Lesson.class);
             add.putExtra("courseID", courseID);
             startActivity(add);
+        });
+
+        btnCancel.setOnClickListener(v -> {
+            onBackPressed();
         });
     }
     private String format(LocalDate localdate){
