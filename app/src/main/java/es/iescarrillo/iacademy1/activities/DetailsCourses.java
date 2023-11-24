@@ -167,6 +167,7 @@ public class DetailsCourses extends AppCompatActivity {
 
                 if (!alreadyEnrolled) {
                     // Si ya está matriculado, mostramos mensaje
+                    btnRegistration.setEnabled(false);
                     Toast.makeText(DetailsCourses.this, "Ya estás matriculado en este curso.", Toast.LENGTH_SHORT).show();
                 } else {
                     // Si no está matriculado, proceder con la matriculación
@@ -186,6 +187,7 @@ public class DetailsCourses extends AppCompatActivity {
 
         } else {
             btnRegistration.setClickable(false);
+            btnRegistration.setEnabled(false);
             btnRegistration.setBackgroundColor(getResources().getColor(R.color.rojo));
             Toast.makeText(DetailsCourses.this, "Matriculación deshabilitada. ¡No es posible matricularte en este momento!", Toast.LENGTH_SHORT).show();
         }
